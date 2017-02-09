@@ -1,0 +1,45 @@
+
+\documentclass{llncs}
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{url}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\sloppy
+
+\title{Random Selection of Parameters in Asynchronous Pool-Based Evolutionary Algorithms}
+
+\author{Mario Garc\'ia-Valdez\inst{1} \and Ren\'e M\'arquez\inst{1} \and Juan J. Merelo Guerv\'os\inst{2} \and  Leonardo Trujillo \inst{1}}
+
+\institute{Instituto Tecnol\'ogico de Tijuana, Tijuana BC, Mexico
+\and
+Universidad de Granada, Granada, Spain
+\email{mario@tectijuana.edu.mx}\\
+\email{renemarquezvalenzuela@gmail.com}\\
+\email{jmerelo@geneura.ugr.es}
+\email{leonardo.trujillo@tectijuana.edu.mx}}
+
+\maketitle
+
+\begin{abstract}
+Several asynchronous Evolutionary Algorithms (EAs) have been proposed that distribute the
+evolutionary process among heterogeneous devices or virtual machines.
+In these algorithms the population is shared between distributed worker processes that 
+execute the actual evolutionary process by taking samples of the population, and putting back
+a replacement of evolved individuals. The performance of these EAs depends in part 
+on the selecion of parameters for the EA runing in each worker, 
+along with the overall configuration. Parameters for each worker may include: 
+sample size, generations, mutation rate and crossover rate. In this paper, we evaluate in a cloud 
+setting, a strategy proposed by Gong and Fukunaga for the Island-Model which statically 
+assigns random parameter settings to each island. Experiments were conducted in the amazon
+cloud using 2, 6 and 12 virtual machine configurations, with both homogeneus and hetergeneus
+random settings using six benchmark optimization problems (OneMax, Rastrigin, Griewank, De Jong, Schafer
+and Ackley). The results suggest that this approach can yield results which are competitive to
+instances of the algorithm using workers with control parameters tuned specifically for the 
+benchmark. 
+
+\keywords{Distributed Evolutionary Algorithms, Volunteer Computing}
+\end{abstract}
+
+\end{document}
