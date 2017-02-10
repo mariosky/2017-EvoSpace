@@ -10,15 +10,14 @@
 
 \title{Random Selection of Parameters in Asynchronous Pool-Based Evolutionary Algorithms}
 
-\author{Mario Garc\'ia-Valdez\inst{1} \and Ren\'e M\'arquez\inst{1} \and Juan J. Merelo Guerv\'os\inst{2} \and  Leonardo Trujillo \inst{1}}
+\author{Mario Garc\'ia-Valdez\inst{1} \and Ren\'e M\'arquez\inst{1} \and Juan J. Merelo Guerv\'os\inst{2}}
 
 \institute{Instituto Tecnol\'ogico de Tijuana, Tijuana BC, Mexico
 \and
 Universidad de Granada, Granada, Spain
 \email{mario@tectijuana.edu.mx}\\
 \email{renemarquezvalenzuela@gmail.com}\\
-\email{jmerelo@geneura.ugr.es}
-\email{leonardo.trujillo@tectijuana.edu.mx}}
+\email{jmerelo@geneura.ugr.es}}
 
 \maketitle
 
@@ -26,9 +25,19 @@ Universidad de Granada, Granada, Spain
  
 
     Using the EvoSpace model, in this paper an asynchronus distributed version of 
-    the grey wolf optimizer (GWO) algorithm is presented. 
+    the grey wolf optimizer (GWO) algorithm is presented. The EvoSpace model is
+    built around a central repository or population store, incorporating some of 
+    the main principles of the tuple-space model. Remote workers,
+	take random samples of the population to perform on them the basic evolutionary
+	processes, once the work is done, the modified sample is pushed back to the 
+	central population. The GWO distributed version has been benchmarked using 
+	four well-known test functions using a two, three, six and twelve worker configurations. 
+	Results show that the parallel version has competitive results when compared 
+	to a centralized version.  
 
 	
+
+
 	
 
 \keywords{Distributed Evolutionary Algorithms, Cloud Computing}
