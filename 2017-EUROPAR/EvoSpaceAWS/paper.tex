@@ -23,23 +23,30 @@ Universidad de Granada, Granada, Spain
 \maketitle
 
 \begin{abstract}
-Several asynchronous Evolutionary Algorithms (EAs) have been proposed that distribute the
-evolutionary process among heterogeneous devices or virtual machines.
-In these algorithms the population is shared between distributed worker processes that 
-execute the actual evolutionary process by taking samples of the population, and putting back
-a replacement of evolved individuals. The performance of these EAs depends in part 
-on the selection of parameters for the EA running in each worker, 
-along with the overall configuration. Parameters for each worker may include: 
-sample size, generations, mutation rate and crossover rate. In this paper, we evaluate in a cloud 
-setting, a strategy proposed by Gong and Fukunaga for the Island-Model which statically 
-assigns random parameter settings to each island. Experiments were conducted in the amazon
-cloud using 2, 6 and 12 virtual machine configurations, with both homogeneous and heterogeneous
-random settings using six benchmark optimization problems (OneMax, Rastrigin, Griewank, De Jong,
-Schafer and Ackley). The results suggest that this approach can yield results which are competitive to
-instances of the algorithm using workers with control parameters tuned specifically for the 
-benchmark. 
+Heterogeneous devices or virtual machines have special requirements if
+their full performance is going to be actually used by evolutionary
+algorithms. Several asynchronous Evolutionary Algorithms (EAs) have
+been proposed that distribute the evolutionary process among these
+devices; in these algorithms the population is shared between
+distributed worker processes which execute the actual evolutionary
+process by taking samples of the population, and replacing them in the
+population pool evolved individuals. The performance of these EAs
+depends in part on the selection of parameters for the EA running in
+each worker, which may include sample size, generations, mutation rate
+and crossover rate along with the overall configuration. In this paper
+we evaluate a strategy proposed by Gong and Fukunaga for the
+Island-Model which statically assigns random parameter settings to
+each island in a cloud setting. Experiments were conducted in the
+Amazon cloud using 2, 6 and 12 virtual machine configurations, with
+both homogeneous and heterogeneous random settings using six benchmark
+optimization problems (OneMax, Rastrigin, Griewank, De Jong, Schafer
+and Ackley). The results suggest that this approach can yield
+performance improvements which are competitive to instances of the
+algorithm using workers with control parameters tuned specifically for
+the benchmark.
 
-\keywords{Distributed Evolutionary Algorithms, Volunteer Computing}
+\keywords{Distributed Evolutionary Algorithms, Volunteer Computing,
+  Cloud Computing}
 \end{abstract}
 
 \end{document}
