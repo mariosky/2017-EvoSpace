@@ -80,7 +80,7 @@ the benchmark.
 The goal of this work is to determine if a random static parametrization for each of the $n$ EvoWorkers 
 collaborating on a given run could achieve competitive results against an homogeneous tuned parametrization.
 The parameters considered to be randomly set for each EvoWorker where the crossover and mutation probabilities 
-with a valid range of [0,1]. This parameters where selected because they have a well stablished relationship 
+with a valid range of [0,1]. This parameters where selected because they have a well established relationship 
 with the exploration and explatation of the solution space \cite{}. Depending on the type of experiment 
 and the number of workers the homogeneous values were set for other variables, these are summarized
 in Table \ref{tab:params}. Additionally, for all the OneMax experiments a BitFlip mutation was used t
@@ -133,8 +133,19 @@ representation is used, while the other five problems use a real-valued vector r
 In this section, results from the OneMax experiments are discussed. As mentioned before, the first
 step is to simulate the manual tuning of the parameters by running 100 experiments with random 
 parameters and then select the best configuration. As the OneMax problem is solved by almost 
-all configurations, the best is that requiring the less time to finish. Figure~\ref{fig:effort} 
-shows the time required for different numbers of EvoWorkers.    
+all configurations, the best is that one requiring the less time to finish. Figure~\ref{fig:effort} 
+shows the time required for different numbers of EvoWorkers. It can be observed that even with an 
+homogeneous configuration as the number of workers increases so does the number fast solutions.
+A reason for this could be that the solution to the problem depends on the number of evaluations, and 
+as the number of workers increases so does the number of evaluations per unit of time. This also means
+that the selection of a good configuration could be found with less experiments for higher number 
+of workers.
+
+
+In Figure~\ref{fig:comp-onemax} the results of 30 runs comparing against the RPSS approach is shown.
+It can be observed that as the number of EvoWorkers increases the median of the time decreases, but
+in this case the best of the heterogeneous solutions (12 workers) is only better than the worst homogeneous
+solution. 
 
 \begin{figure*}[b]
     \centering
@@ -158,6 +169,7 @@ shows the time required for different numbers of EvoWorkers.
 \end{figure*}
 
 
+
 \begin{figure*}[t]
     \centering
         \includegraphics[width=10cm]{img/one_max_comp.png}
@@ -170,7 +182,25 @@ shows the time required for different numbers of EvoWorkers.
 \end{figure*}
 
 
+
 \subsection{ Single-Objective Optimization Test Functions}
+The same steps as the previous section were followed when comparing the five real valued 
+optimization problems of this section. For brevity only two representative functions are discussed
+with figures, and summary of all the results are shown in Table~\ref{fig:summary}. As before
+the the first step is to tune the parameters of the asynchronous GA algorithm. In Figure \ref{fig:griewank}
+the results of the tuning phase for 6 and 12 workers for the Griewank function are shown. For 12 workers
+results are not as flat as before, with times comparable to the 6 worker configuration in the best case.
+
+In order to compare both configurations in Figure \ref{fig:griewank-evals} the number of evaluations 
+needed for solution are presented. In this experiment, the heterogeneous solution is better than the
+tuned homogeneous parametrization. But in the case of results shown in Figure~\ref{fig:schaffer} 
+both the homogeneous and heterogeneous configurations have similar results, only with a slight advantage
+for the heterogeneous configuration when using 12 EvoWorkers. In the summary found in
+Table~\ref{fig:summary} two extreme cases are found the Ackley and Rastrigin functions, with results leaning
+towards the heterogeneous and homogeneous configurations respectively. On the other hand, the De Jong
+function also favors the heterogeneous configurations. 
+
+
 
 \begin{figure*}[b]
     \centering
@@ -186,7 +216,7 @@ shows the time required for different numbers of EvoWorkers.
     \caption{100 experiments with random parameters for the 128 Bit Griewank 
     single-objective optimization test function. Experiments are ranked by 
     the mean time to solution of 5 runs, with (a) 6 workers, and (b) 12 workers.}
-    \label{fig:griewank-homo}
+    \label{fig:griewank}
 \end{figure*}
 
 
@@ -219,7 +249,7 @@ shows the time required for different numbers of EvoWorkers.
 
     \caption{30 runs of the 128 dimension Schaffer single-objective optimization test function. 
     Box-plot of the number of evaluations needed for solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
-    \label{fig:schaffer-evals}
+    \label{fig:schaffer}
 \end{figure*}
 
 \begin{figure*}[t]
