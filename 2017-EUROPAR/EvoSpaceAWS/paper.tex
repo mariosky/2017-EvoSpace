@@ -2,6 +2,7 @@
 \documentclass{llncs}
 \usepackage{graphicx}        % standard LaTeX graphics tool
                              % when including figure files
+\usepackage{subfigure}
 \usepackage{url}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -49,12 +50,102 @@ the benchmark.
   Cloud Computing}
 \end{abstract}
 
+
+
+
+
 \section{Experiments}
+
+\begin{figure*}[t]
+    \centering
+        \includegraphics[width=10cm]{img/evospace-aws.png}
+    \caption{Main components and data-flow in the cloud version of EvoSpace. }
+    \label{fig:evo}
+\end{figure*}
+
 \subsection{One Max}
 
-\subsection{Benchmark Functions}
-\section{Results}
+\begin{figure*}[b]
+    \centering
+    \subfigure [2 workers]
+    {
+        \includegraphics[width=3in]{img/2w_onemax_100_box.png}
+    }
+    \subfigure  [6 workers]
+    {
+        \includegraphics[width=3in]{img/6w_onemax_100_box.png}
+    }
+    \subfigure  [12 workers]
+    {
+        \includegraphics[width=3in]{img/12w_onemax_100_box.png}
+    }
 
+    \caption{100 experiments with random parameters for the 128 Bit OneMax problem.
+    Experiments are ranked by the mean time to solution of 5 runs, with   
+    (a) 2 workers, (b) 6 workers, and (c) 12 workers.}
+    \label{fig:effort}
+\end{figure*}
+
+
+\begin{figure*}[t]
+    \centering
+        \includegraphics[width=5in]{img/one_max_comp.png}
+    \caption{Comparation of  }
+    \label{fig:comp-onemax}
+\end{figure*}
+
+
+\subsection{ Single-Objective Optimization Test Functions}
+
+\begin{figure*}[b]
+    \centering
+    \subfigure  [6 workers]
+    {
+        \includegraphics[width=2.2in]{img/6w_griewank_100_box.png}
+    }
+    \subfigure  [12 workers]
+    {
+        \includegraphics[width=2.2in]{img/12w_griewank_100_box.png}
+    }
+
+    \caption{100 experiments with random parameters for the 128 Bit Griewank 
+    single-objective optimization test function. Experiments are ranked by 
+    the mean time to solution of 5 runs, with (a) 6 workers, and (b) 12 workers.}
+    \label{fig:griewank-homo}
+\end{figure*}
+
+
+\begin{figure*}[b]
+    \centering
+    \subfigure  [Heterogeneous configuration]
+    {
+        \includegraphics[width=2.2in]{img/griewank_evals_hetereo.png}
+    }
+    \subfigure  [Homogeneous configuration]
+    {
+        \includegraphics[width=2.2in]{img/griewank_evals_homo.png}
+    }
+
+    \caption{30 runs of the 128 dimension Griewank single-objective optimization test function. 
+    Box-plot of the number of evaluations needed for solution, with an (a) Heterogeneous configuration, and (b) Homogeneous configuration.}
+    \label{fig:griewank-evals}
+\end{figure*}
+
+\begin{figure*}[b]
+    \centering
+    \subfigure  [Heterogeneous configuration]
+    {
+        \includegraphics[width=2.2in]{img/schaffer_evals_hetereo.png}
+    }
+    \subfigure  [Homogeneous configuration]
+    {
+        \includegraphics[width=2.2in]{img/schaffer_evals_homo.png}
+    }
+
+    \caption{30 runs of the 128 dimension Schaffer single-objective optimization test function. 
+    Box-plot of the number of evaluations needed for solution, with an (a) Heterogeneous configuration, and (b) Homogeneous configuration.}
+    \label{fig:schaffer-evals}
+\end{figure*}
 
 
 \end{document}
