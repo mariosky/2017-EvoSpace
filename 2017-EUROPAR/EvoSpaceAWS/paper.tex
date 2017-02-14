@@ -41,7 +41,7 @@ each island in a cloud setting. Experiments were conducted in the
 Amazon cloud using 2, 6 and 12 virtual machine configurations, with
 both homogeneous and heterogeneous random settings using five 
 test functions for single-objective optimization (Rastrigin, Griewank, De Jong, Schaffer 
-and Ackley) and the one-max binary problem. The results suggest that this approach can yield
+and Ackley) and the OneMax binary problem. The results suggest that this approach can yield
 performance improvements which are competitive to instances of the
 algorithm using workers with control parameters tuned specifically for
 the benchmark.
@@ -50,17 +50,13 @@ the benchmark.
   Cloud Computing}
 \end{abstract}
 
-
-
-
-
 \section{Experiments}
 
 \begin{figure*}[t]
     \centering
         \includegraphics[width=10cm]{img/evospace-aws.png}
     \caption{Main components and data-flow in the cloud version of EvoSpace. }
-    \label{fig:evo}
+    \label{fig:evospace}
 \end{figure*}
 
 \subsection{One Max}
@@ -90,7 +86,12 @@ the benchmark.
 \begin{figure*}[t]
     \centering
         \includegraphics[width=5in]{img/one_max_comp.png}
-    \caption{Comparation of  }
+    \caption{Comparison of 30 runs of the 128 Bit OneMax problem. 
+    Box-plot of the number of evaluations needed for solution, with a 2, 6 and 12 workers
+    homogeneous configuration on the left side, and Heterogeneous configuration on the
+    right side of each.
+    }
+    \label{fig:griewank-evals}
     \label{fig:comp-onemax}
 \end{figure*}
 
@@ -117,33 +118,33 @@ the benchmark.
 
 \begin{figure*}[b]
     \centering
-    \subfigure  [Heterogeneous configuration]
-    {
-        \includegraphics[width=2.2in]{img/griewank_evals_hetereo.png}
-    }
-    \subfigure  [Homogeneous configuration]
+    \subfigure  [Homogeneous]
     {
         \includegraphics[width=2.2in]{img/griewank_evals_homo.png}
     }
-
-    \caption{30 runs of the 128 dimension Griewank single-objective optimization test function. 
-    Box-plot of the number of evaluations needed for solution, with an (a) Heterogeneous configuration, and (b) Homogeneous configuration.}
+    \subfigure  [Heterogeneous]
+    {
+        \includegraphics[width=2.2in]{img/griewank_evals_hetereo.png}
+    }
+      \caption{30 runs of the 128 dimension Griewank single-objective optimization test function. 
+    Box-plot of the number of evaluations needed for solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
     \label{fig:griewank-evals}
 \end{figure*}
 
 \begin{figure*}[b]
     \centering
-    \subfigure  [Heterogeneous configuration]
-    {
-        \includegraphics[width=2.2in]{img/schaffer_evals_hetereo.png}
-    }
-    \subfigure  [Homogeneous configuration]
+    \subfigure  [Homogeneous]
     {
         \includegraphics[width=2.2in]{img/schaffer_evals_homo.png}
     }
+    \subfigure  [Heterogeneous]
+    {
+        \includegraphics[width=2.2in]{img/schaffer_evals_hetereo.png}
+    }
+ 
 
     \caption{30 runs of the 128 dimension Schaffer single-objective optimization test function. 
-    Box-plot of the number of evaluations needed for solution, with an (a) Heterogeneous configuration, and (b) Homogeneous configuration.}
+    Box-plot of the number of evaluations needed for solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
     \label{fig:schaffer-evals}
 \end{figure*}
 
