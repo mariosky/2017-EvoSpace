@@ -18,31 +18,36 @@
 Universidad de Granada, Granada, Spain
 \email{mario@tectijuana.edu.mx}\\
 \email{renemarquezvalenzuela@gmail.com}\\
-\email{jmerelo@geneura.ugr.es}
+\email{jmerelo@geneura.ugr.es}\\
 \email{leonardo.trujillo@tectijuana.edu.mx}}
 
 \maketitle
 
 \begin{abstract}
-Heterogeneous devices or virtual machines have special requirements if
-their full performance is going to be actually used by evolutionary
-algorithms. Several asynchronous Evolutionary Algorithms (EAs) have
-been proposed that distribute the evolutionary process among these
-devices; in these algorithms the population is shared between
-distributed worker processes which execute the actual evolutionary
+It is not always possible to set up an distributed system with
+homogeneous nodes to run algorithms in a synchronous way. In grid,
+cloud or volunteer setups nodes are heterogeneous, or simply are not
+available at the exact same time; this is a challenge for the researcher if
+their full performance is going to be actually leveraged. We are
+interested in evolutionary algorithms (EAs), which evolve a population
+of solutions using a mechanism inspired by biological evolution; in this field, 
+several asynchronous Evolutionary Algorithms (EAs) that distribute the
+evolutionary process among heterogeneous nodes have
+been proposed. These algorithms make the population shared between
+distributed workers  which execute the actual evolutionary
 process by taking samples of the population, and replacing them in the
-population pool evolved individuals. The performance of these EAs
+population pool by evolved individuals. The performance of these EAs
 depends in part on the selection of parameters for the EA running in
 each worker, which may include sample size, generations, mutation rate
 and crossover rate along with the overall configuration. In this paper
-we evaluate a strategy proposed by Gong and Fukunaga for the
+we present a method inspired by a strategy proposed by Gong and Fukunaga for the
 Island-Model which statically assigns random parameter settings to
 each island in a cloud setting. Experiments were conducted in the
-Amazon cloud using 2, 6 and 12 virtual machine configurations, with
+cloud using 2, 6 and 12 virtual machine configurations, with
 both homogeneous and heterogeneous random settings using five 
 test functions for single-objective optimization (Rastrigin, Griewank, De Jong, Schaffer 
 and Ackley) and the OneMax binary problem. The results suggest that this approach can yield
-performance improvements which are competitive to instances of the
+performance improvements which are competitive with instances of the
 algorithm using workers with control parameters tuned specifically for
 the benchmark.
 
