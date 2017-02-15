@@ -100,7 +100,7 @@ collection of possibly heterogeneous processes that collaborate using
 a shared repository or population pool. We will refer to such
 algorithms as Pool-based EAs or PEAs, and highlight the fact that such
 systems are intrinsically parallel, distributed and asynchronous.
-The particular PEA implemented in this paper is implmented on 
+The particular PEA implemented in this paper is implemented on 
 the EvoSpace framework  \cite{GValdez2015}
 in which distributed nodes (or workers) asynchronously interact 
 with the pool by taking a sample of the population and performing 
@@ -158,6 +158,20 @@ Section \ref{sec:conclusions}.
 % Random Patameters
 
 \section{EvoSpace Cloud Implementation}
+The EvoSpace \cite{GValdez2015} framework has two components: (i) the EvoSpace 
+container that stores the evolving population and (ii) workers, which execute 
+the actual evolutionary process, while EvoSpace container acts only as a population repository.
+In a basic configuration, workers pull a small random subset of the 
+population, and use it as the initial population for a local EA executed 
+on the client machine. Afterward, the evolved population from each worker 
+is returned to the EvoSpace container. The experimental platform used in this work is
+described in \cite{valenzuela2015implementing}, and consists of several virtual machines
+created automatically by a script before each experiment. The main components are depicted
+in Figure \cite{fig:evospace}. 
+
+
+
+
 \label{sec:evo}
 % Architecture Components
 % Random Patameters
