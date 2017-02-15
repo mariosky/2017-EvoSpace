@@ -87,11 +87,22 @@ pool-based approach, where the search process is conducted by a
 collection of possibly heterogeneous processes that collaborate using
 a shared repository or population pool. We will refer to such
 algorithms as Pool-based EAs or PEAs, and highlight the fact that such
-systems are intrinsically parallel, distributed and asynchronous. 
-
+systems are intrinsically parallel, distributed and asynchronous.
+The particular PEA implemented in this paper is implmented on 
+the EvoSpace framework  \cite{GValdez2015}
+in which distributed nodes (or workers) asynchronously interact 
+with the pool by taking a sample of the population and performing 
+a local evolutionary search on the population sample, then returning 
+to the pool the newly evolved solutions. 
 % EA Paramaters 
+Like any other EAs, the performance of the complete search will depend
+on the correct tuning of the EA parameters. 
 % Worst on many workers
+In this case this problem  can be magnified by a factor of $N$, 
+the number of workers and by other parameters particular to the 
+EvoSpace framework, for instance the size of the samples. 
 % Explore and Exploit
+
 % Dynamic adaptation
 % Random Patameters
 % Evaluate in EvoSpace
@@ -316,6 +327,6 @@ function also favors the heterogeneous configurations.
 \end{figure*}
 
 \bibliographystyle{abbrv}
-\bibliography{../../bib/biblio}
+\bibliography{../../bib/biblio,../../bib/evospace-i,../../bib/parameters}
 
 \end{document}
