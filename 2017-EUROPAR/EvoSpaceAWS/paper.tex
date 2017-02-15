@@ -81,6 +81,18 @@ the benchmark.
   Cloud Computing}
 \end{abstract}
 \section{Introduction}
+%Why Paralel
+Biological evolution is an intrinsically parallel, distributed and asynchronous process, however, 
+some of these features are not trivially included into standard EAs,  which are mostly coded as sequential 
+and synchronous algorithms \cite{eiben}. For instance, a large body of work exists in EA parallelization, 
+using multiple CPU cores, multiple nodes and GPUs \cite{}.
+However, distributed and asynchronous EAs have started to become common only recently. In an effort to
+exploit computing resources available from personal computers and smart-devices to massive data centers.
+These resources are easily accessible through popular Internet technologies, such as cloud computing, 
+peer-to-peer (P2P), and web environments. Moreover, these technologies are intended for the development 
+of parallel, distributed and asynchronous systems, such that an EA developed on top of them could easily 
+reap the benefits of these features.
+
 %Pool Based
 In this work, we are interested in EAs systems that follow a
 pool-based approach, where the search process is conducted by a
@@ -96,22 +108,57 @@ a local evolutionary search on the population sample, then returning
 to the pool the newly evolved solutions. 
 % EA Paramaters 
 Like any other EAs, the performance of the complete search will depend
-on the correct tuning of the EA parameters. 
+on the correct tuning of the EA parameters. However, settings 
+must be optimized to each particular problem \cite{de2007parameter}  
+giving users an additional optimization task. 
+Substantial work has been focused on facilitating the burden of finding 
+the most appropriate parameters settings, suggesting several strategies:
+using parameters of previous studies \cite{eiben1999parameter} 
+optimization by another genetic algorithm \cite{}, Dynamic adaptation \cite{}, 
+self-adaptive parameters \cite{pellerin2004self}, hybrid approaches and so on.
 % Worst on many workers
-In this case this problem  can be magnified by a factor of $N$, 
-the number of workers and by other parameters particular to the 
-EvoSpace framework, for instance the size of the samples. 
-% Explore and Exploit
-
+In heterogeneous and distributed PEAs like EvoSpace, this problem can 
+be magnified by a factor of $N$, the number of workers, because each one
+can be treated as an independent EA with local parameters. Moreover, there
+are additional parameters particular to the EvoSpace framework, 
+for instance the size of the samples.
 % Dynamic adaptation
+Several works propose the use of adaptive crossover and mutation probabilities
+that depend on the current genetic diversity of the population \cite{pellerin2004self},
+arguing that modifying these parameters can prevent the rapid convergence of the 
+algorithm. 
+% Explore and Exploit 
+% Is this pertinent?
+A common dynamic heuristic is to explore the solution space first and then exploit
+when a local optima is found and repeat if necessary.  
 % Random Patameters
+Having multiple EAs running in parallel with different parameters could be 
+equivalent to performing a dynamic adaptation, having some workers exploring
+and others exploiting at the same time. 
 % Evaluate in EvoSpace
+In the study presented here, a recent approach called Randomized Parameter
+Setting Strategy (RPSS) \cite{fuku1,fuku2} is applied to EvoSpace and tested on 
+several benchmark problems, extending the work presented in \cite{garcia2014randomized} 
+in which only trap functions were applied.
+The idea behind RPSS is that in a distributed EA, parametrization may be
+completely skipped for a successful search, with research showing that when the 
+number of distributed process is large enough, algorithm parameters can be set 
+randomly and still achieve good overall results. However, work on RPSS has 
+only focused on the well-known Island Model for EAs, a distributed but synchronous system.
+
+The remainder of the paper proceeds as follows.  Section \ref{sec:work} 
+reviews related work. Afterwards, Section \ref{sec:evo} briefly describes the
+proposed EvoSpace cloud implementation, the experimental work is presented in 
+Section \ref{sec:experiments}. Finally, a summary and concluding remarks are in
+Section \ref{sec:conclusions}.
 
 \section{Related Work}
+\label{sec:work}
 % Dynamic adaptation
 % Random Patameters
 
 \section{EvoSpace Cloud Implementation}
+\label{sec:evo}
 % Architecture Components
 % Random Patameters
 \begin{figure*}[t]
@@ -121,18 +168,19 @@ EvoSpace framework, for instance the size of the samples.
     \label{fig:evospace}
 \end{figure*}
 
-\section{Experimental Set-up}
+\section{Experiments}
+ \ref{sec:experiments}
 
 The goal of this work is to determine if a random static parametrization for each of the $n$ EvoWorkers 
 collaborating on a given run could achieve competitive results against an homogeneous tuned parametrization
 \cite{fuku1,fuku2,garcia2014randomized}. The parameters considered to be randomly set for each EvoWorker 
 where the crossover and mutation probabilities with a valid range of $[0,1]$. These parameters where 
 selected because they effectively control which types of moves in the search space are
-applied, and are related to the amount of exploration and explatation that is carried out \cite{}.
+applied, and are related to the amount of exploration and exploitation that is carried out \cite{}.
 The other parameters and design choices used by EvoSpace and the EvoWorkers in our experiments are given in 
 Table \ref{tab:params}. Additionally, for the binary OneMax problem bit-flip mutation
 is used with an independent probability for each attribute to be flipped (indpb) of $0.05$, 
-a two ponit crossover and a tournament selection of size 3. For the real-valued problems a Gaussian
+a two point crossover and a tournament selection of size 3. For the real-valued problems a Gaussian
 mutation was applied with mu=$0$, sigma=$0.2$, and indpb=$0.05$; two point crossover and
 a tournament selection of three. These values are kept static to measure only the effect of the 
 parameters mentioned above.
@@ -166,7 +214,7 @@ To measure the effectiveness of RPSS in EvoSpace two parametrization strategies 
 similar to what is done in \cite{fuku1,fuku2,garcia2014randomized}. First, we consider the approach of setting all 
 of the EvoWorker parameters homogeneously. In order to tune the homogeneous parameters,
 we select the best configuration from 100 random parameterizations. 
-Each of these random parametrizations are evaluated based on their average performance over 10 
+Each of these random parametrization are evaluated based on their average performance over 10 
 independent runs for each problem.
 Hereafter, we refer to this method as the {\em homogeneous} configuration. Second, for RPSS the parametrizations
 are not tuned, they are randomly generated for each EvoWorker, set independently at the beginning of each run.
