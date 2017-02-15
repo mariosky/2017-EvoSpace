@@ -152,12 +152,21 @@ proposed EvoSpace cloud implementation, the experimental work is presented in
 Section \ref{sec:experiments}. Finally, a summary and concluding remarks are in
 Section \ref{sec:conclusions}.
 
+
+\begin{figure*}[t]
+    \centering
+        \includegraphics[width=10cm]{img/EvoSpaceAWS.png}
+    \caption{Main components and data-flow in the cloud version of EvoSpace. }
+    \label{fig:evospace}
+\end{figure*}
+
 \section{Related Work}
 \label{sec:work}
 % Dynamic adaptation
 % Random Patameters
 
 \section{EvoSpace Cloud Implementation}
+\label{sec:evo}
 The EvoSpace \cite{GValdez2015} framework has two components: (i) the EvoSpace 
 container that stores the evolving population and (ii) workers, which execute 
 the actual evolutionary process, while EvoSpace container acts only as a population repository.
@@ -167,23 +176,26 @@ on the client machine. Afterward, the evolved population from each worker
 is returned to the EvoSpace container. The experimental platform used in this work is
 described in \cite{valenzuela2015implementing}, and consists of several virtual machines
 created automatically by a script before each experiment. The main components are depicted
-in Figure \cite{fig:evospace}. 
+in Figure \cite{fig:evospace}. Each experiment consisted of the following steps:
 
-
-
-
-\label{sec:evo}
+\begin{enumerate}
+    \item First, the script creates two virtual machines: one for the task queue and another
+    for the EvoSpace container, then it creates the number of worker machines needed, these 
+    machines are a configured as client machines for the task queue. 
+    \item For each run, the number of EvoWorkers needed are added to the queue as tasks, from
+    the user PC.
+    \item Each worker machine loads the task and the experiment starts, and each worker
+    starts taking and replacing samples to the EvoSpace container.
+    \item Finally all the data generated in each workers is returned by the task queue. 
+\end{enumerate}
+This setup was deployed on top of the Amazon Web Services (AWS) platform, and permitted the 
+execution of the experiments with similar computing resources.  
 % Architecture Components
 % Random Patameters
-\begin{figure*}[t]
-    \centering
-        \includegraphics[width=10cm]{img/evospace-aws.png}
-    \caption{Main components and data-flow in the cloud version of EvoSpace. }
-    \label{fig:evospace}
-\end{figure*}
+
 
 \section{Experiments}
- \ref{sec:experiments}
+ \label{sec:experiments}
 
 The goal of this work is to determine if a random static parametrization for each of the $n$ EvoWorkers 
 collaborating on a given run could achieve competitive results against an homogeneous tuned parametrization
@@ -247,8 +259,28 @@ with the number of dimensions set to 100 in each case. For these problems we use
 representation for each individual.
 
 
-\subsection{OneMax Results}
+\begin{figure*}[t]
+    \centering
+    \subfigure [2 workers]
+    {
+        \includegraphics[width=2in]{img/2w_onemax_100_box.png}
+    }
+    \subfigure  [6 workers]
+    {
+        \includegraphics[width=2in]{img/6w_onemax_100_box.png}
+    }
+    \subfigure  [12 workers]
+    {
+        \includegraphics[width=2in]{img/12w_onemax_100_box.png}
+    }
 
+    \caption{100 experiments with random parameters for the 128 Bit OneMax problem.
+    Experiments are ranked by the mean time to solution of 5 runs, with   
+    (a) 2 workers, (b) 6 workers, and (c) 12 workers.}
+    \label{fig:effort}
+\end{figure*}
+
+\subsection{OneMax Results}
 In this section, results from the OneMax experiments are discussed. As mentioned before, the first
 step is to simulate the manual tuning of the parameters by running 100 experiments with random 
 parameters and then select the best configuration. As the OneMax problem is solved by almost 
@@ -262,7 +294,6 @@ per unit of time, which implies
 that the selection of a good configuration could be found with less experiments for higher number 
 of workers.
 
-
 In Figure~\ref{fig:comp-onemax} the results of 30 runs comparing
 against the RPSS approach is shown. %What is RPSS? - JJ
         %It will be explained in the Intro is the Random Parameter Selection Strategy - Mario
@@ -271,26 +302,7 @@ in this case the best of the heterogeneous solutions (12 workers) is only better
 solution.  % Explain - JJ
            % To do - Mario 
 
-\begin{figure*}[b]
-    \centering
-    \subfigure [2 workers]
-    {
-        \includegraphics[width=3in]{img/2w_onemax_100_box.png}
-    }
-    \subfigure  [6 workers]
-    {
-        \includegraphics[width=3in]{img/6w_onemax_100_box.png}
-    }
-    \subfigure  [12 workers]
-    {
-        \includegraphics[width=3in]{img/12w_onemax_100_box.png}
-    }
 
-    \caption{100 experiments with random parameters for the 128 Bit OneMax problem.
-    Experiments are ranked by the mean time to solution of 5 runs, with   
-    (a) 2 workers, (b) 6 workers, and (c) 12 workers.}
-    \label{fig:effort}
-\end{figure*}
 
 
 
