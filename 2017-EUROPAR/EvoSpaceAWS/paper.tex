@@ -111,7 +111,7 @@ Local Generations & 30 & 30 & 30 & 100 & 100 & 100\\
 \end{table}
 
 To measure the effectiveness of RPSS in EvoSpace two parametrization strategies are compared, 
-similar to what is done in \cite{fuku1,fuku2}. First, we consider the approach of setting all 
+similar to what is done in \cite{fuku1,fuku2,garcia2014randomized}. First, we consider the approach of setting all 
 of the EvoWorker parameters homogeneously. In order to tune the homogeneous parameters,
 we must select the best configuration found after from generating a 100 random parameterizations 
 and performing 10 independent runs for each problem. We call this the homogeneous configuration and 
@@ -187,16 +187,20 @@ solution.
 The same steps as the previous section were followed when comparing the five real valued 
 optimization problems of this section. For brevity only two representative functions are discussed
 with figures, and summary of all the results are shown in Table~\ref{fig:summary}. As before
-the the first step is to tune the parameters of the asynchronous GA algorithm. In Figure \ref{fig:griewank}
-the results of the tuning phase for 6 and 12 workers for the Griewank function are shown. For 12 workers
-results are not as flat as before, with times comparable to the 6 worker configuration in the best case.
+the the first step is to tune the parameters of the 
+asynchronous GA algorithm. In Figure \ref{fig:griewank} the results of the tuning 
+phase for 6 and 12 workers for the Griewank function are shown. For 12 workers
+results are not as flat as before, with times comparable to the 6 worker 
+configuration in the best case.
 
 In order to compare both configurations in Figure \ref{fig:griewank-evals} the number of evaluations 
 needed for solution are presented. In this experiment, the heterogeneous solution is better than the
 tuned homogeneous parametrization. But in the case of results shown in Figure~\ref{fig:schaffer} 
-both the homogeneous and heterogeneous configurations have similar results, only with a slight advantage
+both the homogeneous and heterogeneous configurations have similar results, 
+only with a slight advantage
 for the heterogeneous configuration when using 12 EvoWorkers. In the summary found in
-Table~\ref{fig:summary} two extreme cases are found the Ackley and Rastrigin functions, with results leaning
+Table~\ref{fig:summary} two extreme cases are found the Ackley and Rastrigin functions, 
+with results leaning
 towards the heterogeneous and homogeneous configurations respectively. On the other hand, the De Jong
 function also favors the heterogeneous configurations. 
 
@@ -258,5 +262,8 @@ function also favors the heterogeneous configurations.
     \caption{Summary table of results. }
     \label{fig:summary}
 \end{figure*}
+
+\bibliographystyle{abbrv}
+\bibliography{../../bib/biblio}
 
 \end{document}
