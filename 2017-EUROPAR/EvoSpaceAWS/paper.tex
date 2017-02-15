@@ -55,6 +55,14 @@ the benchmark.
   Cloud Computing}
 \end{abstract}
 \section{Introduction}
+%Pool Based
+In this work, we are interested in EAs systems that follow a
+pool-based approach, where the search process is conducted by a
+collection of possibly heterogeneous processes that collaborate using
+a shared repository or population pool. We will refer to such
+algorithms as Pool-based EAs or PEAs, and highlight the fact that such
+systems are intrinsically parallel, distributed and asynchronous. 
+
 % EA Paramaters 
 % Worst on many workers
 % Explore and Exploit
@@ -78,14 +86,17 @@ the benchmark.
 
 \section{Experimental Set-up}
 The goal of this work is to determine if a random static parametrization for each of the $n$ EvoWorkers 
-collaborating on a given run could achieve competitive results against an homogeneous tuned parametrization.
-The parameters considered to be randomly set for each EvoWorker where the crossover and mutation probabilities 
-with a valid range of [0,1]. This parameters where selected because they have a well established relationship 
-with the exploration and explatation of the solution space \cite{}. Depending on the type of experiment 
-and the number of workers the homogeneous values were set for other variables, these are summarized
-in Table \ref{tab:params}. Additionally, for all the OneMax experiments a BitFlip mutation was used t
-with an independent probability for each attribute to be flipped of 0.05, and a tournament selection of size 3
-was used.    
+collaborating on a given run could achieve competitive results against an homogeneous tuned parametrization
+\cite{fuku1,fuku2,garcia2014randomized}. The parameters considered to be randomly set for each EvoWorker 
+where the crossover and mutation probabilities with a valid range of $[0,1]$. These parameters where 
+selected because they effectively control which types of moves in the search space are
+applied, and are related to the amount of exploration and explatation that is carried out \cite{}.
+The other parameters and design choices used by EvoSpace and the EvoWorkers in our experiments are given in 
+Table \ref{tab:params}. Additionally, for the binary OneMax problem bit-flip mutation is used and for the real-valued problems uniform 
+with an 
+independent probability (ind prob) for each attribute to be flipped of $0.05$, 
+and a tournament selection of size 3. 
+ we use ind_prob mutation and XXXX crossover.    
 
 
 \begin{table}[!t]
@@ -113,21 +124,25 @@ Local Generations & 30 & 30 & 30 & 100 & 100 & 100\\
 To measure the effectiveness of RPSS in EvoSpace two parametrization strategies are compared, 
 similar to what is done in \cite{fuku1,fuku2,garcia2014randomized}. First, we consider the approach of setting all 
 of the EvoWorker parameters homogeneously. In order to tune the homogeneous parameters,
-we must select the best configuration found after from generating a 100 random parameterizations 
-and performing 10 independent runs for each problem. We call this the homogeneous configuration and 
-is compared against a random-heterogeneous-parametrization, where the parameters of each worker are 
-set independently at random at the beginning of each run; we call this the heterogeneous configuration.
-Finally, we perform 30 independent runs of with both methods and report the average number of evaluations.
+we select the best configuration from 100 random parameterizations. 
+Each of these random parametrizations are evaluated based on their average performance over 10 
+independent runs for each problem.
+Hereafter, we refer to this method as the homogeneous configuration. Second, for RPSS the parametrizations
+are not tuned, they are randomly generated for each EvoWorker, set independently at the beginning of each run.
+Hereafter, we call this approach the heterogeneous configuration. Finally, we perform 30 independent runs
+with both methods and report the average number of evaluations required by each strategy to find the
+global optimum solution.
 
 The algorithms are first evaluated using the OneMax (or BitCounting) problem proposed by 
 Schaffer and Eshelman \cite{SE91}, this is a simple problem consisting in maximizing the number 
-of ones of a bitstring. For the current experiments a 128 bit string was used. This problem was
-selected first because is not computationally demanding, and more experiments where conducted for
-the tuning phase, tuning the parameters using 2, 6, and 12 worker configurations. 
-Then, following \cite{fuku1}, five standard real-valued single-value optimization problems 
+of ones of a bitstring. For the current experiments a 128 bit string was used. Since this
+problem is not computationally demanding, more experiments where conducted for the tuning phase, 
+tuning the parameters using 2, 6, and 12 EvoWorkers. Then, following \cite{fuku1}, 
+five standard real-valued single objective optimization problems 
 are used, these are the Rastrigin, Griewank, De Jong, Schaffer  and Ackley functions, 
-with the number of dimensions set to 100 in each case. For the OneMax problem a standard bitstring 
-representation is used, while the other five problems use a real-valued vector representation.
+with the number of dimensions set to 100 in each case. For these problems we use a real-valued vector
+representation for each individual.
+
 
 \subsection{OneMax Results}
 In this section, results from the OneMax experiments are discussed. As mentioned before, the first
