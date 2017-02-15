@@ -11,7 +11,8 @@
 
 \title{Random Selection of Parameters in Asynchronous Pool-Based Evolutionary Algorithms}
 
-\author{Mario Garc\'ia-Valdez\inst{1} \and Ren\'e M\'arquez\inst{1} \and Juan J. Merelo Guerv\'os\inst{2} \and  Leonardo Trujillo \inst{1}}
+\author{Mario Garc\'ia-Valdez\inst{1} 
+\and Ren\'e M\'arquez\inst{1} \and Juan J. Merelo Guerv\'os\inst{2} \and  Leonardo Trujillo \inst{1}}
 
 \institute{Instituto Tecnol\'ogico de Tijuana, Tijuana BC, Mexico
 \and
@@ -94,9 +95,13 @@ selected because they effectively control which types of moves in the search spa
 applied, and are related to the amount of exploration and explatation that is carried out \cite{}.
 The other parameters and design choices used by EvoSpace and the EvoWorkers in our experiments are given in 
 Table \ref{tab:params}. Additionally, for the binary OneMax problem bit-flip mutation
-is used and for the real-valued problems uniform with an 
-independent probability (ind prob) for each attribute to be flipped of $0.05$, 
-and a tournament selection of size 3.     % Why do these parameters don't change?
+is used with an independent probability for each attribute to be flipped (indpb) of $0.05$, 
+a two ponit crossover and a tournament selection of size 3. For the real-valued problems a Gaussian
+mutation was applied with mu=$0$, sigma=$0.2$, and indpb=$0.05$; two point crossover and
+a tournament selection of three. These values are kept static to measure only the effect of the 
+parameters mentioned above.
+    % Why do these parameters don't change?
+    % Explained - Mario 
 
 
 \begin{table}[!t]
@@ -162,9 +167,11 @@ of workers.
 
 In Figure~\ref{fig:comp-onemax} the results of 30 runs comparing
 against the RPSS approach is shown. %What is RPSS? - JJ
+        %It will be explained in the Intro is the Random Parameter Selection Strategy - Mario
 It can be observed that as the number of EvoWorkers increases the median of the time decreases, but
 in this case the best of the heterogeneous solutions (12 workers) is only better than the worst homogeneous
 solution.  % Explain - JJ
+           % To do - Mario 
 
 \begin{figure*}[b]
     \centering
