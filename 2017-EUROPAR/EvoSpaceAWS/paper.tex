@@ -52,6 +52,31 @@ performance improvements which are competitive with instances of the
 algorithm using workers with control parameters tuned specifically for
 the benchmark.
 
+% Abstract proposed by Leonardo
+% This work studies pool-based evolutionary algorithms (PEAs), that
+% asynchronously distribute the evolutionary process among multiple computing nodes.
+% PEAs provide a central repository or pool where the complete population is stored.
+% Distributed nodes (or workers) asynchronously interact with the pool by taking a 
+% sample of the population and performing a local evolutionary search on the population
+% sample, then returning to the pool the newly evolved solutions.
+    %%% Not all PEAs here you are talking about EvoSpace, others
+    %%% you can have an island model using PEAs, and migration is throu the pool - Mario  
+% Like any other EAs, the performance of the complete search will depend
+% on the correct tuning of the EA parameters. In this case this problem 
+% is magnified by a factor of $N$, the number of workers.
+% This paper evaluates two approaches. First, to set the main parameters 
+% homogeneously across all workers, based on a previous random sampling of parameter space.
+% The second approach is based on the work by Gong and Fukunaga 
+% proposed for the Island-Model EA called Randomized Parameter Setting Strategy,
+% where parameters are set randomly for each worker and are thus heterogeneous across workers.
+% Experiments were conducted in the cloud using 2, 6 and 12 virtual machine configurations, using five 
+% test functions for single-objective real-valued optimization problems (Rastrigin, Griewank, De Jong, Schaffer 
+% and Ackley) and the OneMax binary problem. The results suggest that the heterogeneous approach can yield
+% performance improvements over the homogeneous method without requiring any previous tuning heuristic.
+
+
+
+
 \keywords{Distributed Evolutionary Algorithms, Volunteer Computing,
   Cloud Computing}
 \end{abstract}
