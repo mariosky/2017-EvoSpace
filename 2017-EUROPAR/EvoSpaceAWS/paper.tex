@@ -74,20 +74,10 @@ the benchmark.
 % and Ackley) and the OneMax binary problem. The results suggest that the heterogeneous approach can yield
 % performance improvements over the homogeneous method without requiring any previous tuning heuristic.
 
-
-
-
 \keywords{Distributed Evolutionary Algorithms, Volunteer Computing,
   Cloud Computing}
 \end{abstract}
 \section{Introduction}
-
-\begin{figure*}[t]
-    \centering
-        \includegraphics[width=10cm]{img/EvoSpaceAWS.png}
-    \caption{Main components and data-flow in the cloud version of EvoSpace. }
-    \label{fig:evospace}
-\end{figure*}
 
 %Why Paralel
 Biological evolution is an intrinsically parallel, distributed and asynchronous process, however, 
@@ -124,7 +114,7 @@ giving users an additional optimization task.
 Substantial work has focused on facilitating the burden of finding 
 the most appropriate parameters settings, suggesting several strategies:
 using parameters of previous studies \cite{eiben1999parameter} 
-optimization by another genetic algorithm \cite{grefenstette1986optimization}, Dynamic adaptation \cite{eiben1999parameter}, 
+optimization by another genetic algorithm \cite{grefenstette1986optimization}, dynamic adaptation \cite{eiben1999parameter}, 
 self-adaptive parameters \cite{pellerin2004self}, hybrid approaches and so on.
 % Worst on many workers
 In heterogeneous and distributed PEAs like EvoSpace, this problem can 
@@ -196,20 +186,23 @@ However, while such algorithms can find high performance parametrizations,
 they require additional computational effort which can be too expensive in some applications
 (even if they are more efficient than an exhaustive search).
 
-This paper studies the approach by Gong and Fukunaga called Randomized Parameter Setting Strategy (RPSS) \cite{fuku1,fuku2}.
-Originally proposed for an Island-Model EA, RPSS sets the parameter values of each subpopulation randomly, 
-without a tuning or self-adaptive process whatsoever. The RPSS approach is to set the parameters 
+This paper is inspired by the approach proposed by Gong and Fukunaga
+called Randomized Parameter Setting Strategy (RPSS)
+\cite{fuku1,fuku2}. 
+Originally proposed for an Island Model EA, RPSS sets the parameter values of each subpopulation randomly, 
+without any kind of tuning or self-adaptive process. The RPSS approach is to set the parameters 
 of each subpopulation randomly at the beginning of the run, a very simple strategy.
-Nevertheless, results reported in \cite{fuku1,fuku2} exhibit promise, achieving competitive results 
+Even so, results reported in \cite{fuku1,fuku2} exhibit promise, achieving competitive results 
 while substantially reducing the amount of effort required to tune the system.
 
 In a first study, \cite{garcia2014randomized} reported that in effect RPSS 
 can be successfully applied to a PEA. However, in that work the
 approach was only tested on the P-Peaks generator of multimodal problems proposed by De Jong et al. \cite{Jong:PS97}.
 While the problem is theoretically interesting, it can be limited in scope given its reliance on a bit string representation.
-Therefore, this work extends the study to consider another binary problem (OneMax) as well as 
-5 high-dimensional real-valued optimization benchmarks. Our goal is to test the generalization of 
-the approach, by considering a different search space and different forms of fitness landscapes.
+Therefore, this work extends the study considering another binary representation problem (OneMax) as well as 
+five high-dimensional real-valued optimization benchmarks. Our goal is
+to test how general is this approach by considering a different search
+spaces and different forms of fitness landscapes. 
 
 % Dynamic adaptation
 % Random Patameters
@@ -236,19 +229,19 @@ Local Generations & 30 & 30 & 30 & 100 & 100 & 100\\
 \end{tabular}
 \end{table}
 
-\begin{figure*}[t]
+\begin{figure*}[h!t]
     \centering
     \subfigure [2 workers]
     {
-        \includegraphics[width=2.2in]{img/2w_onemax_100_box.png}
+        \includegraphics[width=3in]{img/2w_onemax_100_box.png}
     }
     \subfigure  [6 workers]
     {
-        \includegraphics[width=2.2in]{img/6w_onemax_100_box.png}
+        \includegraphics[width=3in]{img/6w_onemax_100_box.png}
     }
     \subfigure  [12 workers]
     {
-        \includegraphics[width=2.2in]{img/12w_onemax_100_box.png}
+        \includegraphics[width=3in]{img/12w_onemax_100_box.png}
     }
 
     \caption{100 experiments with random parameters for the 128 Bit OneMax problem.
@@ -260,6 +253,14 @@ Local Generations & 30 & 30 & 30 & 100 & 100 & 100\\
 
 \section{EvoSpace Cloud Implementation}
 \label{sec:evo}
+
+\begin{figure*}[t]
+    \centering
+        \includegraphics[width=10cm]{img/EvoSpaceAWS.png}
+    \caption{Main components and data-flow in the cloud version of EvoSpace. }
+    \label{fig:evospace}
+  \end{figure*}
+  %
 The EvoSpace \cite{GValdez2015} framework has two components: (i) the EvoSpace 
 container that stores the evolving population and (ii) workers, which execute 
 the actual evolutionary process, while EvoSpace container acts only as a population repository.
@@ -455,6 +456,12 @@ such as genetic programming or particle swarm optimization for having more heter
 workers, the RPSS could be use in those cases where each algorithm has different sets of
 parameters. Another interesting line of work is the dynamic adaptation of parameters by
 measuring the diversity of each worker or returned sample.   
+
+\section*{Acknowledgments}
+
+This work has been supported in part by: de Ministerio espa\~{n}ol de
+Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
+(UGR-EPHEMECH).
 
 
 \bibliographystyle{abbrv}
