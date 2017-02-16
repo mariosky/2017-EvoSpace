@@ -367,8 +367,8 @@ representation for each individual.
     {
         \includegraphics[width=2.2in]{img/griewank_evals_hetereo.png}
     }
-      \caption{30 runs of the 128 dimension Griewank single-objective optimization test function. 
-    Box-plot of the number of evaluations needed for solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
+      \caption{ 30 runs on the Griewank function. Box-plot of the number of evaluations needed for solution, 
+                 with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
     \label{fig:griewank-evals}
 \end{figure*}
 
@@ -384,8 +384,8 @@ representation for each individual.
     }
  
 
-    \caption{30 runs of the 128 dimension Schaffer single-objective optimization test function. 
-    Box-plot of the number of evaluations needed for solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
+    \caption{30 runs on the Schaffer function. Box-plot of the number of evaluations needed for 
+      solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
     \label{fig:schaffer}
 \end{figure*}
 
@@ -396,49 +396,47 @@ representation for each individual.
     \label{fig:summary}
 \end{figure*}
 
-\subsection{OneMax Results}
-In this section, results from the OneMax experiments are discussed. As mentioned before, the first
-step is to simulate the manual tuning of the parameters by running 100 experiments with random 
-parameters and then select the best configuration. As the OneMax problem is solved by almost 
-all configurations, the best is the one requiring the least time to finish. Figure~\ref{fig:effort} 
-shows the time required for different numbers of EvoWorkers. It can be observed that even with an 
-homogeneous configuration as the number of workers increases so does
-the number of fast solutions.
-A reason for this could be that the solution to the problem depends on the number of evaluations, and 
-as the number of workers increases so does the number of evaluations
-per unit of time, which implies
-that the selection of a good configuration could be found with less experiments for higher number 
-of workers.
+\subsection{Results for OneMax}
+As mentioned before, the first step is to simulate the manual tuning of the parameters 
+by running 100 experiments with random parameters and then select the best configuration, 
+using the median performance over 5 runs. Since the OneMax problem is solved by almost all
+configurations, performance is determined by the time required to find the optimal solution.
+%[FALTA ESPECIFICAR PORQUE SE USO EL TIEMPO AQUI, Y PORQUE EL NUMERO DE EVALUACIONES EN LOS OTROS EXPERIMENTOS]
+Figure~\ref{fig:effort} shows the time required for different numbers of EvoWorkers. 
+It can be observed that even with an homogeneous configuration, as the number of workers 
+increases solutions are found faster. In general, increasing the number of workers increases 
+the number of function evaluations carried out over a unit of time. This implies that the selection
+of a good configuration could be found easier when using a higher number of workers, relative
+to the total wall-clock time.  
 
-In Figure~\ref{fig:comp-onemax} the results of 30 runs comparing
-against the RPSS approach is shown. %What is RPSS? - JJ
-        %It will be explained in the Intro is the Random Parameter Selection Strategy - Mario
+In Figure~\ref{fig:comp-onemax} the results of 30 runs comparing against the RPSS approach is shown.
 It can be observed that as the number of EvoWorkers increases the median of the time decreases, but
 in this case the best of the heterogeneous solutions (12 workers) is only better than the worst homogeneous
-solution.  % Explain - JJ
-           % To do - Mario 
+solution. % Explain - JJ
 
-\subsection{Single-Objective Optimization Test Functions Results}
+\subsection{Results for Real-valued Optimization Functions}
+The same steps as the previous section were followed when evaluating the five real valued 
+optimization problems of this section.  For brevity only two representative functions are 
+presented with figures, and summary of all the results are shown in Table~\ref{fig:summary}. As before
+the first step is to tune the parameters for the homogeneous configuration.
+In Figure \ref{fig:griewank}, the results of the tuning phase for 6 and 12 workers 
+for the Griewank function are shown. For 12 workers results are not as flat as before, 
+with times comparable to the 6 worker configuration in the best case.
 
-The same steps as the previous section were followed when comparing the five real valued 
-optimization problems of this section. For brevity only two representative functions are discussed
-with figures, and summary of all the results are shown in Table~\ref{fig:summary}. As before
-the first step is to tune the parameters of the 
-asynchronous GA algorithm. In Figure \ref{fig:griewank} the results of the tuning 
-phase for 6 and 12 workers for the Griewank function are shown. For 12 workers
-results are not as flat as before, with times comparable to the 6 worker 
-configuration in the best case.
-
-In order to compare both configurations in Figure \ref{fig:griewank-evals} the number of evaluations 
-needed for solution are presented. In this experiment, the heterogeneous solution is better than the
-tuned homogeneous parametrization. But in the case of results shown in Figure~\ref{fig:schaffer} 
-the homogeneous and heterogeneous configurations yield similar results, 
-only with a slight advantage
-for the heterogeneous configuration with 12 EvoWorkers. In the summary shown in
-Table~\ref{fig:summary} two extreme cases are found the Ackley and Rastrigin functions, 
-with results leaning
-towards the heterogeneous and homogeneous configurations respectively. On the other hand, the De Jong
-function also favors the heterogeneous configurations. 
+To compare the performance of the homogeneous approach and the heterogeneous approach based on RPSS,
+Figure \ref{fig:griewank-evals} compares the approaches based on the total number of function 
+evaluations required to find the optimal solution.
+%[SE DETIENE CUANDO SE ENCUENTRA EL OPTIMO, O CUANDO ESTAS CERCAS POR UN epsilon ?] 
+% Optimo con hasta 7 decimas - Mario  
+These results show a clear performance improvement, with the heterogeneous configuration 
+reducing the total number of function evaluations required to find a solution,
+independently of the number of workers used.
+On the other hand, for the Schaffer function, performance is quite similar,
+with the heterogeneous approach only providing a slight reduction in the number 
+of function evaluations for the case with 12 EvoWorkers.
+In the summary shown in Table~\ref{fig:summary} two extreme cases are found, the Ackley and Rastrigin functions.
+In the former, the heterogeneous configuration achieves the best performance, while the opposite is true on the latter.
+Finally, performance on the De Jong function also favors the heterogeneous configurations.
 
 \section{Conclusions and Further Work}
 \label{sec:conclusions}
