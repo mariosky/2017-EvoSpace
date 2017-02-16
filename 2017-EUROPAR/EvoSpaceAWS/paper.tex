@@ -160,11 +160,55 @@ proposed EvoSpace cloud implementation, the experimental work is presented in
 Section \ref{sec:experiments}. Finally, a summary and concluding remarks are in
 Section \ref{sec:conclusions}.
 
-
-
-
 \section{Related Work}
 \label{sec:work}
+There are two important practical issues faced by many EA systems, namely the size of the parameter 
+space and the high computational cost when it is compared with mathematical programming or numerical techniques.
+Concerning the latter, one approach to mitigate this issue is to use parallel or 
+distributed implementations \cite{cantu-paz:migration-policies,duda2013gpu}.
+For instance, Fern\'andez et al. \cite{nc}% articulo Paco, Gustavo y Leo publucado en Natural Computing}
+uses the well-known Berkeley Open Infrastructure for Network Computing (BOINC) to distribute EA runs across a
+heterogeneous network of volunteer computers using virtual machines. Another recent example is 
+found in the FlexGP system developed by Sherry et al. \cite{sherry2012flex}. FlexGP is probably the first large scale GP system 
+that runs on the cloud, using an Island model approach and implemented over Amazon EC2 with a 
+socket-based client-server architecture.
+
+Another approach to distributed EAs is the so called pool-based architecture. In general, a 
+pool-based system employs a central repository (real or virtual) where the evolving population is stored.
+Distributed clients interact with the pool, performing some or all of the basic EA processes 
+(selection, genetic operators, survival). A representative work of this approach 
+is that by Merelo et al. \cite{agajaj} implementing a Javascript based PEA that distributes 
+the evolutionary process over the web, providing the added advantage of not requiring the 
+installation of additional software in each computing node.  Other similar cloud-based solutions 
+are based on a global queue of tasks and a Map-Reduce implementation which normally handles failures 
+by the re-execution of  tasks \cite{fazenda2012,di2013towards,FlexGP}. Using the BOINC 
+volunteer platform  Smaoui et al. \cite{FekiNG09} uses work units that consist of a fitness 
+evaluation task and multiple replicas  were produced and sent to different clients.
+
+While using a distributed framework can ease the computational cost, it can also exacerbate the first issue mentioned above;
+i.e., it increases the size of the algorithm parameter space, which makes parameter tuning a more difficult task.
+The issue of optimal parametrization of EAs is a widely studied subject \cite{de2007parameter}, 
+with many approaches in literature. For instance, one of the most successful approaches 
+is the F-Racing \cite{} and iterative F-Racing techniques \cite{}. 
+However, while such algorithms can find high performance parametrizations, 
+they require additional computational effort which can be too expensive in some applications
+(even if they are more efficient than an exhaustive search).
+
+This paper studies the approach by Gong and Fukunaga called Randomized Parameter Setting Strategy (RPSS) \cite{fuku1,fuku2}.
+Originally proposed for an Island-Model EA, RPSS sets the parameter values of each subpopulation randomly, 
+without a tuning or self-adaptive process whatsoever. The RPSS approach is to set the parameters 
+of each subpopulation randomly at the beginning of the run, a very simple strategy.
+Nevertheless, results reported in \cite{fuku1,fuku2} exhibit promise, achieving competitive results 
+while substantially reducing the amount of effort required to tune the system.
+
+In a first study, \cite{garcia2014randomized} reported that in effect RPSS 
+can be successfully applied to a PEA. However, in that work the
+approach was only tested on the P-Peaks generator of multimodal problems proposed by De Jong et al. \cite{Jong:PS97}.
+While the problem is theoretically interesting, it can be limited in scope given its reliance on a bit string representation.
+Therefore, this work extends the study to consider another binary problem (OneMax) as well as 
+5 high-dimensional real-valued optimization benchmarks. Our goal is to test the generalization of 
+the approach, by considering a different search space and different forms of fitness landscapes.
+
 % Dynamic adaptation
 % Random Patameters
 
@@ -223,7 +267,7 @@ on the client machine. Afterward, the evolved population from each worker
 is returned to the EvoSpace container. The experimental platform used in this work is
 described in \cite{valenzuela2015implementing}, and consists of several virtual machines
 created automatically by a script before each experiment. The main components are depicted
-in Figure \cite{fig:evospace}. Each experiment consisted of the following steps:
+in Figure \ref{fig:evospace}. Each experiment consisted of the following steps:
 
 \begin{enumerate}
     \item First, the script creates two virtual machines: one for the task queue and another
@@ -347,7 +391,7 @@ representation for each individual.
 
 \begin{figure*}[t]
     \centering
-        \includegraphics[width=10cm]{img/table.png}
+        \includegraphics[width=4.5in]{img/table.png}
     \caption{Summary table of results. }
     \label{fig:summary}
 \end{figure*}
@@ -413,6 +457,6 @@ measuring the diversity of each worker or returned sample.
 
 
 \bibliographystyle{abbrv}
-\bibliography{../../bib/biblio,../../bib/evospace-i,../../bib/parameters}
+\bibliography{../../bib/biblio,../../bib/evospace-i,../../bib/parameters,../../bib/volunteer,../../bib/geneura}
 
 \end{document}
