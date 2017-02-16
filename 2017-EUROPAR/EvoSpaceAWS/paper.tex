@@ -380,7 +380,7 @@ representation for each individual.
 \begin{figure*}[t]
     \centering
         \includegraphics[width=4.5in]{img/table.png}
-    \caption{Summary table of results. }
+    \caption{Table summaryzing results. }
     \label{fig:summary}
 \end{figure*}
 
@@ -461,11 +461,32 @@ without any form of parameter tuning, achieving comparable results to standard h
 parametrizations. Results also show that the benefits of a RPSS are not only present
 when using a heterogeneous approach, even a random homogeneous configuration could bring
 benefits. Unfortunately the RPSS strategy is not a silver bullet, as there are cases
-when is the best approach. Future work will focus on using other EA techniques, 
-such as genetic programming or particle swarm optimization for having more heterogeneous
-workers, the RPSS could be use in those cases where each algorithm has different sets of
-parameters. Another interesting line of work is the dynamic adaptation of parameters by
-measuring the diversity of each worker or returned sample.   
+when it is not the best approach; however these disadvantages are
+offset by the fact that it comes very close to zero parametrization,
+giving a consistently good result across a good range of network
+size. The worst result is achieved for the Rastrigin function, which
+is one of the most difficult ones; not only the time needed is worse,
+also the number of evaluations. In case such as these it would be
+interesting to use some technique to constrain the range of variation
+of the random parameters.
+
+The work presented in this paper, thus, extends the work by Fukunaga
+and coworkers by confirming his result in a pool-based environment and
+different kinds of fitness functions. In general, we can conclude that
+random parametrization will allow a good initial result for most
+problems, providing a fast solution in cases where there is not enough
+time to perform optimization of the parameters in a parallel setup. 
+
+
+This will be one of the future lines of work; these will also focus on using other EA techniques, 
+such as genetic programming or particle swarm optimization for having 
+workers that are heterogeneous in more than one sense. RPSS could be
+use in those cases where each algorithm has different sets of
+parameters, but also to select randomly the technique used in each
+node. Another interesting line of work is the dynamic adaptation of
+parameters by measuring the diversity of each worker or returned
+sample. This could be specially useful in cases where the random
+parametrization technique seems to achieve bad results. 
 
 \section*{Acknowledgments}
 
