@@ -92,10 +92,12 @@ the benchmark.
 %Why Paralel
 Biological evolution is an intrinsically parallel, distributed and asynchronous process, however, 
 some of these features are not trivially included into standard EAs,  which are mostly coded as sequential 
-and synchronous algorithms \cite{eiben}. For instance, a large body of work exists in EA parallelization, 
-using multiple CPU cores, multiple nodes and GPUs \cite{}.
+and synchronous algorithms \cite{eiben};  a large body of work exists in EA parallelization, 
+using multiple CPU cores, multiple nodes and GPUs \cite{cantu2000efficient}.
 However, distributed and asynchronous EAs have started to become common only recently. In an effort to
-exploit computing resources available from personal computers and smart-devices to massive data centers.
+exploit computing resources available from personal computers,
+smartphones and tablets as massive data centers there have been many
+researchers and companies that have tried to tap them. 
 These resources are easily accessible through popular Internet technologies, such as cloud computing, 
 peer-to-peer (P2P), and web environments. Moreover, these technologies are intended for the development 
 of parallel, distributed and asynchronous systems, such that an EA developed on top of them could easily 
@@ -119,10 +121,10 @@ Like any other EAs, the performance of the complete search will depend
 on the correct tuning of the EA parameters. However, settings 
 must be optimized to each particular problem \cite{de2007parameter}  
 giving users an additional optimization task. 
-Substantial work has been focused on facilitating the burden of finding 
+Substantial work has focused on facilitating the burden of finding 
 the most appropriate parameters settings, suggesting several strategies:
 using parameters of previous studies \cite{eiben1999parameter} 
-optimization by another genetic algorithm \cite{}, Dynamic adaptation \cite{}, 
+optimization by another genetic algorithm \cite{grefenstette1986optimization}, Dynamic adaptation \cite{eiben1999parameter}, 
 self-adaptive parameters \cite{pellerin2004self}, hybrid approaches and so on.
 % Worst on many workers
 In heterogeneous and distributed PEAs like EvoSpace, this problem can 
@@ -189,7 +191,7 @@ While using a distributed framework can ease the computational cost, it can also
 i.e., it increases the size of the algorithm parameter space, which makes parameter tuning a more difficult task.
 The issue of optimal parametrization of EAs is a widely studied subject \cite{de2007parameter}, 
 with many approaches in literature. For instance, one of the most successful approaches 
-is the F-Racing \cite{} and iterative F-Racing techniques \cite{}. 
+is the F-Racing and iterative F-Racing techniques \cite{lopez2011irace}. 
 However, while such algorithms can find high performance parametrizations, 
 they require additional computational effort which can be too expensive in some applications
 (even if they are more efficient than an exhaustive search).
@@ -303,7 +305,8 @@ collaborating on a given run could achieve competitive results against an homoge
 \cite{fuku1,fuku2,garcia2014randomized}. The parameters considered to be randomly set for each EvoWorker 
 where the crossover and mutation probabilities with a valid range of $[0,1]$. These parameters where 
 selected because they effectively control which types of moves in the search space are
-applied, and are related to the amount of exploration and exploitation that is carried out \cite{}.
+applied, and are related to the amount of exploration and exploitation
+that is carried out. % \cite{}. Don't know if we need this - JJ
 The other parameters and design choices used by EvoSpace and the EvoWorkers in our experiments are given in 
 Table \ref{tab:params}. Additionally, for the binary OneMax problem bit-flip mutation
 is used with an independent probability for each attribute to be flipped (indpb) of $0.05$, 
