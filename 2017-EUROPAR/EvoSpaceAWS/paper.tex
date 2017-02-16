@@ -207,6 +207,62 @@ spaces and different forms of fitness landscapes.
 % Dynamic adaptation
 % Random Patameters
 
+
+
+
+\section{EvoSpace Cloud Implementation}
+\label{sec:evo}
+
+\begin{figure*}[h!tbp]
+    \centering
+        \includegraphics[width=10cm]{img/EvoSpaceAWS.png}
+    \caption{Main components and data-flow in the cloud version of EvoSpace. }
+    \label{fig:evospace}
+  \end{figure*}
+  %
+The EvoSpace framework, which was introduced in \cite{Evospace}, and
+since then used in several applications \cite{GValdez2015} has two components: (i) the EvoSpace 
+container that stores the evolving population and (ii) workers, which execute 
+the actual evolutionary process, while EvoSpace container acts only as a population repository.
+In a basic configuration, workers pull a small random subset of the 
+population, and use it as the initial population for a local EA executed 
+on the client machine. Afterward, the evolved population from each worker 
+is returned to the EvoSpace container. The experimental platform used in this work is
+described in \cite{valenzuela2015implementing}, and consists of several virtual machines
+created automatically by a script before each experiment. The main components are depicted
+in Figure \ref{fig:evospace}. Each experiment consisted of the following steps:
+
+\begin{enumerate}
+    \item First, the script creates two virtual machines: one for the task queue and another
+    for the EvoSpace container, then it creates the number of worker machines needed, these 
+    machines are a configured as client machines for the task queue. 
+    \item For each run, the number of EvoWorkers needed are added to the queue as tasks, from
+    the user PC.
+    \item Every worker machine loads the task and the experiment
+      starts. During the experiment every one takes from and replaces
+      samples in the EvoSpace container. 
+    \item Finally all the data generated in each workers is returned by the task queue. 
+    \end{enumerate}
+    
+This setup was deployed on top of the Amazon Web Services (AWS)
+platform which allowed the execution of the experiments with similar computing resources.  
+% Architecture Components
+% Random Patameters
+
+\begin{figure*}[h!t]
+    \centering
+        \includegraphics[width=10cm]{img/one_max_comp.png}
+    \caption{Comparison of 30 runs of the 128 Bit OneMax problem. 
+    Box-plot of the number of evaluations needed for solution, with a 2, 6 and 12 workers
+    homogeneous configuration on the left side, and Heterogeneous configuration on the
+    right side of each.
+    }
+    \label{fig:comp-onemax}
+\end{figure*}
+
+\section{Experiments}
+ \label{sec:experiments}
+
 \begin{table}[!t]
 \caption{Valid ranges for each EvoWorker parameters. One Max}
 \label{tab:params}
@@ -228,79 +284,7 @@ Local Generations & 30 & 30 & 30 & 100 & 100 & 100\\
 \hline
 \end{tabular}
 \end{table}
-
-\begin{figure*}[h!t]
-    \centering
-    \subfigure [2 workers]
-    {
-        \includegraphics[width=3in]{img/2w_onemax_100_box.png}
-    }
-    \subfigure  [6 workers]
-    {
-        \includegraphics[width=3in]{img/6w_onemax_100_box.png}
-    }
-    \subfigure  [12 workers]
-    {
-        \includegraphics[width=3in]{img/12w_onemax_100_box.png}
-    }
-
-    \caption{100 experiments with random parameters for the 128 Bit OneMax problem.
-    Experiments are ranked by the mean time to solution of 5 runs, with   
-    (a) 2 workers, (b) 6 workers, and (c) 12 workers.}
-    \label{fig:effort}
-\end{figure*}
-
-
-\section{EvoSpace Cloud Implementation}
-\label{sec:evo}
-
-\begin{figure*}[t]
-    \centering
-        \includegraphics[width=10cm]{img/EvoSpaceAWS.png}
-    \caption{Main components and data-flow in the cloud version of EvoSpace. }
-    \label{fig:evospace}
-  \end{figure*}
-  %
-The EvoSpace \cite{GValdez2015} framework has two components: (i) the EvoSpace 
-container that stores the evolving population and (ii) workers, which execute 
-the actual evolutionary process, while EvoSpace container acts only as a population repository.
-In a basic configuration, workers pull a small random subset of the 
-population, and use it as the initial population for a local EA executed 
-on the client machine. Afterward, the evolved population from each worker 
-is returned to the EvoSpace container. The experimental platform used in this work is
-described in \cite{valenzuela2015implementing}, and consists of several virtual machines
-created automatically by a script before each experiment. The main components are depicted
-in Figure \ref{fig:evospace}. Each experiment consisted of the following steps:
-
-\begin{enumerate}
-    \item First, the script creates two virtual machines: one for the task queue and another
-    for the EvoSpace container, then it creates the number of worker machines needed, these 
-    machines are a configured as client machines for the task queue. 
-    \item For each run, the number of EvoWorkers needed are added to the queue as tasks, from
-    the user PC.
-    \item Each worker machine loads the task and the experiment starts, and each worker
-    starts taking and replacing samples to the EvoSpace container.
-    \item Finally all the data generated in each workers is returned by the task queue. 
-\end{enumerate}
-This setup was deployed on top of the Amazon Web Services (AWS) platform, and permitted the 
-execution of the experiments with similar computing resources.  
-% Architecture Components
-% Random Patameters
-
-\begin{figure*}[t]
-    \centering
-        \includegraphics[width=10cm]{img/one_max_comp.png}
-    \caption{Comparison of 30 runs of the 128 Bit OneMax problem. 
-    Box-plot of the number of evaluations needed for solution, with a 2, 6 and 12 workers
-    homogeneous configuration on the left side, and Heterogeneous configuration on the
-    right side of each.
-    }
-    \label{fig:comp-onemax}
-\end{figure*}
-
-\section{Experiments}
- \label{sec:experiments}
-
+%
 The goal of this work is to determine if a random static parametrization for each of the $n$ EvoWorkers 
 collaborating on a given run could achieve competitive results against an homogeneous tuned parametrization
 \cite{fuku1,fuku2,garcia2014randomized}. The parameters considered to be randomly set for each EvoWorker 
@@ -401,14 +385,40 @@ representation for each individual.
 \end{figure*}
 
 \subsection{Results for OneMax}
+
+\begin{figure*}[h!t]
+    \centering
+    \subfigure [2 workers]
+    {
+        \includegraphics[width=3in]{img/2w_onemax_100_box.png}
+    }
+    \subfigure  [6 workers]
+    {
+        \includegraphics[width=3in]{img/6w_onemax_100_box.png}
+    }
+    \subfigure  [12 workers]
+    {
+        \includegraphics[width=3in]{img/12w_onemax_100_box.png}
+    }
+
+    \caption{100 experiments with random parameters for the 128 Bit OneMax problem.
+    Experiments are ranked in increasing order by the average time to solution in 5 runs, with   
+    (a) 2 workers, (b) 6 workers, and (c) 12 workers.} 
+    \label{fig:effort}
+  \end{figure*}
+  %
 As mentioned before, the first step is to simulate the manual tuning of the parameters 
-by running 100 experiments with random parameters and then select the best configuration, 
+by running 100 experiments with random parameters and then selecting the best configuration, 
 using the median performance over 5 runs. Since the OneMax problem is solved by almost all
 configurations, performance is determined by the time required to find the optimal solution.
 %[FALTA ESPECIFICAR PORQUE SE USO EL TIEMPO AQUI, Y PORQUE EL NUMERO DE EVALUACIONES EN LOS OTROS EXPERIMENTOS]
 Figure~\ref{fig:effort} shows the time required for different numbers of EvoWorkers. 
 It can be observed that even with an homogeneous configuration, as the number of workers 
-increases solutions are found faster. In general, increasing the number of workers increases 
+increases solutions are found faster on average, but it is also true
+that it the median time needed to find the solution also decreases,
+with around 75\% of the experiments finding the solution in the same
+amount of time, around 5 seconds, as the bottom chart in the
+aforementioned Figure shows.  In general, increasing the number of workers increases 
 the number of function evaluations carried out over a unit of time. This implies that the selection
 of a good configuration could be found easier when using a higher number of workers, relative
 to the total wall-clock time.  
