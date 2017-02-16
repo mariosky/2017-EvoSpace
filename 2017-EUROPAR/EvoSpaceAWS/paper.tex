@@ -25,7 +25,7 @@ Universidad de Granada, Granada, Spain
 \maketitle
 
 \begin{abstract}
-It is not always possible to set up an distributed system with
+It is not always possible to set up a distributed system with
 homogeneous nodes to run algorithms in a synchronous way. In grid,
 cloud or volunteer setups nodes are heterogeneous, or simply are not
 available at the exact same time; this is a challenge for the researcher if
@@ -34,22 +34,20 @@ interested in evolutionary algorithms (EAs), which evolve a population
 of solutions using a mechanism inspired by biological evolution; in this field, 
 several asynchronous Evolutionary Algorithms (EAs) that distribute the
 evolutionary process among heterogeneous nodes have
-been proposed. These algorithms make the population shared between
+been proposed recently. These algorithms share the population between
 distributed workers  which execute the actual evolutionary
 process by taking samples of the population, and replacing them in the
 population pool by evolved individuals. The performance of these EAs
 depends in part on the selection of parameters for the EA running in
-each worker, which may include sample size, generations, mutation rate
-and crossover rate along with the overall configuration. In this paper
-we present a method inspired by a strategy proposed by Gong and Fukunaga for the
+each worker.  In this paper we present a method inspired by a strategy proposed by Gong and Fukunaga for the
 Island-Model which statically assigns random parameter settings to
-each island in a cloud setting. Experiments were conducted in the
+each island without parameter tuning. Experiments were conducted in the
 cloud using 2, 6 and 12 virtual machine configurations, with
 both homogeneous and heterogeneous random settings using five 
-test functions for single-objective optimization (Rastrigin, Griewank, De Jong, Schaffer 
+test functions for real-valued optimization (Rastrigin, Griewank, De Jong, Schaffer 
 and Ackley) and the OneMax binary problem. The results suggest that this approach can yield
-performance improvements which are competitive with instances of the
-algorithm using workers with control parameters tuned specifically for
+a performance which is competitive with instances of the
+algorithm using workers with parameters tuned specifically for
 the benchmark.
 
 % Abstract proposed by Leonardo
@@ -82,40 +80,40 @@ the benchmark.
 %Why Paralel
 Biological evolution is an intrinsically parallel, distributed and asynchronous process, however, 
 some of these features are not trivially included into standard EAs,  which are mostly coded as sequential 
-and synchronous algorithms \cite{eiben};  a large body of work exists in EA parallelization, 
+and synchronous algorithms \cite{eiben}.  A large body of work exists in EA parallelization, 
 using multiple CPU cores, multiple nodes and GPUs \cite{cantu2000efficient}.
-However, distributed and asynchronous EAs have started to become common only recently. In an effort to
-exploit computing resources available from personal computers,
-smartphones and tablets as massive data centers there have been many
-researchers and companies that have tried to tap them. 
+However, distributed and asynchronous EAs have started to become common only recently, 
+in an effort to exploit computing resources available everywhere from personal computers,
+smartphones and tablets, as well as massive data centers \cite{agajaj,falta}. 
 These resources are easily accessible through popular Internet technologies, such as cloud computing, 
 peer-to-peer (P2P), and web environments. Moreover, these technologies are intended for the development 
 of parallel, distributed and asynchronous systems, such that an EA developed on top of them could easily 
 reap the benefits of these features.
 
 %Pool Based
-In this work, we are interested in EAs systems that follow a
+In this work, we are interested in EAs that follow a
 pool-based approach, where the search process is conducted by a
 collection of possibly heterogeneous processes that collaborate using
 a shared repository or population pool. We will refer to such
 algorithms as Pool-based EAs or PEAs, and highlight the fact that such
 systems are intrinsically parallel, distributed and asynchronous.
-The particular PEA implemented in this paper is implemented on 
+The particular PEA used in this paper is implemented on 
 the EvoSpace framework  \cite{GValdez2015}
 in which distributed nodes (or workers) asynchronously interact 
 with the pool by taking a sample of the population and performing 
 a local evolutionary search on the population sample, then returning 
 to the pool the newly evolved solutions. 
 % EA Paramaters 
-Like any other EAs, the performance of the complete search will depend
-on the correct tuning of the EA parameters. However, settings 
+Like any other EA, the performance of the complete search will depend
+on the correct tuning of the parameters. However, settings 
 must be optimized to each particular problem \cite{de2007parameter}  
 giving users an additional optimization task. 
 Substantial work has focused on facilitating the burden of finding 
 the most appropriate parameters settings, suggesting several strategies:
 using parameters of previous studies \cite{eiben1999parameter} 
-optimization by another genetic algorithm \cite{grefenstette1986optimization}, dynamic adaptation \cite{eiben1999parameter}, 
-self-adaptive parameters \cite{pellerin2004self}, hybrid approaches and so on.
+optimization by another genetic algorithm \cite{grefenstette1986optimization}, 
+dynamic adaptation \cite{eiben1999parameter}, 
+self-adaptive parameters \cite{pellerin2004self}, hybrid approaches \cite{None} and so on.
 % Worst on many workers
 In heterogeneous and distributed PEAs like EvoSpace, this problem can 
 be magnified by a factor of $N$, the number of workers, because each one
@@ -139,17 +137,17 @@ and others exploiting at the same time.
 In the study presented here, a recent approach called Randomized Parameter
 Setting Strategy (RPSS) \cite{fuku1,fuku2} is applied to EvoSpace and tested on 
 several benchmark problems, extending the work presented in \cite{garcia2014randomized} 
-in which only trap functions were applied.
+in which only trap functions were considered.
 The idea behind RPSS is that in a distributed EA, parametrization may be
 completely skipped for a successful search, with research showing that when the 
 number of distributed process is large enough, algorithm parameters can be set 
 randomly and still achieve good overall results. However, work on RPSS has 
-only focused on the well-known Island Model for EAs, a distributed but synchronous system.
+mostly been focused on the well-known Island Model for EAs, a distributed but synchronous system.
 
 The remainder of the paper proceeds as follows.  Section \ref{sec:work} 
 reviews related work. Afterwards, Section \ref{sec:evo} briefly describes the
 proposed EvoSpace cloud implementation, the experimental work is presented in 
-Section \ref{sec:experiments}. Finally, a summary and concluding remarks are in
+Section \ref{sec:experiments}. Finally, a summary and concluding remarks are given in
 Section \ref{sec:conclusions}.
 
 \section{Related Work}
@@ -158,7 +156,7 @@ There are two important practical issues faced by many EA systems, namely the si
 space and the high computational cost when it is compared with mathematical programming or numerical techniques.
 Concerning the latter, one approach to mitigate this issue is to use parallel or 
 distributed implementations \cite{cantu-paz:migration-policies,duda2013gpu}.
-For instance, Fern\'andez et al. \cite{nc}% articulo Paco, Gustavo y Leo publucado en Natural Computing}
+For instance, Fern\'andez et al. \cite{nc} % articulo Paco, Gustavo y Leo publucado en Natural Computing}
 uses the well-known Berkeley Open Infrastructure for Network Computing (BOINC) to distribute EA runs across a
 heterogeneous network of volunteer computers using virtual machines. Another recent example is 
 found in the FlexGP system developed by Sherry et al. \cite{sherry2012flex}. FlexGP is probably the first large scale GP system 
@@ -187,8 +185,7 @@ they require additional computational effort which can be too expensive in some 
 (even if they are more efficient than an exhaustive search).
 
 This paper is inspired by the approach proposed by Gong and Fukunaga
-called Randomized Parameter Setting Strategy (RPSS)
-\cite{fuku1,fuku2}. 
+called RPSS \cite{fuku1,fuku2}. 
 Originally proposed for an Island Model EA, RPSS sets the parameter values of each subpopulation randomly, 
 without any kind of tuning or self-adaptive process. The RPSS approach is to set the parameters 
 of each subpopulation randomly at the beginning of the run, a very simple strategy.
@@ -201,7 +198,7 @@ approach was only tested on the P-Peaks generator of multimodal problems propose
 While the problem is theoretically interesting, it can be limited in scope given its reliance on a bit string representation.
 Therefore, this work extends the study considering another binary representation problem (OneMax) as well as 
 five high-dimensional real-valued optimization benchmarks. Our goal is
-to test how general is this approach by considering a different search
+to test how general is this approach by considering different search
 spaces and different forms of fitness landscapes. 
 
 % Dynamic adaptation
@@ -222,26 +219,26 @@ spaces and different forms of fitness landscapes.
   %
 The EvoSpace framework, which was introduced in \cite{Evospace}, and
 since then used in several applications \cite{GValdez2015} has two components: (i) the EvoSpace 
-container that stores the evolving population and (ii) workers, which execute 
-the actual evolutionary process, while EvoSpace container acts only as a population repository.
-In a basic configuration, workers pull a small random subset of the 
+container that stores the evolving population; and (ii) workers, which execute 
+the actual evolutionary process, while the EvoSpace container acts only as a population repository.
+In a basic configuration, workers pull a small random sample of the 
 population, and use it as the initial population for a local EA executed 
 on the client machine. Afterward, the evolved population from each worker 
 is returned to the EvoSpace container. The experimental platform used in this work is
 described in \cite{valenzuela2015implementing}, and consists of several virtual machines
 created automatically by a script before each experiment. The main components are depicted
-in Figure \ref{fig:evospace}. Each experiment consisted of the following steps:
+in Figure \ref{fig:evospace}. Each experiment consists of the following steps:
 
 \begin{enumerate}
     \item First, the script creates two virtual machines: one for the task queue and another
-    for the EvoSpace container, then it creates the number of worker machines needed, these 
-    machines are a configured as client machines for the task queue. 
-    \item For each run, the number of EvoWorkers needed are added to the queue as tasks, from
-    the user PC.
+    for the EvoSpace container. Then it creates the number of worker machines needed, these 
+    machines are configured as client machines for the task queue. 
+    \item For each run the number of EvoWorkers needed are added to the queue as tasks, from
+    the user's PC.
     \item Every worker machine loads the task and the experiment
-      starts. During the experiment every one takes from and replaces
+      starts. During the experiment every worker takes from and replaces
       samples in the EvoSpace container. 
-    \item Finally all the data generated in each workers is returned by the task queue. 
+    \item Finally, all the data generated in each workers is returned by the task queue. 
     \end{enumerate}
     
 This setup was deployed on top of the Amazon Web Services (AWS)
@@ -394,8 +391,8 @@ but checking the cases when that happens is left as future work.
         \includegraphics[width=2.2in]{img/12w_griewank_100_box.png}
     }
 
-    \caption{100 experiments with random parameters for the 128 Bit Griewank 
-    single-objective optimization test function. Experiments are ranked by 
+    \caption{100 experiments with random parameters for the 100 dimensions Griewank 
+    real-valued optimization test function. Experiments are ranked by 
     the mean time to solution of 5 runs, with (a) 6 workers, and (b) 12 workers.}
     \label{fig:griewank}
 \end{figure*}
@@ -466,14 +463,16 @@ Finally, performance on the De Jong function also favors the heterogeneous confi
 \section{Conclusions and Further Work}
 \label{sec:conclusions}
 This paper presents an evaluation of the RPSS parametrization approach on 
-a pool-based EA, using the OneMax problem and five test functions. 
+a pool-based EA, using the OneMax problem and five real-valued optimization functions
+in high dimensional space. 
 Using the RPSS approach, it seems that a PEA can be executed successfully 
 without any form of parameter tuning, achieving comparable results to standard homogeneous
-parametrizations. Results also show that the benefits of a RPSS are not only present
-when using a heterogeneous approach, even a random homogeneous configuration could bring
+parametrizations that were tuned for each problem. 
+Results also show that the benefits of a RPSS are not only present
+when using an heterogeneous approach, even a random homogeneous configuration could bring
 benefits. Unfortunately the RPSS strategy is not a silver bullet, as there are cases
-when it is not the best approach; however these disadvantages are
-offset by the fact that it comes very close to zero parametrization,
+when it is not the best approach. However these disadvantages are
+offset by the fact that it comes very close to zero parameter tuning,
 giving a consistently good result across a good range of network
 size. The worst result is achieved for the Rastrigin function, which
 is one of the most difficult ones; not only the time needed is worse,
@@ -488,12 +487,11 @@ random parametrization will allow a good initial result for most
 problems, providing a fast solution in cases where there is not enough
 time to perform optimization of the parameters in a parallel setup. 
 
-
-This will be one of the future lines of work; these will also focus on using other EA techniques, 
+Future lines of work will focus on using other EA or meta-heuristic techniques, 
 such as genetic programming or particle swarm optimization for having 
 workers that are heterogeneous in more than one sense. RPSS could be
-use in those cases where each algorithm has different sets of
-parameters, but also to select randomly the technique used in each
+used in those cases where each algorithm has different sets of
+parameters, but also to randomly select the technique used in each
 node. Another interesting line of work is the dynamic adaptation of
 parameters by measuring the diversity of each worker or returned
 sample. This could be specially useful in cases where the random
