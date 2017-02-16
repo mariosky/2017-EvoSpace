@@ -216,7 +216,7 @@ spaces and different forms of fitness landscapes.
 \begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=10cm]{img/EvoSpaceAWS.png}
-    \caption{Main components and data-flow in the cloud version of EvoSpace. }
+    \caption{Main components and data-flow in the cloud version of EvoSpace we are using in this paper.}
     \label{fig:evospace}
   \end{figure*}
   %
@@ -249,16 +249,7 @@ platform which allowed the execution of the experiments with similar computing r
 % Architecture Components
 % Random Patameters
 
-\begin{figure*}[h!t]
-    \centering
-        \includegraphics[width=10cm]{img/one_max_comp.png}
-    \caption{Comparison of 30 runs of the 128 Bit OneMax problem. 
-    Box-plot of the number of evaluations needed for solution, with a 2, 6 and 12 workers
-    homogeneous configuration on the left side, and Heterogeneous configuration on the
-    right side of each.
-    }
-    \label{fig:comp-onemax}
-\end{figure*}
+
 
 \section{Experiments}
  \label{sec:experiments}
@@ -326,64 +317,6 @@ are used, these are the Rastrigin, Griewank, De Jong, Schaffer  and Ackley funct
 with the number of dimensions set to 100 in each case. For these problems we use a real-valued vector
 representation for each individual.
 
-
-\begin{figure*}[t]
-    \centering
-    \subfigure  [6 workers]
-    {
-        \includegraphics[width=2.2in]{img/6w_griewank_100_box.png}
-    }
-    \subfigure  [12 workers]
-    {
-        \includegraphics[width=2.2in]{img/12w_griewank_100_box.png}
-    }
-
-    \caption{100 experiments with random parameters for the 128 Bit Griewank 
-    single-objective optimization test function. Experiments are ranked by 
-    the mean time to solution of 5 runs, with (a) 6 workers, and (b) 12 workers.}
-    \label{fig:griewank}
-\end{figure*}
-
-
-\begin{figure*}[t]
-    \centering
-    \subfigure  [Homogeneous]
-    {
-        \includegraphics[width=2.2in]{img/griewank_evals_homo.png}
-    }
-    \subfigure  [Heterogeneous]
-    {
-        \includegraphics[width=2.2in]{img/griewank_evals_hetereo.png}
-    }
-      \caption{ 30 runs on the Griewank function. Box-plot of the number of evaluations needed for solution, 
-                 with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
-    \label{fig:griewank-evals}
-\end{figure*}
-
-\begin{figure*}[t]
-    \centering
-    \subfigure  [Homogeneous]
-    {
-        \includegraphics[width=2.2in]{img/schaffer_evals_homo.png}
-    }
-    \subfigure  [Heterogeneous]
-    {
-        \includegraphics[width=2.2in]{img/schaffer_evals_hetereo.png}
-    }
- 
-
-    \caption{30 runs on the Schaffer function. Box-plot of the number of evaluations needed for 
-      solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
-    \label{fig:schaffer}
-\end{figure*}
-
-\begin{figure*}[t]
-    \centering
-        \includegraphics[width=4.5in]{img/table.png}
-    \caption{Table summaryzing results. }
-    \label{fig:summary}
-\end{figure*}
-
 \subsection{Results for OneMax}
 
 \begin{figure*}[h!t]
@@ -423,12 +356,90 @@ the number of function evaluations carried out over a unit of time. This implies
 of a good configuration could be found easier when using a higher number of workers, relative
 to the total wall-clock time.  
 
+\begin{figure*}[h!t]
+    \centering
+        \includegraphics[width=10cm]{img/one_max_comp.png}
+    \caption{Comparison of 30 runs of the 128 Bit OneMax problem. 
+    Box-plot of the number of evaluations needed for solution, with a 2, 6 and 12 workers
+    homogeneous configuration as a boxplot to the left of the $x$ axis
+    tick, and heterogeneous configuration to the right. 
+    }
+    \label{fig:comp-onemax}
+  \end{figure*}
+  %
 In Figure~\ref{fig:comp-onemax} the results of 30 runs comparing against the RPSS approach is shown.
 It can be observed that as the number of EvoWorkers increases the median of the time decreases, but
 in this case the best of the heterogeneous solutions (12 workers) is only better than the worst homogeneous
-solution. % Explain - JJ
+solution. In this case, the heterogenous/random configuration
+presented in this paper does not obtain better results than the
+homogeneous configuration using the best parameters found by random
+search. This problem, which is deceptively simple, actually depends
+more on the explorative part than the exploitative part. The
+heterogeneous worker solution, however, seems to lean more on
+exploitation by keeping high diversity, something that might not be
+actually needed during the last phases of the OneMax problem. This
+might be also the case for other combinatorial optimization problem,
+but checking the cases when that happens is left as future work. 
 
 \subsection{Results for Real-valued Optimization Functions}
+%
+\begin{figure*}[t]
+    \centering
+    \subfigure  [6 workers]
+    {
+        \includegraphics[width=2.2in]{img/6w_griewank_100_box.png}
+    }
+    \subfigure  [12 workers]
+    {
+        \includegraphics[width=2.2in]{img/12w_griewank_100_box.png}
+    }
+
+    \caption{100 experiments with random parameters for the 128 Bit Griewank 
+    single-objective optimization test function. Experiments are ranked by 
+    the mean time to solution of 5 runs, with (a) 6 workers, and (b) 12 workers.}
+    \label{fig:griewank}
+\end{figure*}
+%
+\begin{figure*}[t]
+    \centering
+    \subfigure  [Homogeneous]
+    {
+        \includegraphics[width=2.2in]{img/griewank_evals_homo.png}
+    }
+    \subfigure  [Heterogeneous]
+    {
+        \includegraphics[width=2.2in]{img/griewank_evals_hetereo.png}
+    }
+      \caption{ 30 runs on the Griewank function. Box-plot of the number of evaluations needed for solution, 
+                 with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
+    \label{fig:griewank-evals}
+\end{figure*}
+%
+\begin{figure*}[t]
+    \centering
+    \subfigure  [Homogeneous]
+    {
+        \includegraphics[width=2.2in]{img/schaffer_evals_homo.png}
+    }
+    \subfigure  [Heterogeneous]
+    {
+        \includegraphics[width=2.2in]{img/schaffer_evals_hetereo.png}
+    }
+ 
+
+    \caption{30 runs on the Schaffer function. Box-plot of the number of evaluations needed for 
+      solution, with an (a) Homogeneous configuration, and (b) Heterogeneous configuration.}
+    \label{fig:schaffer}
+\end{figure*}
+%
+\begin{figure*}[t]
+    \centering
+        \includegraphics[width=4.5in]{img/table.png}
+    \caption{Summary of results obtained for the five floating point
+      optimization problems. }
+    \label{fig:summary}
+\end{figure*}
+
 The same steps as the previous section were followed when evaluating the five real valued 
 optimization problems of this section.  For brevity only two representative functions are 
 presented with figures, and summary of all the results are shown in Table~\ref{fig:summary}. As before
