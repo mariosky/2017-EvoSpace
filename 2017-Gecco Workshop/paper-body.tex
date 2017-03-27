@@ -74,9 +74,47 @@ they require additional computational effort which can be too expensive in some 
 
 \section{evospace-js Implementation}
 \label{sec:evo}
+The main components of the EvoSpace framework are: the evospace-js population container, 
+remote clients called EvoWorkers. Each of these components are defined in the following subsections.
+
+\subsection{evospace-js}
+ \label{sec:evospace}
+The evospace-js server provides a collection of REST methods that operate over a set of objects ES, 
+which can be seen as the population. Multiple populations can be created and are disnguished by their name.
+Objects in ES represent individuals in the population (these are defined in the next subsection), 
+they can be selected, removed and replaced from ES using a specified set of REST methods. The main
+interface is:
+\begin{enumerate}
+    \item  \tt {population_name/initialize} This is a POST request used to create a new population.
+    \item \tt {population_name/individual} This is a POST request used to create add a new object
+    to a population. The object defined in JSON format, there is no restricion on the format and only 
+    the following properties are requiered: ``id'' this is an integer and is generated if not present 
+    and ``fitness'' defined as an object. Also there is an optional integer property called ``score''
+    used if objects are to be selected in a certain order.
+    \item \tt {population_name/sample/n}  This is a GET request used to take from the population a 
+    sample of \tt{n} objects. These objects are removed from the population and are no longer available
+    to other requests until and only if they are put back. Objects can be returned to the population 
+    either by a PUT sample request called from the same client or by a Respawn request. The reason for 
+    this is to avoid concurrently write conflicts and duplication of work.
+    \item \tt {population_name/sample}  This is a POST request used to put back a sample to the population.
+    The new sample is sent in the request body as a JSON object. If the client created new objects or 
+    changed their original state, these objects replace the originals. 
+    \item \tt {population_name/respawn}  This is a POST request used to put back \tt {n} samples to their 
+    original state. The number of samples is sent in the request body. 
+\end{enumerate}
+There are other secondary methods to select all objects in a population or just the ids, objects
+with scores between to integers, read the top N objects acording to a score and read the number of
+individuals currently on the population.      
+
+The above methods were implemented as javascript library   
+
+\subsection{EvoWorkers}
+\label{sec:evoworkers}
+
 
 \section{Experiments}
  \label{sec:experiments}
+
 
 
 \section{Conclusions and Further Work}
