@@ -91,7 +91,7 @@
 
 
 This paper is part of an ever-growing effort in the field of EC to develop algorithms
-following this opportunistic approach to computing, allowing the exploitation
+following an opportunistic approach to computing, allowing the exploitation
 of freely available services over the Internet or volunteer computing resources.
 In this paper a version of the EvoSpace Model for the development of asynchronous
 evolutionary algorithms is presented. The design follows an an event-driven 
@@ -101,18 +101,13 @@ store is exposed to clients running population and nature-inspired metaheuristic
 through a REST API. Additional capabilities where implemented in this version to
 allow the logging of experiments where heterogeneous algorithms are executed in parallel.
 These logs can then be transformed to other formats. As a case study
-an hybrid global optimization algorithm has been implemented using PSO and GA
-metaheuristics and the result has been transformed to files compatible to the
-Comparing Continuous Optimizer platform. 
-
-
-
-
-
-
-
-
-
+an hybrid global optimization algorithm has been implemented using an hybrid of
+two algorithms: a PSO algorithm from the EvoloPy library and a GA using the DEAP framework.
+The result was transformed to files compatible to the Comparing Continuous Optimizer platform
+in order to use their post-processing code. Clients in this case have been developed in 
+the Python language. The results from case study suggest that this software can yield
+performance improvements and a viable platform to execute asynchronous pool-based
+metaheuristics.   
 \end{abstract}
 
 %
@@ -123,29 +118,22 @@ Comparing Continuous Optimizer platform.
 \begin{CCSXML}
 <ccs2012>
 <concept>
-<concept_id>10003120.10003130.10003233</concept_id>
-<concept_desc>Human-centered computing~Collaborative and social computing systems and tools</concept_desc>
-<concept_significance>500</concept_significance>
-</concept>
-<concept>
 <concept_id>10010147.10010178.10010205.10010206</concept_id>
 <concept_desc>Computing methodologies~Heuristic function construction</concept_desc>
-<concept_significance>300</concept_significance>
+<concept_significance>500</concept_significance>
 </concept>
 <concept>
 <concept_id>10010147.10010178.10010205.10010207</concept_id>
 <concept_desc>Computing methodologies~Bio Inspired Algorithms</concept_desc>
-<concept_significance>300</concept_significance>
+<concept_significance>500</concept_significance>
 </concept>
 </ccs2012>
 \end{CCSXML}
-
-\ccsdesc[500]{Human-centered computing~Collaborative and social computing systems and tools}
-\ccsdesc[300]{Computing methodologies~Heuristic function construction}
+\ccsdesc[500]{Computing methodologies~Heuristic function construction}
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{Interactive evolutionary computation, Human Centered Computing}
+\keywords{Nature-inspired metaheuristics, Distributed evolutionary computation}
 
 
 \maketitle
