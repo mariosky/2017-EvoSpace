@@ -70,49 +70,12 @@ However, while such algorithms can find high performance parametrizations,
 they require additional computational effort which can be too expensive in some applications
 (even if they are more efficient than an exhaustive search).
 
-This paper is inspired by the approach proposed by Gong and Fukunaga
-called RPSS \cite{fuku1,fuku2}. 
-Originally proposed for an Island Model EA, RPSS sets the parameter values of each subpopulation randomly, 
-without any kind of tuning or self-adaptive process. The RPSS approach is to set the parameters 
-of each subpopulation randomly at the beginning of the run, a very simple strategy.
-Even so, results reported in \cite{fuku1,fuku2} exhibit promise, achieving competitive results 
-while substantially reducing the amount of effort required to tune the system.
 
-In a first study, \cite{garcia2014randomized} reported that in effect RPSS 
-can be successfully applied to a PEA. However, in that work the
-approach was only tested on the P-Peaks generator of multi-modal problems proposed by De Jong et al. \cite{Jong:PS97}.
-While the problem is theoretically interesting, it can be limited in scope given its reliance on a bit string representation.
-Therefore, this work extends the study considering another binary representation problem (OneMax) as well as 
-five high-dimensional real-valued optimization benchmarks. Our goal is
-to test how general is this approach by considering different search
-spaces and different forms of fitness landscapes. 
 
 \section{Conclusions and Further Work}
 \label{sec:conclusions}
-This paper presents an evaluation of the RPSS parametrization approach on 
-a pool-based EA, using the OneMax problem and five real-valued optimization functions
-in high dimensional space. 
-Using the RPSS approach, it seems that a PEA can be executed successfully 
-without any form of parameter tuning, achieving comparable results to standard homogeneous
-parametrizations that were tuned for each problem. 
-Results also show that the benefits of a RPSS are not only present
-when using an heterogeneous approach, even a random homogeneous configuration could bring
-benefits. Unfortunately the RPSS strategy is not a silver bullet, as there are cases
-when it is not the best approach. However these disadvantages are
-offset by the fact that it comes very close to zero parameter tuning,
-giving a consistently good result across a good range of problem instances.
-The worst result is achieved for the Rastrigin function, which
-is one of the most difficult ones; not only the time needed is worse,
-also the number of evaluations. In case such as these it would be
-interesting to use some technique to constrain the range of variation
-of the random parameters.
 
-The work presented in this paper, thus, extends the work by Fukunaga
-and coworkers by confirming his result in a pool-based environment and
-different kinds of fitness functions. In general, we can conclude that
-random parametrization will allow a good initial result for most
-problems, providing a fast solution in cases where there is not enough
-time to perform optimization of the parameters in a parallel setup. 
+% To be written
 
 Future lines of work will focus on using other EA or meta-heuristic techniques, 
 such as genetic programming or particle swarm optimization for having 
