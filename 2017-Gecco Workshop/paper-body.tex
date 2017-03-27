@@ -66,7 +66,7 @@ i.e., it increases the size of the algorithm parameter space, which makes parame
 The issue of optimal parametrization of EAs is a widely studied subject \cite{de2007parameter}, 
 with many approaches in literature. For instance, one of the most successful approaches 
 is the F-Racing and iterative F-Racing techniques \cite{lopez2011irace}. 
-However, while such algorithms can find high performance parametrizations, 
+However, while such algorithms can find high performance parametrization, 
 they require additional computational effort which can be too expensive in some applications
 (even if they are more efficient than an exhaustive search).
 
@@ -80,17 +80,19 @@ remote clients called EvoWorkers. Each of these components are defined in the fo
 \subsection{evospace-js}
  \label{sec:evospace}
 The evospace-js server provides a collection of REST methods that operate over a set of objects ES, 
-which can be seen as the population. Multiple populations can be created and are disnguished by their name.
+which can be seen as the population. Multiple populations can be created and are distinguished by their name.
 Objects in ES represent individuals in the population (these are defined in the next subsection), 
 they can be selected, removed and replaced from ES using a specified set of REST methods. The main
 interface is:
 \begin{enumerate}
     \item  \tt {population_name/initialize} This is a POST request used to create a new population.
     \item \tt {population_name/individual} This is a POST request used to create add a new object
-    to a population. The object defined in JSON format, there is no restricion on the format and only 
-    the following properties are requiered: ``id'' this is an integer and is generated if not present 
-    and ``fitness'' defined as an object. Also there is an optional integer property called ``score''
-    used if objects are to be selected in a certain order.
+    to a population. The object defined in JSON format, there is no restriction on the format and only 
+    the following properties are required: ``id'' this is an integer and is generated if not present 
+    and ``fitness'' defined as an object and ``chromosome'' a JavaScript object with the internal 
+    representation of the solution, by default a list of objects. 
+    There is also an optional integer property called ``score'' used when objects are going to 
+    be selected in a certain order.
     \item \tt {population_name/sample/n}  This is a GET request used to take from the population a 
     sample of \tt{n} objects. These objects are removed from the population and are no longer available
     to other requests until and only if they are put back. Objects can be returned to the population 
@@ -102,11 +104,14 @@ interface is:
     \item \tt {population_name/respawn}  This is a POST request used to put back \tt {n} samples to their 
     original state. The number of samples is sent in the request body. 
 \end{enumerate}
-There are other secondary methods to select all objects in a population or just the ids, objects
-with scores between to integers, read the top N objects acording to a score and read the number of
+There are other secondary methods used to: select all objects in a population, select objects
+with scores in a range, read the top N objects according to a score and read the number of
 individuals currently on the population.      
 
-The above methods were implemented as javascript library   
+The above methods were implemented as JavaScript library with two classes: Individual and Population with 
+calls to Redis through the 'ioredis' asynchronous library.  
+
+
 
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
