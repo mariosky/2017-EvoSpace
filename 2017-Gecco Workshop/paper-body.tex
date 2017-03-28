@@ -1,39 +1,65 @@
 \section{Introduction}
 % Main Ideas:
 %Why Paralel
-A large body of work exists in EA parallelization, using multiple CPU cores, multiple 
-nodes and GPUs \cite{cantu2000efficient,hofmann2013performance}.
-However, asynchronous EAs have started to become common only recently, 
-in an effort to exploit computing resources available through popular Internet technologies
-through popular Internet technologies
-%Pool Based
-In this work, we are interested in EAs that follow a
-pool-based approach, where the search process is conducted by a
-collection of heterogeneous processes that collaborate using
-a shared repository or population pool. We will refer to such
-algorithms as Pool-based EAs or PEAs, and highlight the fact that such
-systems are intrinsically parallel, distributed and asynchronous.
+A large body of work exists on the parallelization of EAs,
+with techniques using multiple CPU cores, many compute nodes, 
+and GPUs \cite{cantu2000efficient,hofmann2013performance}. 
+However, asynchronous EAs have started to become common only
+recently, in an effort to exploit computing resources available
+through different Internet technologies. In this work, we are
+interested in those EAs following a pool-based approach,
+where a collection of heterogeneous worker processes 
+conduct the search by collaborating through a shared 
+repository or population pool. We will refer to such algorithms 
+as Pool-based EAs or PEAs, and highlight the fact that 
+such systems are intrinsically parallel, distributed and asynchronous.
 
-The particular PEA platform immplemented in this paper is based on  
-the EvoSpace framework \cite{GValdez2015} in which distributed nodes 
-(or workers) asynchronously interact  with the pool by taking a sample 
-of the population and performing a local evolutionary search on 
-the population sample, then returning to the pool the newly evolved solutions. 
-Pool-EAs differ from the closely related island model, mainly with regards to 
-the responsibilities that are assigned to the server. In the island model 
-the server is usually responsible for the interaction and synchronization 
-of all the populations, while in a Pool-EA the server only receives stateless
-requests from isolated participants or clients. In this way, Pool-EAs 
-are capable of an ad-hoc collaboration of computing resources. 
+Pool-EAs differ from the closely related island model, 
+mainly with regards to the responsibilities assigned to 
+the server. In the island model, the server is usually 
+responsible for the interaction and synchronization of 
+all the populations, while in a Pool-EA the server only 
+receives stateless requests from isolated workers 
+or clients. In this way, Pool-EAs are capable of an 
+ad-hoc collaboration of computing resources. 
 
-% Evaluate in EvoSpace
-The software system presented here is a new immplementation 
+The platform presented in this paper is a new implementation 
+of the EvoSpace model \cite{GValdez2015} in which 
+workers asynchronously interact with the population 
+pool by taking samples of the population 
+to perform a local evolutionary search on the samples, 
+to then return newly evolved solutions back to the pool.
 
-The remainder of the paper proceeds as follows.  Section \ref{sec:work} 
+The previous version was implemented using CherryPy a basic HTTP 
+server written in Python. This new version uses Node.js an 
+event-driven server capable of asynchronous I/O, that is 
+running on the JavaSacript V8 engine. Node.js is used 
+to optimize throughput and scalability of the server.
+Additionaly to the  increased performance this version 
+adds new functionality: In the former version workers could only
+ask for random samples of a particular size, now clients 
+can retrieve objects from the server ordered by a score. 
+Designers can use this functionality to implement 
+asynchronous versions of the Island Model or to force 
+the retrieval of different objects in every request 
+resembling a circular queue. Instead of using the JSON-RPC 
+protocol the server functionality is now exposed as a RESTful 
+Web Service. The server now keeps a log of the work performed 
+by workers: The number of evaluations, the best solution in each 
+generation (or iteration), parameters and algorithm used among others.
+This log can later be used to compare the performance of 
+the algorithm against others, for instance against 
+algorithms using the COCO (COmparing Continuous Optimisers)
+platform \cite{hansen2016coco}.
+The aim of the evospace-js software is to provide 
+researchers with a high performance platform in which 
+they can execute pool-based algorithms using heterogeneous workers. 
+
+The remainder of the paper proceeds as follows. Section \ref{sec:work} 
 reviews related work. Afterwards, Section \ref{sec:evo} describes the
 proposed EvoSpace implementation, the experimental work is presented in 
-Section \ref{sec:experiments}. Finally, a summary and concluding remarks are given in
-Section \ref{sec:conclusions}.
+Section \ref{sec:experiments}. Finally, a summary and 
+concluding remarks are given in Section \ref{sec:conclusions}.
 
 
 \section{Related Work}
@@ -85,23 +111,28 @@ Objects in ES represent individuals in the population (these are defined in the 
 they can be selected, removed and replaced from ES using a specified set of REST methods. The main
 interface is:
 \begin{enumerate}
-    \item  \tt {population_name/initialize} This is a POST request used to create a new population.
-    \item \tt {population_name/individual} This is a POST request used to create add a new object
+    \item {\bf population\_name/initialize} 
+    This is a POST request used to create a new population.
+    \item {\bf population\_name/individual} 
+    This is a POST request used to create add a new object
     to a population. The object defined in JSON format, there is no restriction on the format and only 
     the following properties are required: ``id'' this is an integer and is generated if not present 
     and ``fitness'' defined as an object and ``chromosome'' a JavaScript object with the internal 
     representation of the solution, by default a list of objects. 
     There is also an optional integer property called ``score'' used when objects are going to 
     be selected in a certain order.
-    \item \tt {population_name/sample/n}  This is a GET request used to take from the population a 
-    sample of \tt{n} objects. These objects are removed from the population and are no longer available
+    \item {\bf population\_name/sample/n}
+    This is a GET request used to take from the population a 
+    sample of {\bf n} objects. These objects are removed from the population and are no longer available
     to other requests until and only if they are put back. Objects can be returned to the population 
     either by a PUT sample request called from the same client or by a Respawn request. The reason for 
     this is to avoid concurrently write conflicts and duplication of work.
-    \item \tt {population_name/sample}  This is a POST request used to put back a sample to the population.
+    \item {\bf population\_name/sample}
+    This is a POST request used to put back a sample to the population.
     The new sample is sent in the request body as a JSON object. If the client created new objects or 
     changed their original state, these objects replace the originals. 
-    \item \tt {population_name/respawn}  This is a POST request used to put back \tt {n} samples to their 
+    \item {\bf population\_name/respawn}
+    This is a POST request used to put back {\bf n} samples to their 
     original state. The number of samples is sent in the request body. 
 \end{enumerate}
 There are other secondary methods used to: select all objects in a population, select objects
@@ -109,7 +140,7 @@ with scores in a range, read the top N objects according to a score and read the
 individuals currently on the population.      
 
 The above methods were implemented as JavaScript library with two classes: Individual and Population with 
-calls to Redis through the 'ioredis' asynchronous library.  
+calls to Redis through the {\bf ioredis} asynchronous library.  
 
 
 
