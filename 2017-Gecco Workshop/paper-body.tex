@@ -243,14 +243,28 @@ A requirement of the COCO platform is that it needs
 to inspect each function evaluation to keep the log required 
 to analyze the execution. The logging code maintains 
 a sequential record of the number function calls. 
-This exact order is not practical to keep in an 
-asynchronous execution as many workers are calling the 
-function at the same time. For this reason, the granularity 
-of the number of function evaluations and their order 
-is kept at the sample-iteration level. As we mentioned 
-earlier, each worker return a record of benchmark data, 
-with the number of evaluations performed in each iteration. 
-  
+This exact order is not practical to keep in an asynchronous 
+execution as many workers are calling the function at the 
+same time. For this reason, the granularity of the number of 
+function evaluations and their order is kept at the 
+sample-iteration level. As we mentioned earlier, each worker 
+returns a record with benchmark data, with the number of 
+evaluations performed in each iteration.
+
+Using this data, we consider the result after each 
+iteration as a single function evaluation and add the 
+number of function evaluations in the iteration to the 
+sequential count. Is important to
+notice that EvoWorkers run the algorithm only for a small 
+number of iterations and with a relatively small sample of 
+the population. For instance, for the COCO benchmark, 
+the maximum number of function evaluations in an 
+iteration was 200. 
+
+\subsection{Set-up}
+\label{sec:evoworkers}
+A script responsible to create EvoWorkers and run the 
+benchmark was  
 
 
 
