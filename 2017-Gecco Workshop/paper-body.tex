@@ -78,18 +78,30 @@ concluding remarks are given in Section \ref{sec:conclusions}.
 
 \section{Related Work}
 \label{sec:work}
-There are two important practical issues faced by many EA systems, namely the size of the parameter 
-space and the high computational cost when it is compared with mathematical programming or numerical techniques.
+There are two important practical issues faced by many EA and other
+optimization systems, namely the size of the parameter 
+space and the high computational cost when it is compared with
+mathematical programming or numerical techniques. % I guess because
+% they are deterministic, right? - JJ
 Concerning the latter, one approach to mitigate this issue is to use parallel or 
 distributed implementations \cite{cantu-paz:migration-policies,duda2013gpu}.
 For instance, Fern\'andez et al. \cite{nc} % articulo Paco, Gustavo y Leo publucado en Natural Computing}
-uses the well-known Berkeley Open Infrastructure for Network Computing (BOINC) to distribute EA runs across a
+use the well-known Berkeley Open Infrastructure for Network Computing (BOINC) to distribute EA runs across a
 heterogeneous network of volunteer computers using virtual machines. Another recent example is 
 found in the FlexGP system developed by Sherry et al. \cite{sherry2012flex}. FlexGP is probably the first large scale GP system 
 that runs on the cloud, using an Island model approach and implemented over Amazon EC2 with a 
-socket-based client-server architecture.
+socket-based client-server architecture. There is a considerable
+improvement and scalability in this approach, but this scalability has
+a cost which is proportionally much smaller than installing a
+permanent infraestructure, but onerous nonetheless. % Maybe take some
+                                % figures from it - JJ
 
-Another approach to distributed EAs is the so called pool-based architecture. In general, a 
+In general, all the techniques and implementations mentioned above
+rely on more or less {\em traditional} parallel or distributed
+evolutionary algorithms, using {\em farming} for offloading
+evaluations to ephemeral resources or using more traditional
+island-based models in distributed or cloud-based resources. However,
+there is another approach to distributed EAs: the so called pool-based architecture. In general, a 
 pool-based system employs a central repository (real or virtual) where the evolving population is stored.
 Distributed clients interact with the pool, performing some or all of the basic EA processes 
 (selection, genetic operators, survival). A representative work of this approach 
