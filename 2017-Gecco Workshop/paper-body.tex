@@ -31,13 +31,24 @@ of the EvoSpace model \cite{GValdez2015} in which
 workers asynchronously interact with the population 
 pool by taking samples of the population 
 to perform a local evolutionary search on the samples, 
-to then return newly evolved solutions back to the pool.
+to then return newly evolved solutions back to the pool. This is a
+particular instance of a pool-based EA, which, as long as there is a
+common population pool, leaves every other detail to particular
+implementations. Other PEAs, for instance, might return only one
+individual to the pool, or use it as a read-only resource, not
+returning any member to it; the {\em frequency} with which resources
+are taken or returned to the population are not set by the model
+either, leaving it as a implementation or model-specific parameter. % I am giving here a general overview of PEAs, maybe it should be moved up with a few references? - JJ
 
-The previous version was implemented using CherryPy a basic HTTP 
-server written in Python. This new version uses Node.js an 
-event-driven server capable of asynchronous I/O, that is 
+The previous version % anonymized reference
+was implemented using CherryPy, a basic HTTP 
+server written in Python. This new version uses Node.js, an 
+event-driven interpreter with a built-in event loop capable of
+asynchronous I/O \cite{tilkov2010node}, that is 
 running on the JavaSacript V8 engine. Node.js is used 
-to optimize throughput and scalability of the server.
+to optimize throughput and scalability of the server. %Actually you
+                                %are using express, I think. You
+                                %should talk about that - JJ
 Additionaly to the  increased performance this version 
 adds new functionality: In the former version workers could only
 ask for random samples of a particular size, now clients 
