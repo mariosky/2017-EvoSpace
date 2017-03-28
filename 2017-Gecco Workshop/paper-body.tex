@@ -100,14 +100,14 @@ they require additional computational effort which can be too expensive in some 
     \centering
         \includegraphics[width=2.5in]{img/classes.png}
     \caption{ UML Class diagram of the Population and Individual classes.}
-    \label{fig:w1}
+    \label{fig:classes}
 \end{figure}
 %
 \begin{figure*}[!t]
     \centering
         \includegraphics[width=5.4in]{img/evospace-js.png}
     \caption{ Stack diagram of the evospace-js framework components.}
-    \label{fig:w2}
+    \label{fig:stack}
 \end{figure*}
 
 \section{evospace-js Implementation}
@@ -160,15 +160,34 @@ objects currently on the population.
 
 The above methods were implemented first as JavaScript library 
 with two classes: {\tt Individual} and {\tt Population} depicted 
-in Figure  with calls to the Redis memory store through the {\bf ioredis} 
+in Figure~\ref{fig:classes} with calls to the Redis memory store 
+through the {\bf ioredis} 
 asynchronous library. In order to expose the library as a 
 REST Web service endpoints were implemented using the Express HTTP framework. 
 An optional dashboard type application, can be used to inspect 
 the populations currently available on the server.
 
 
+When a worker is putting back a sample, it can send 
+an additional property called {\tt benchmark_data }
+to send supplementary information about the execution 
+of the experiment.  This data can later be used to 
+benchmark the performance of the algorithm. This 
+data is again stored in redis as an ordered list, 
+keeping a log for each experiment. Currently the JSON 
+benchmark data structure contains the following details 
+to later be used by the COCO platform: the algorithm identifier, 
+parameters used, name , dimension, instance and optimal value 
+of the function that is been optimized, worker and experiment 
+identifiers and finally a list of details of each iteration 
+or generation of the local execution. The details include:
+the best solution and the function value, and the number of
+function evaluations requiered. Depending on the application
+other data could be recorded. The source code for the evospace-js
+server is on following Github repository: 
+https://github.com/mariosky/evospace-js.
 
-  
+
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
 
