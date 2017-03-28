@@ -100,49 +100,64 @@ they require additional computational effort which can be too expensive in some 
 
 \section{evospace-js Implementation}
 \label{sec:evo}
-The main components of the EvoSpace framework are: the evospace-js population container, 
-remote clients called EvoWorkers. Each of these components are defined in the following subsections.
+The main components of the EvoSpace framework are: the evospace-js 
+population container, remote clients called EvoWorkers.
+Each of these components are defined in the following subsections.
 
 \subsection{evospace-js}
  \label{sec:evospace}
-The evospace-js server provides a collection of REST methods that operate over a set of objects ES, 
-which can be seen as the population. Multiple populations can be created and are distinguished by their name.
-Objects in ES represent individuals in the population (these are defined in the next subsection), 
-they can be selected, removed and replaced from ES using a specified set of REST methods. The main
-interface is:
+The evospace-js server provides a collection of REST methods that 
+operate over a set of objects $ES$, which can be seen as the 
+population. Multiple populations can be created and are 
+distinguished by their name. Objects in $ES$ represent 
+individuals in the population (these are defined in the next subsection), 
+they can be selected, removed and replaced from $ES$ using
+a specified set of REST methods. The main interfaces are:
 \begin{enumerate}
     \item {\bf population\_name/initialize} 
-    This is a POST request used to create a new population.
+    This is a {\tt POST} request used to create a new population.
     \item {\bf population\_name/individual} 
-    This is a POST request used to create add a new object
-    to a population. The object defined in JSON format, there is no restriction on the format and only 
-    the following properties are required: ``id'' this is an integer and is generated if not present 
-    and ``fitness'' defined as an object and ``chromosome'' a JavaScript object with the internal 
-    representation of the solution, by default a list of objects. 
-    There is also an optional integer property called ``score'' used when objects are going to 
-    be selected in a certain order.
+    This is a {\tt POST} request used to create and add a new object
+    to a population. The object is defined in a JSON format, 
+    and there is no restriction on its structure, only 
+    the following properties are required: ``id'' this is an 
+    integer and is generated if not present, ``fitness'' also defined 
+    as a JSON object, the structure been specific to each application, 
+    and finally a ``chromosome'' property again defined as
+    a JavaScript object giving the internal representation of 
+    the solution, by default a it defined as list of objects. 
+    There is also an optional integer property called 
+    ``score'' used when objects are going to be retieved in a certain order.
     \item {\bf population\_name/sample/n}
-    This is a GET request used to take from the population a 
+    This is a {\tt GET}  request used to take from the population a 
     sample of {\bf n} objects. These objects are removed from the population and are no longer available
     to other requests until and only if they are put back. Objects can be returned to the population 
-    either by a PUT sample request called from the same client or by a Respawn request. The reason for 
+    either by a {\tt PUT} sample request called from the same client or by a Respawn request. The reason for 
     this is to avoid concurrently write conflicts and duplication of work.
     \item {\bf population\_name/sample}
-    This is a POST request used to put back a sample to the population.
+    This is a {\tt POST} request used to put back a sample to the population.
     The new sample is sent in the request body as a JSON object. If the client created new objects or 
     changed their original state, these objects replace the originals. 
     \item {\bf population\_name/respawn}
-    This is a POST request used to put back {\bf n} samples to their 
+    This is a {\tt POST} request used to put back {\bf n} samples to their 
     original state. The number of samples is sent in the request body. 
 \end{enumerate}
-There are other secondary methods used to: select all objects in a population, select objects
-with scores in a range, read the top N objects according to a score and read the number of
-individuals currently on the population.      
+There are other secondary methods used to: select all objects in a 
+population, select objects with scores with in a range, read the 
+top {\tt n} objects according to a score and read the number of
+objects currently on the population.      
 
-The above methods were implemented as JavaScript library with two classes: Individual and Population with 
-calls to Redis through the {\bf ioredis} asynchronous library.  
+The above methods were implemented first as JavaScript library 
+with two classes: {\tt Individual} and {\tt Population} depicted 
+in Figure  with calls to the Redis memory store through the {\bf ioredis} 
+asynchronous library. 
 
+In order to expose the library as a REST Web service an HTTP 
+interface is implemented using the Express HTTP framework. 
+An optional dashboard type application, can be used to inspect 
+the populations currently available on the server.
 
+  
 
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
