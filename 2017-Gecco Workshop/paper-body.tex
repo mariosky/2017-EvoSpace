@@ -233,6 +233,24 @@ https://github.com/mariosky/EvoWorker.
 
 \section{Experiments}
  \label{sec:experiments}
+As a case study, a simple hybrid algorithm consisting 
+of PSO and GA EvoWorkers was used to run several benchmark
+functions found in the COCO platform. After the execution,
+a script processed the logs and generated the files needed
+by the COCO platform post-processing scripts. 
+
+A requirement of the COCO platform is that it needs 
+to inspect each function evaluation to keep the log required 
+to analyze the execution. The logging code maintains 
+a sequential record of the number function calls. 
+This exact order is not practical to keep in an 
+asynchronous execution as many workers are calling the 
+function at the same time. For this reason, the granularity 
+of the number of function evaluations and their order 
+is kept at the sample-iteration level. As we mentioned 
+earlier, each worker return a record of benchmark data, 
+with the number of evaluations performed in each iteration. 
+  
 
 
 
