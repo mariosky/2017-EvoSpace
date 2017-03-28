@@ -228,7 +228,7 @@ scripts can run in Docker containers, by receiving
 the initial parameters as environment variables, and 
 the script ends when it reaches a maximum number of samples.
 The source code for the Python EvoWorkers
-proposed in this work are on following Github repository: 
+proposed in this work are on following GitHub repository: 
 https://github.com/mariosky/EvoWorker.
 
 \section{Experiments}
@@ -251,15 +251,24 @@ sample-iteration level. As we mentioned earlier, each worker
 returns a record with benchmark data, with the number of 
 evaluations performed in each iteration.
 
-Using this data, we consider the result after each 
-iteration as a single function evaluation and add the 
-number of function evaluations in the iteration to the 
-sequential count. Is important to
+Is not practical to track the exact sequential number 
+of function evaluation in an asynchronous execution, 
+as many workers could be calling the function at the same 
+time. For this reason, the granularity of the number of 
+function evaluations and their order was kept at the sample 
+and iteration level. As we mentioned earlier, each worker returns
+a record with benchmark data containing the number of 
+evaluations performed in each iteration. The order and number 
+of function calls were given by the order in which 
+the server received the samples and sequence of iterations.
+A After each iteration, the best solution was considered 
+to happen at the last function evaluation. Is important to
 notice that EvoWorkers run the algorithm only for a small 
 number of iterations and with a relatively small sample of 
-the population. For instance, for the COCO benchmark, 
-the maximum number of function evaluations in an 
-iteration was 200. 
+the population. For instance, for the COCO benchmark 
+presented in the case study the maximum number of 
+function evaluations in a single iteration was 200. 
+  
 
 \subsection{Set-up}
 \label{sec:evoworkers}
@@ -278,7 +287,7 @@ evaluations the following parameters were set to each dimension.
 %Data in https://docs.google.com/spreadsheets/d/123s_p6ABtyT2wdifxjuHVGuXjTZECmfzOddxUTydbI8/edit?usp=sharing
 
 \subsection{Results}
-\label{sec:evoworkers}
+\label{sec:results}
 After the experiment was executed a script generated 
 the folders needed by the COCO post-processing scripts.
 
@@ -286,7 +295,7 @@ the folders needed by the COCO post-processing scripts.
     \centering
         \includegraphics[width=2.5in]{img/Sphere.png}
     \caption{ TO DO: Caption.}
-    \label{fig:classes}
+    \label{fig:sphere}
 \end{figure}
 
 
@@ -294,14 +303,14 @@ the folders needed by the COCO post-processing scripts.
     \centering
         \includegraphics[width=2.5in]{img/Ellipsoid.png}
     \caption{ TO DO: Caption.}
-    \label{fig:classes}
+    \label{fig:ellipsoid}
 \end{figure}
 
 \begin{figure}[!t]
     \centering
         \includegraphics[width=2.5in]{img/Rastrigin.png}
     \caption{ TO DO: Caption.}
-    \label{fig:classes}
+    \label{fig:rastrigin}
 \end{figure}
 
 
