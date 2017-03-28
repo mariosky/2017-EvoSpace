@@ -101,10 +101,18 @@ rely on more or less {\em traditional} parallel or distributed
 evolutionary algorithms, using {\em farming} for offloading
 evaluations to ephemeral resources or using more traditional
 island-based models in distributed or cloud-based resources. However,
-there is another approach to distributed EAs: the so called pool-based architecture. In general, a 
-pool-based system employs a central repository (real or virtual) where the evolving population is stored.
+there is another approach to distributed EAs: the so called pool-based
+architecture \cite{talukdar1998asynchronous,pool:ga,de1991genetic}. In general, a 
+pool-based system employs a central repository (real or virtual)
+% What's the difference? - JJ
+where the evolving population, or a part of it, is stored. 
 Distributed clients interact with the pool, performing some or all of the basic EA processes 
-(selection, genetic operators, survival). A representative work of this approach 
+(selection, genetic operators, survival), but these clients join the
+search by just using an API, and quit by simply not doing it any
+more. Clients are not considered reliable in any way, and the
+threshold to join the pool and perform an operation is kept as low as
+possible. 
+A representative work of this approach 
 is that by Merelo et al. \cite{agajaj} implementing a JavaScript based PEA that distributes 
 the evolutionary process over the web, providing the added advantage of not requiring the 
 installation of additional software in each computing node.  Other similar cloud-based solutions 
