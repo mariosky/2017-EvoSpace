@@ -1,0 +1,187 @@
+<HTML>
+<HEAD>
+   <META NAME="description" CONTENT="COCO/BBOB figures by function">
+   <META NAME="keywords" CONTENT="COCO, BBOB">
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <TITLE> pptable </TITLE>
+   <SCRIPT SRC="sorttable.js"></SCRIPT>
+</HEAD>
+<BODY>
+<H1> 
+</H1>
+<H3><a href="templateBBOBarticle.html">Overview page</a></H3>
+<H2> aRT in number of function evaluations </H2>
+
+<p><b>5-D</b></p>
+<table>
+<thead>
+<tr>
+<th>&#916; f</th>
+<td>1e+1</td>
+<td>1e+0</td>
+<td>1e-1</td>
+<td>1e-2</td>
+<td>1e-3</td>
+<td>1e-5</td>
+<td>1e-7</td>
+<td>#succ</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th><b>f<sub>1</sub></b></th>
+<td>11</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>12</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th></th>
+<td>0.09</td>
+<td>27 (37)</td>
+<td>90 (42)</td>
+<td>187 (117)</td>
+<td>480 (388)</td>
+<td>1466 (238)</td>
+<td>1989 (290)</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th><b>f<sub>2</sub></b></th>
+<td>83</td>
+<td>87</td>
+<td>88</td>
+<td>89</td>
+<td>90</td>
+<td>92</td>
+<td>94</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th></th>
+<td>93 (55)</td>
+<td>151 (72)</td>
+<td>170 (18)</td>
+<td>213 (43)</td>
+<td>258 (49)</td>
+<td>315 (30)</td>
+<td>460 (52)</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th><b>f<sub>3</sub></b></th>
+<td>716</td>
+<td>1622</td>
+<td>1637</td>
+<td>1642</td>
+<td>1646</td>
+<td>1650</td>
+<td>1654</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th></th>
+<td>1.5 (1)</td>
+<td>6.8 (5)</td>
+<td>12 (5)</td>
+<td>16 (7)</td>
+<td>19 (8)</td>
+<td>25 (9)</td>
+<td>32 (7)</td>
+<td>15/15</td>
+</tr>
+</table>
+<p><b>20-D</b></p>
+<table>
+<thead>
+<tr>
+<th>&#916; f</th>
+<td>1e+1</td>
+<td>1e+0</td>
+<td>1e-1</td>
+<td>1e-2</td>
+<td>1e-3</td>
+<td>1e-5</td>
+<td>1e-7</td>
+<td>#succ</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th><b>f<sub>1</sub></b></th>
+<td>43</td>
+<td>43</td>
+<td>43</td>
+<td>43</td>
+<td>43</td>
+<td>43</td>
+<td>43</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th></th>
+<td>49 (8)</td>
+<td>112 (16)</td>
+<td>197 (12)</td>
+<td>910 (234)</td>
+<td>2024 (313)</td>
+<td>5160 (813)</td>
+<td>8267 (642)</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th><b>f<sub>2</sub></b></th>
+<td>385</td>
+<td>386</td>
+<td>387</td>
+<td>388</td>
+<td>390</td>
+<td>391</td>
+<td>393</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th></th>
+<td>297 (82)</td>
+<td>462 (83)</td>
+<td>635 (90)</td>
+<td>836 (63)</td>
+<td>1024 (35)</td>
+<td>1394 (108)</td>
+<td>1747 (117)</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th><b>f<sub>3</sub></b></th>
+<td>5066</td>
+<td>7626</td>
+<td>7635</td>
+<td>7637</td>
+<td>7643</td>
+<td>7646</td>
+<td>7651</td>
+<td>15/15</td>
+</tr>
+<tr>
+<th></th>
+<td>7.5 (4)</td>
+<td>18 (5)</td>
+<td>32 (5)</td>
+<td>42 (5)</td>
+<td>52 (7)</td>
+<td>72 (7)</td>
+<td>93 (8)</td>
+<td>15/15</td>
+</tr>
+</table>
+<!--pptableHtml-->
+<p/>
+ Average running time (<span class="roman">aRT</span>&nbsp;in number of function evaluations) divided by the <span class="roman">aRT</span>&nbsp;of the best algorithm from BBOB 2009 in different dimensions. The <span class="roman">aRT</span>&nbsp; and in braces, as dispersion measure, the half difference between 90 and 10%-tile of bootstrapped run lengths appear in the second row of each cell, the best <span class="roman">aRT</span>&nbsp;                (preceded by the target &#8710;f-value in <i>italics</i>) in the first. #succ is the number of trials that reached the target value of the last column. The median number of conducted function evaluations is additionally given in <i>italics</i>, if the target in the last column was never reached. <b>Bold</b> entries are statistically significantly better (according to the rank-sum test) compared to the best algorithm from BBOB 2009, with p = 0.05 or p = 10<sup>&#8722;k</sup> when the number k  &gt;  1 is following the &#8595; symbol, with Bonferroni correction by the number of functions.<br />Data produced with COCO v2.0.1  <div class="p"><!----></div>
+<p/><p/>
+<BR/><BR/><BR/><BR/><BR/>
+</BODY>
+</HTML>
