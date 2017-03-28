@@ -2,26 +2,29 @@
 % Main Ideas:
 %Why Paralel
 A large body of work exists on the parallelization of EAs,
-with techniques using multiple CPU cores, many compute nodes, 
-and GPUs \cite{cantu2000efficient,hofmann2013performance}. 
-However, asynchronous EAs have started to become common only
+with techniques leveraging multiple CPU cores, many computing nodes, 
+and GPUs \cite{muhlenbein1989parallel,cantu2000efficient,hofmann2013performance}. 
+However, asynchronous EAs
+\cite{Jini:FEA2000,alba2001analyzing,Jini:FEA2000,jj:2008:PPSN} have
+started to become common only relatively
 recently, in an effort to exploit computing resources available
-through different Internet technologies. In this work, we are
+through different Internet technologies, including cloud. In this work, we are
 interested in those EAs following a pool-based approach,
 where a collection of heterogeneous worker processes 
-conduct the search by collaborating through a shared 
+carry out population search tasks by collaborating through a shared
+individual 
 repository or population pool. We will refer to such algorithms 
-as Pool-based EAs or PEAs, and highlight the fact that 
+as {\em Pool-based EAs} or PEAs, and highlight the fact that 
 such systems are intrinsically parallel, distributed and asynchronous.
 
 Pool-EAs differ from the closely related island model, 
 mainly with regards to the responsibilities assigned to 
-the server. In the island model, the server is usually 
+the server. When there is a server in the island model, it is 
 responsible for the interaction and synchronization of 
-all the populations, while in a Pool-EA the server only 
+all the populations.  In Pool-EAs, on the other hand, the population repository only 
 receives stateless requests from isolated workers 
-or clients. In this way, Pool-EAs are capable of an 
-ad-hoc collaboration of computing resources. 
+or clients. In this way, Pool-EAs are capable of using and leveraging an 
+ad-hoc and ephemeral collaboration of computing resources. 
 
 The platform presented in this paper is a new implementation 
 of the EvoSpace model \cite{GValdez2015} in which 
@@ -183,9 +186,9 @@ identifiers and finally a list of details of each iteration
 or generation of the local execution. The details include:
 the best solution and the function value, and the number of
 function evaluations requiered. Depending on the application
-other data could be recorded. The source code for the evospace-js
-server is on following Github repository: 
-https://github.com/mariosky/evospace-js.
+other data could be recorded. The source code for the {\ss evospace-js}
+server is in the following Github repository: 
+\url{https://github.com/mariosky/evospace-js}.
 
 
 \subsection{EvoWorkers}
