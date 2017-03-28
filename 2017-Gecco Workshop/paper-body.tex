@@ -287,8 +287,27 @@ The maximum number of function evaluations was set to $10^5*dim$.
 In order to maintain the required number of function 
 evaluations the following parameters were set to each dimension.
 
+\begin{table}
+  \small
+  \caption{ EvoWorker setup parameters }
+  \label{tab:params} 
+  \centering
+  \small
+  \begin{tabular}{|l|c|c|c|c|c|c|}
+    \hline\noalign{\smallskip}
+    Dimension & 2 & 3 & 5 & 10 & 20 & 40\\\hline
+    Iterations per Sample  & 50 & 50 & 50 & 50 & 50 & 50\\ \hline
+    Sample Size  & 100 & 100 & 100 & 200 & 200 & 200 \\ \hline
+    Samples per Worker & 20 & 30 & 25 & 25 & 25 & 25  \\ \hline
+    PSO Workers & 1 & 1 & 2 & 2 & 4 & 8  \\ \hline
+  \end{tabular}
+\end{table}
+
+
 %TO DO: TABLE
 %Data in https://docs.google.com/spreadsheets/d/123s_p6ABtyT2wdifxjuHVGuXjTZECmfzOddxUTydbI8/edit?usp=sharing
+
+
 
 \subsection{Results}
 \label{sec:results}
