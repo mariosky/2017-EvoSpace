@@ -199,6 +199,17 @@ replace the initial population of a local algorithm.
 Then after a certain number of iterations return the 
 current population back to the server.
 
+In this work, EvoWorkers were implemented in Python 
+using two open source libraries of nature inspired optimization 
+metaheuristics:  DEAP and EvoloPy. For each algorithm a 
+python script was responsible for the initialization using 
+the required parameters and setting up the initial population, 
+then after some iterations, the current population and 
+benchmark data is sent back to the server. EvoWorker 
+scripts can run in Docker containers, by receiving 
+the initial parameters as environment variables, and 
+the script ends when it reaches a maximum number of samples.
+
 \section{Experiments}
  \label{sec:experiments}
 
