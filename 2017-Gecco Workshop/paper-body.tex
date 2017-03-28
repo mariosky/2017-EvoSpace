@@ -190,7 +190,14 @@ https://github.com/mariosky/evospace-js.
 
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
-
+As we mentioned earlier, EvoWorkers are independent of 
+the population store, and developers can implement them 
+in any language that supports HTTP requests. To develop an 
+EvoWorker, a programmer could just write the code needed to 
+take a sample of the population and use this sample to 
+replace the initial population of a local algorithm. 
+Then after a certain number of iterations return the 
+current population back to the server.
 
 \section{Experiments}
  \label{sec:experiments}
