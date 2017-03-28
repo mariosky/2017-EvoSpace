@@ -155,13 +155,17 @@ following endpoints:
     ``score'' used when objects are going to be retieved in a certain order.
     \item {\bf population\_name/sample/n}
     This is a {\tt GET}  request used to take from the population a 
-    sample of {\bf n} objects. These objects are removed from the population and are no longer available
-    to other requests until and only if they are put back. Objects can be returned to the population 
-    either by a {\tt PUT} sample request called from the same client or by a Respawn request. The reason for 
+    sample of {\bf n} objects. These objects are removed from the 
+    population and are no longer available
+    to other requests until and only if they are put back. 
+    Objects can be returned to the population 
+    either by a {\tt PUT} sample request called from the same 
+    client or by a Respawn request. The reason for 
     this is to avoid concurrently write conflicts and duplication of work.
     \item {\bf population\_name/sample}
     This is a {\tt POST} request used to put back a sample to the population.
-    The new sample is sent in the request body as a JSON object. If the client created new objects or 
+    The new sample is sent in the request body as a JSON object. 
+    If the client created new objects or 
     changed their original state, these objects replace the originals. 
     \item {\bf population\_name/respawn}
     This is a {\tt POST} request used to put back {\bf n} samples to their 
@@ -204,7 +208,28 @@ server is in the following Github repository:
 
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
+As we mentioned earlier, EvoWorkers are independent of 
+the population store, and developers can implement them 
+in any language that supports HTTP requests. To develop an 
+EvoWorker, a programmer could just write the code needed to 
+take a sample of the population and use this sample to 
+replace the initial population of a local algorithm. 
+Then after a certain number of iterations return the 
+current population back to the server.
 
+In this work, EvoWorkers were implemented in Python 
+using two open source libraries of nature inspired optimization 
+metaheuristics:  DEAP and EvoloPy. For each algorithm a 
+python script was responsible for the initialization using 
+the required parameters and setting up the initial population, 
+then after some iterations, the current population and 
+benchmark data is sent back to the server. EvoWorker 
+scripts can run in Docker containers, by receiving 
+the initial parameters as environment variables, and 
+the script ends when it reaches a maximum number of samples.
+The source code for the Python EvoWorkers
+proposed in this work are on following Github repository: 
+https://github.com/mariosky/EvoWorker.
 
 \section{Experiments}
  \label{sec:experiments}
