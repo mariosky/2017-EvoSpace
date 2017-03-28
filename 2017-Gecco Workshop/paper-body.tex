@@ -96,7 +96,19 @@ However, while such algorithms can find high performance parametrization,
 they require additional computational effort which can be too expensive in some applications
 (even if they are more efficient than an exhaustive search).
 
-
+\begin{figure}[!t]
+    \centering
+        \includegraphics[width=2.5in]{img/classes.png}
+    \caption{ UML Class diagram of the Population and Individual classes.}
+    \label{fig:w1}
+\end{figure}
+%
+\begin{figure*}[!t]
+    \centering
+        \includegraphics[width=5.4in]{img/evospace-js.png}
+    \caption{ Stack diagram of the evospace-js framework components.}
+    \label{fig:w2}
+\end{figure*}
 
 \section{evospace-js Implementation}
 \label{sec:evo}
@@ -106,13 +118,12 @@ Each of these components are defined in the following subsections.
 
 \subsection{evospace-js}
  \label{sec:evospace}
-The evospace-js server provides a collection of REST methods that 
-operate over a set of objects $ES$, which can be seen as the 
+The evospace-js server provides a collection of REST methods  
+to operate over a set of objects $ES$, which can be seen as the 
 population. Multiple populations can be created and are 
-distinguished by their name. Objects in $ES$ represent 
-individuals in the population (these are defined in the next subsection), 
-they can be selected, removed and replaced from $ES$ using
-a specified set of REST methods. The main interfaces are:
+distinguished by their name. Objects in each $ES$ 
+can be selected, removed and replaced through the 
+following endpoints:
 \begin{enumerate}
     \item {\bf population\_name/initialize} 
     This is a {\tt POST} request used to create a new population.
@@ -142,7 +153,7 @@ a specified set of REST methods. The main interfaces are:
     This is a {\tt POST} request used to put back {\bf n} samples to their 
     original state. The number of samples is sent in the request body. 
 \end{enumerate}
-There are other secondary methods used to: select all objects in a 
+There are other secondary REST endpoints used to: select all objects in a 
 population, select objects with scores with in a range, read the 
 top {\tt n} objects according to a score and read the number of
 objects currently on the population.      
@@ -150,15 +161,14 @@ objects currently on the population.
 The above methods were implemented first as JavaScript library 
 with two classes: {\tt Individual} and {\tt Population} depicted 
 in Figure  with calls to the Redis memory store through the {\bf ioredis} 
-asynchronous library. 
-
-In order to expose the library as a REST Web service an HTTP 
-interface is implemented using the Express HTTP framework. 
+asynchronous library. In order to expose the library as a 
+REST Web service endpoints were implemented using the Express HTTP framework. 
 An optional dashboard type application, can be used to inspect 
 the populations currently available on the server.
 
-  
 
+
+  
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
 
