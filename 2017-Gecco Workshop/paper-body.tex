@@ -65,7 +65,7 @@ This log can later be used to compare the performance of
 the algorithm against others, for instance against 
 algorithms using the COCO (COmparing Continuous Optimisers)
 platform \cite{hansen2016coco}.
-The aim of the evospace-js software is to provide 
+The aim of the {\sf evospace-js} software is to provide 
 researchers with a high performance platform in which 
 they can execute pool-based algorithms using heterogeneous workers. 
 
@@ -120,19 +120,21 @@ they require additional computational effort which can be too expensive in some 
 \begin{figure*}[!t]
     \centering
         \includegraphics[width=5.4in]{img/evospace-js.png}
-    \caption{ Stack diagram of the evospace-js framework components.}
+    \caption{ Stack diagram of the {\sf evospace-js} framework components.}
     \label{fig:stack}
 \end{figure*}
 
-\section{evospace-js Implementation}
+\section{{\sf evospace-js} Implementation}
 \label{sec:evo}
-The main components of the EvoSpace framework are: the evospace-js 
+The main components of the EvoSpace framework are: the {\sf evospace-js} 
 population container, remote clients called EvoWorkers.
 Each of these components are defined in the following subsections.
 
-\subsection{evospace-js}
+\subsection{{\sf evospace-js}} % Maybe qualify this, it's got the same
+                               % name as above. Population container?
+                               % ~ JJ
  \label{sec:evospace}
-The evospace-js server provides a collection of REST methods  
+The {\sf evospace-js} server provides a collection of REST methods  
 to operate over a set of objects $ES$, which can be seen as the 
 population. Multiple populations can be created and are 
 distinguished by their name. Objects in each $ES$ 
@@ -201,7 +203,7 @@ identifiers and finally a list of details of each iteration
 or generation of the local execution. The details include:
 the best solution and the function value, and the number of
 function evaluations requiered. Depending on the application
-other data could be recorded. The source code for the {\ss evospace-js}
+other data could be recorded. The source code for the {\sf evospace-js}
 server is in the following Github repository: 
 \url{https://github.com/mariosky/evospace-js}.
 
@@ -228,8 +230,8 @@ scripts can run in Docker containers, by receiving
 the initial parameters as environment variables, and 
 the script ends when it reaches a maximum number of samples.
 The source code for the Python EvoWorkers
-proposed in this work are on following GitHub repository: 
-https://github.com/mariosky/EvoWorker.
+proposed in this work are in the following GitHub repository: 
+\url{https://github.com/mariosky/EvoWorker}.
 
 \section{Experiments}
  \label{sec:experiments}
