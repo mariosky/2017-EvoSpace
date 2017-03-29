@@ -160,14 +160,14 @@ Each of these components are defined in the following subsections.
 \subsection{{\sf evospace-js} Population Repository} % Maybe qualify this, it's got the same
                                % name as above. Population container?
                                % ~ JJ
-                               % I like container but we have been using repository in
-                               % other pape.
- \label{sec:evospace}
+                               % I like "container" but we have been using "repository" in
+                               % the begining and other papers, will stick to that.
+\label{sec:evospace}
 The {\sf evospace-js} server provides a collection of REST methods  
 to operate over a set of objects $ES$, which can be seen as the 
 population. Multiple populations can be created and are 
-distinguished by their name. Objects in each $ES$ 
-can be selected, removed and replaced through the 
+distinguished by their identifier $ES_id$. Objects in each $ES_id$ 
+can be selected, removed or replaced through the 
 following endpoints:
 \begin{enumerate}
     \item {\bf population\_name/initialize} 
@@ -183,7 +183,7 @@ following endpoints:
     a JavaScript object giving the internal representation of 
     the solution, by default a it defined as list of objects. 
     There is also an optional integer property called 
-    ``score'' used when objects are going to be retieved in a certain order.
+    ``score'' used when objects are going to be retrieved in a certain order.
     \item {\bf population\_name/sample/n}
     This is a {\tt GET}  request used to take from the population a 
     sample of {\bf n} objects. These objects are removed from the 
@@ -191,7 +191,7 @@ following endpoints:
     to other requests until and only if they are put back. 
     Objects can be returned to the population 
     either by a {\tt PUT} sample request called from the same 
-    client or by a Respawn request. The reason for 
+    client or by a respawn request. The reason for 
     this is to avoid concurrently write conflicts and duplication of work.
     \item {\bf population\_name/sample}
     This is a {\tt POST} request used to put back a sample to the population.
@@ -209,20 +209,23 @@ objects currently on the population.
 
 The above methods were implemented first as JavaScript library 
 with two classes: {\tt Individual} and {\tt Population} depicted 
-in Figure~\ref{fig:classes} with calls to the Redis memory store 
-through the {\bf ioredis} 
-asynchronous library. In order to expose the library as a 
-REST Web service endpoints were implemented using the Express HTTP framework. 
-An optional dashboard type application, can be used to inspect 
-the populations currently available on the server.
+in Figure~\ref{fig:classes} with calls to the Redis memory store \cite{}
+through the {\bf ioredis} asynchronous library. 
+% I can describe with more detail the data structures used in Redis
+% Set, Lists, Key-Value, etc. - M 
 
+In order to expose the library as a 
+REST Web service endpoints were implemented using the Express HTTP framework.
+An optional dashboard type application, can be used to inspect 
+the populations currently available on the server. This dashboard uses
+the Jade template engine and Express.
 
 When a worker is putting back a sample, it can send 
 an additional property called {\tt benchmark\_data }
 to send supplementary information about the execution 
 of the experiment.  This data can later be used to 
 benchmark the performance of the algorithm. This 
-data is again stored in redis as an ordered list, 
+data is again stored in Redis as an ordered list, 
 keeping a log for each experiment. Currently the JSON 
 benchmark data structure contains the following details 
 to later be used by the COCO platform: the algorithm identifier, 
@@ -231,7 +234,7 @@ of the function that is been optimized, worker and experiment
 identifiers and finally a list of details of each iteration 
 or generation of the local execution. The details include:
 the best solution and the function value, and the number of
-function evaluations requiered. Depending on the application
+function evaluations required. Depending on the application
 other data could be recorded. The source code for the {\sf evospace-js}
 server is in the following Github repository: 
 \url{https://github.com/mariosky/evospace-js}.
@@ -240,7 +243,7 @@ server is in the following Github repository:
 \subsection{EvoWorkers}
 \label{sec:evoworkers}
 As we mentioned earlier, EvoWorkers are independent of 
-the population store, and developers can implement them 
+the population repository, and developers can implement them 
 in any language that supports HTTP requests. To develop an 
 EvoWorker, a programmer could just write the code needed to 
 take a sample of the population and use this sample to 
@@ -249,8 +252,9 @@ Then after a certain number of iterations return the
 current population back to the server.
 
 In this work, EvoWorkers were implemented in Python 
-using two open source libraries of nature inspired optimization 
-metaheuristics:  DEAP and EvoloPy. For each algorithm a 
+taking advantage of two open source libraries of nature inspired optimization 
+metaheuristics:  DEAP \cite{fortin2012deap} and EvoloPy 
+\cite{faris2016evolopy}. For each algorithm a 
 python script was responsible for the initialization using 
 the required parameters and setting up the initial population, 
 then after some iterations, the current population and 
@@ -394,6 +398,7 @@ This file can later be used to analyze further the asynchronous
 performance of the algorithm.  For instance to compare the 
 performance of each of the EvoWorkers.
 
+
 \begin{figure*}[h!t]
     \centering
         \includegraphics[width=5in]{img/Sphere.pdf}
@@ -403,8 +408,8 @@ performance of each of the EvoWorkers.
     generator. The lines represent the average runtimes, the crosses
     the median runtime of successful runs to reach the most difficult
     target, x-crosses the max number of f-evaluations in any
-    triel. The $y$ scale is logarithmic. The light line on the bottom
-    with diammonds indicates the best algorithm from BBOB 2009. }
+    trial. The $y$ scale is logarithmic. The light line on the bottom
+    with diamonds indicates the best algorithm from BBOB 2009. }
   % Does this means our runtime is worse than BBOB 2009? - JJ
   % Yes, at this moment but we have been working on the platform
   % not yet on the optimization. - M
