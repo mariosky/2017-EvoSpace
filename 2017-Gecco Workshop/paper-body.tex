@@ -9,7 +9,7 @@ However, asynchronous EAs
 started to become common only relatively
 recently, in an effort to exploit computing resources available
 through different Internet technologies, including cloud. In this work, we are
-interested in those EAs following a pool-based approach,
+interested in those asynchronous EAs following a pool-based approach,
 where a collection of heterogeneous worker processes 
 carry out population search tasks by collaborating through a shared
 individual 
@@ -17,7 +17,7 @@ repository or population pool. We will refer to such algorithms
 as {\em Pool-based EAs} or PEAs, and highlight the fact that 
 such systems are intrinsically parallel, distributed and asynchronous.
 
-Pool-EAs differ from the closely related island model, 
+Pool-EAs differ from the closely related Island Model, 
 mainly with regards to the responsibilities assigned to 
 the server. When there is a server in the island model, it is 
 responsible for the interaction and synchronization of 
@@ -32,7 +32,7 @@ workers asynchronously interact with the population
 pool by taking samples of the population 
 to perform a local evolutionary search on the samples, 
 to then return newly evolved solutions back to the pool. This is a
-particular instance of a pool-based EA, which, as long as there is a
+particular instance of a Pool-based EA, which, as long as there is a
 common population pool, leaves every other detail to particular
 implementations. Other PEAs, for instance, might return only one
 individual to the pool, or use it as a read-only resource, not
@@ -49,12 +49,15 @@ running on the JavaSacript V8 engine. Node.js is used
 to optimize throughput and scalability of the server. %Actually you
                                 %are using express, I think. You
                                 %should talk about that - JJ
+                                % Ok, I will later when explaining the server 
+                                % in detail - Mario 
+
 Additionaly to the  increased performance this version 
 adds new functionality: In the former version workers could only
 ask for random samples of a particular size, now clients 
 can retrieve objects from the server ordered by a score. 
 Designers can use this functionality to implement 
-asynchronous versions of the Island Model or to force 
+asynchronous versions of the island model or to force 
 the retrieval of different objects in every request 
 resembling a circular queue. Instead of using the JSON-RPC 
 protocol the server functionality is now exposed as a RESTful 
@@ -83,17 +86,18 @@ optimization systems, namely the size of the parameter
 space and the high computational cost when it is compared with
 mathematical programming or numerical techniques. % I guess because
 % they are deterministic, right? - JJ
+% Yes - Mario
 Concerning the latter, one approach to mitigate this issue is to use parallel or 
 distributed implementations \cite{cantu-paz:migration-policies,duda2013gpu}.
 For instance, Fern\'andez et al. \cite{nc} % articulo Paco, Gustavo y Leo publucado en Natural Computing}
 use the well-known Berkeley Open Infrastructure for Network Computing (BOINC) to distribute EA runs across a
 heterogeneous network of volunteer computers using virtual machines. Another recent example is 
 found in the FlexGP system developed by Sherry et al. \cite{sherry2012flex}. FlexGP is probably the first large scale GP system 
-that runs on the cloud, using an Island model approach and implemented over Amazon EC2 with a 
+that runs on the cloud, using an island model approach and implemented over Amazon EC2 with a 
 socket-based client-server architecture. There is a considerable
-improvement and scalability in this approach, but this scalability has
+improvement in performance and scalability in this approach, but this scalability has
 a cost which is proportionally much smaller than installing a
-permanent infraestructure, but onerous nonetheless. % Maybe take some
+permanent infrastructure, but onerous nonetheless. % Maybe take some
                                 % figures from it - JJ
 
 In general, all the techniques and implementations mentioned above
@@ -101,10 +105,12 @@ rely on more or less {\em traditional} parallel or distributed
 evolutionary algorithms, using {\em farming} for offloading
 evaluations to ephemeral resources or using more traditional
 island-based models in distributed or cloud-based resources. However,
-there is another approach to distributed EAs: the so called pool-based
+there is another approach to distributed EAs: the so called Pool-based
 architecture \cite{talukdar1998asynchronous,pool:ga,de1991genetic}. In general, a 
-pool-based system employs a central repository (real or virtual)
+Pool-based system employs a central repository 
 % What's the difference? - JJ
+% Is central but it could be internally distributed or a cluster
+% Im taking it of because is an implemantation detail - M 
 where the evolving population, or a part of it, is stored. 
 Distributed clients interact with the pool, performing some or all of the basic EA processes 
 (selection, genetic operators, survival), but these clients join the
@@ -121,7 +127,8 @@ by the re-execution of  tasks \cite{fazenda2012,di2013towards,FlexGP}. Using the
 volunteer platform  Smaoui et al. \cite{FekiNG09} uses work units that consist of a fitness 
 evaluation task and multiple replicas  were produced and sent to different clients.
 
-While using a distributed framework can ease the computational cost, it can also exacerbate the first issue mentioned above;
+While using a distributed framework can ease the computational cost, 
+it can also exacerbate the first issue mentioned above;
 i.e., it increases the size of the algorithm parameter space, which makes parameter tuning a more difficult task.
 The issue of optimal parametrization of EAs is a widely studied subject \cite{de2007parameter}, 
 with many approaches in literature. For instance, one of the most successful approaches 
@@ -147,12 +154,14 @@ they require additional computational effort which can be too expensive in some 
 \section{{\sf evospace-js} Implementation}
 \label{sec:evo}
 The main components of the EvoSpace framework are: the {\sf evospace-js} 
-population container, remote clients called EvoWorkers.
+population repository, remote clients called EvoWorkers.
 Each of these components are defined in the following subsections.
 
-\subsection{{\sf evospace-js}} % Maybe qualify this, it's got the same
+\subsection{{\sf evospace-js} Population Repository} % Maybe qualify this, it's got the same
                                % name as above. Population container?
                                % ~ JJ
+                               % I like container but we have been using repository in
+                               % other pape.
  \label{sec:evospace}
 The {\sf evospace-js} server provides a collection of REST methods  
 to operate over a set of objects $ES$, which can be seen as the 
