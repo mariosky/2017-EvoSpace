@@ -45,14 +45,14 @@ was implemented using CherryPy, a basic HTTP
 server written in Python. This new version uses Node.js, an 
 event-driven interpreter with a built-in event loop capable of
 asynchronous I/O \cite{tilkov2010node}, that is 
-running on the JavaSacript V8 engine. Node.js is used 
+running on the JavaScript V8 engine. Node.js is used 
 to optimize throughput and scalability of the server. %Actually you
                                 %are using express, I think. You
                                 %should talk about that - JJ
                                 % Ok, I will later when explaining the server 
                                 % in detail - Mario 
 
-Additionaly to the  increased performance this version 
+Additionally to the  increased performance this version 
 adds new functionality: In the former version workers could only
 ask for random samples of a particular size, now clients 
 can retrieve objects from the server ordered by a score. 
@@ -305,7 +305,7 @@ function evaluations is incremented in each iteration
 by the sample size and the best function evaluation is 
 assigned that number,  as if in each iteration the best 
 solution was found in the last function evaluation. Instead 
-of incrementing the number by one it is incremented by the 
+of increasing the number by one it is incremented by the 
 number of solutions in the sample. 
 Is important to notice that EvoWorkers run the algorithm 
 only for a small number of iterations and with 
@@ -392,7 +392,7 @@ each dimension.
     \caption{Average numbers of function evaluations to reach target
       for every dimension for the Sphere function. This figure and the
     following ones have been generated with the BBOB report
-    generator. The lines represent the average runtimes, the crosses
+    generator. The lines represent the average running times, the crosses
     the median runtime of successful runs to reach the most difficult
     target, x-crosses the max number of f-evaluations in any
     trial. The $y$ scale is logarithmic. The light line on the bottom
