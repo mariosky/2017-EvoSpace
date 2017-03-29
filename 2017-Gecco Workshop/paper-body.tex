@@ -386,20 +386,7 @@ each dimension.
 
 \subsection{Results}
 \label{sec:results}
-After the experiment was executed a script generated 
-the files and folders needed by the COCO post-processing 
-scripts. The script generated the comparative tables and
-graphics for comparing the performance of the algorithm with
-those found in the COCO repository. Results from experiments 
-according to \cite{hansen2016coco} on the benchmark functions 
-are presented in Figures \ref{fig:sphere} to \ref{fig:ellipsoid}.
-The whole experiment (all dimensions and instances) took 
-less three hours to execute. The results obtained show that the 
-algorithm performs quite well on separable functions 1-3, 
-both regarding results and scaling when compared to results 
-from other nature inspired algorithms \cite{hansen2010bbob}. 
-
-\begin{figure*}[h!t]
+\begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=5in]{img/Sphere.pdf}
     \caption{Average numbers of function evaluations to reach target
@@ -413,15 +400,29 @@ from other nature inspired algorithms \cite{hansen2010bbob}.
   % Does this means our runtime is worse than BBOB 2009? - JJ
   % Yes, at this moment but we have been working on the platform
   % not yet on the optimization. - M
-
   % Also I hope that this apprach will work better on more difficult
   % functions were more diversity is needed. - M
-
+  % We should say that on the paper
 \label{fig:sphere}
 \end{figure*}
+%
+After the experiment was executed a script generated 
+the files and folders needed by the COCO post-processing 
+scripts. The script generated the comparative tables and
+graphics for comparing the performance of the algorithm with
+those found in the COCO repository. Results from experiments 
+according to \cite{hansen2016coco} on the benchmark functions 
+are presented in Figures \ref{fig:sphere} to \ref{fig:ellipsoid}.
+The whole experiment (all dimensions and instances) took 
+less three hours to execute. The results obtained show that the 
+algorithm performs quite well on separable functions 1-3, 
+both regarding results and scaling when compared to results 
+from other nature inspired algorithms \cite{hansen2010bbob}. 
 
 
-\begin{figure*}[h!t]
+
+
+\begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=5in]{img/Ellipsoid.pdf}
     \caption{Average numbers of function evaluations to reach target
@@ -429,7 +430,7 @@ from other nature inspired algorithms \cite{hansen2010bbob}.
     \label{fig:ellipsoid}
 \end{figure*}
 
-\begin{figure*}[h!t]
+\begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=5in]{img/Rastrigin.pdf}
     \caption{Average numbers of function evaluations to reach target
