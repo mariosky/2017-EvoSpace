@@ -389,7 +389,7 @@ each dimension.
 \begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=5in]{img/Sphere.pdf}
-    \caption{Average numbers of function evaluations to reach target
+    \caption{Average numbers of function evaluations to reach the target
       for every dimension for the Sphere function. This figure and the
     following ones have been generated with the BBOB report
     generator. The lines represent the average running times, the crosses
@@ -406,7 +406,7 @@ each dimension.
 \label{fig:sphere}
 \end{figure*}
 %
-After the experiment was executed a script generated 
+After the experiment was run a script generated 
 the files and folders needed by the COCO post-processing 
 scripts; this script generated the comparative tables and
 graphics for checking the performance of the algorithm against
@@ -418,11 +418,10 @@ less three hours to execute. %Computer? - JJ
 The results obtained show that the 
 algorithm performs quite well on separable functions 1-3, 
 both regarding results and scaling when compared to results 
-from other nature inspired algorithms \cite{hansen2010bbob}. % Maybe
-                                % qualify that a bit. 
-
-
-
+from other nature inspired algorithms \cite{hansen2010bbob}. Results
+obtained with the Rastrigin function are better than the rest, giving
+hope that with adequate tuning much better results could be obtained.
+%
 \begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=5in]{img/Ellipsoid.pdf}
@@ -430,7 +429,7 @@ from other nature inspired algorithms \cite{hansen2010bbob}. % Maybe
       for every dimension for the Ellipsoid function.}
     \label{fig:ellipsoid}
 \end{figure*}
-
+%
 \begin{figure*}[h!tbp]
     \centering
         \includegraphics[width=5in]{img/Rastrigin.pdf}
@@ -439,6 +438,12 @@ from other nature inspired algorithms \cite{hansen2010bbob}. % Maybe
     \label{fig:rastrigin}
 \end{figure*}
 
+In fact, all runs have ended successfully with a completely new
+asynchronous, heterogeneous, and pool based evolutionary
+algorithm. Our intention in this paper was to present this framework
+and present how it can successfully tackle and solve difficult
+problems using heterogeneous workers that consume the same {\sf
+  evospace-js} API. 
 
 \section{Conclusions and Further Work}
 \label{sec:conclusions}
@@ -447,16 +452,25 @@ The {\sf evospace-js} platform has been applied to implement
 and test a hybrid nature-inspired algorithm against a testbed 
 of noiseless continuous functions. Design and implementation 
 details have been presented.  The results obtained show that 
-an asynchronous execution following a Pool-based approach is 
-possible and easy to achieve. Results, however, are still 
+an asynchronous execution following a pool-based approach is 
+possible and easy to implement, and that it is able to successfully
+find solutions to difficult optimization problems. Results, however, are still 
 preliminary and further tuning of the parameters could 
-potentially wield better results. There is also the question about
+potentially yield better results, mainly time-wise. There is also the question about
 the performance of the algorithm on the remaining functions
-of the benchmark and other real-world problems. 
+of the benchmark and other real-world problems; however, these are
+only implementation details.
+
+Our results have been entirely published in GitHub, along with
+sources. We think it is important to help reproductibility as much as
+possible by opening our science. Publishing results and software with
+an open source license will help achieve this reproducibility, and you
+can find all results, code as well as the source for this paper in
+(URL HIDDEN FOR DOUBLE-BLIND REASONS).
 
 Future lines of work will focus on using other EA or 
-meta-heuristic techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014grey}
-or Differential Evolution \cite{storn1997differential} for having workers that are 
+meta-heuristic population-based techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014grey}
+or Differential Evolution \cite{storn1997differential} for creating workers that are 
 heterogeneous in more than one sense. RPSS could be used 
 in those cases where each algorithm has a different set of 
 parameters, but also to randomly select the technique employed 
