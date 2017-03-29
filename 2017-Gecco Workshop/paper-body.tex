@@ -277,22 +277,27 @@ sample-iteration level. As we mentioned earlier, each worker
 returns a record with benchmark data, with the number of 
 evaluations performed in each iteration.
 
-Is not practical to track the exact sequential number 
-of function evaluation in an asynchronous execution, 
-as many workers could be calling the function at the same 
-time. For this reason, the granularity of the number of 
-function evaluations and their order was kept at the sample 
-and iteration level. As we mentioned earlier, each worker returns
-a record with benchmark data containing the number of 
-evaluations performed in each iteration. The order and number 
-of function calls were given by the order in which 
-the server received the samples and sequence of iterations.
-A After each iteration, the best solution was considered 
-to happen at the last function evaluation. Is important to
-notice that EvoWorkers run the algorithm only for a small 
-number of iterations and with a relatively small sample of 
-the population. For instance, for the COCO benchmark 
-presented in the case study the maximum number of 
+Is not practical to track the exact sequential 
+number of function evaluations in an asynchronous 
+execution, because many workers could be calling 
+the function at the same time. For this reason, the 
+granularity of the number of function evaluations and 
+their order was kept at the sample and iteration level. 
+As we mentioned earlier, each worker returns the number 
+of evaluations performed in each iteration. The order 
+of function calls was given by the order in which the 
+server received the samples and the order of the 
+iterations in each. On the other hand, the number of 
+function evaluations is incremented in each iteration 
+by the sample size and the best function evaluation is 
+assigned that number,  as if in each iteration the best 
+solution was found in the last function evaluation. Instead 
+of incrementing the number by one it is incremented by the 
+number of solutions in the sample. 
+Is important to notice that EvoWorkers run the algorithm 
+only for a small number of iterations and with 
+a relatively small sample of the population. For instance,
+for the COCO benchmark presented in the case study the maximum number of 
 function evaluations in a single iteration was 200. 
   
 
@@ -300,12 +305,13 @@ function evaluations in a single iteration was 200.
 \label{sec:evoworkers}
 
 A script was responsible for creating the EvoWorker 
-containers and running the benchmark. The three functions 
+containers and running the benchmark. The first three functions 
 F1 to F3 were tested with 15 instances for each of 
-the following dimensions:  2, 3, 5, 10, 20, and 40. 
+the dimensions: 2, 3, 5, 10, 20, and 40. 
 The maximum number of function evaluations was set to $10^5*dim$. 
 In order to maintain the required number of function 
-evaluations the following parameters were set to each dimension.
+evaluations the following EvoWorker setup was set for
+each dimension.
 
 \begin{table}
   \small
@@ -366,7 +372,13 @@ evaluations the following parameters were set to each dimension.
 \subsection{Results}
 \label{sec:results}
 After the experiment was executed a script generated 
-the folders needed by the COCO post-processing scripts.
+the files and folders needed by the COCO post-processing 
+scripts. The script generated the comparative tables and
+graphics for comparing the performance of the algorithm with
+those found in the COCO repository. Examples of these figures
+are presented in Figures \ref{fig:sphere} to \ref{fig:ellipsoid}.
+
+
 
 \begin{figure*}[h!t]
     \centering
