@@ -309,13 +309,13 @@ evaluations the following parameters were set to each dimension.
 
 \begin{table}
   \small
-  \caption{EvoWorker setup parameters}
+  \caption{EvoWorker Setup}
   \label{tab:params} 
   \centering
   \small
   \begin{tabular}{|l|c|c|c|c|c|c|}
-    \hline\noalign\\
-    Dimension & 2 & 3 & 5 & 10 & 20 & 40\\\hline
+    \hline
+    Dimension & 2 & 3 & 5 & 10 & 20 & 40\\ \hline
     Iterations per Sample  & 50 & 50 & 50 & 50 & 50 & 50\\ \hline
     Sample Size  & 100 & 100 & 100 & 200 & 200 & 200 \\ \hline
     Samples per Worker & 20 & 30 & 25 & 25 & 25 & 25  \\ \hline
@@ -325,19 +325,37 @@ evaluations the following parameters were set to each dimension.
 
 \begin{table}
   \small
-  \caption{ GA EvoWorker Parameters }
+  \caption{ DEAP GA EvoWorker Parameters }
   \label{tab:GAparams} 
   \centering
   \small
   \begin{tabular}{|l|c|}
-    \hline\noalign\\
-      Search space &  $[-4,4]^{D}$ \\ \hline
-      Selection & Tournament size=12\\ \hline
-      Mutation &  \\ \hline
-
+    \hline
+    Search space &  $[-4,4]^{D}$ \\ \hline
+    Selection & Tournament size=12\\ \hline
+    Mutation & Gaussian $\mu=0.0$, $\sigma=0.5$, indbp=0.05  \\ \hline
+    Mutation Probability & [.1,.6]  \\ \hline
+    Crossover & Two Point  \\ \hline
+    Crossover Probability& [.8,1]  \\ \hline
   \end{tabular}
 \end{table}
 
+\begin{table}
+  \small
+  \caption{ EvoloPy PSO EvoWorker Parameters }
+  \label{tab:GAparams} 
+  \centering
+  \small
+  \begin{tabular}{|l|c|}
+    \hline
+    Search space &  $[-4,4]^{D}$ \\ \hline
+    $V_{max}$ & 6 \\ \hline
+    $W_{max}$ & $0.9$ \\ \hline
+    $W_{min}$ & $0.2$ \\ \hline
+    $C_1$ & 2 \\ \hline
+    $C_2$ & 2 \\ \hline
+  \end{tabular}
+\end{table}
 
 
 %TO DO: TABLE
