@@ -314,7 +314,7 @@ evaluations the following parameters were set to each dimension.
   \centering
   \small
   \begin{tabular}{|l|c|c|c|c|c|c|}
-    \hline\noalign{\smallskip}
+    \hline\noalign
     Dimension & 2 & 3 & 5 & 10 & 20 & 40\\\hline
     Iterations per Sample  & 50 & 50 & 50 & 50 & 50 & 50\\ \hline
     Sample Size  & 100 & 100 & 100 & 200 & 200 & 200 \\ \hline
@@ -322,6 +322,22 @@ evaluations the following parameters were set to each dimension.
     PSO Workers & 1 & 1 & 2 & 2 & 4 & 8  \\ \hline
   \end{tabular}
 \end{table}
+
+\begin{table}
+  \small
+  \caption{ GA EvoWorker Parameters }
+  \label{tab:GAparams} 
+  \centering
+  \small
+  \begin{tabular}{|l|c|}
+    \hline\noalign
+      Search space &  $[-4,4]^{D}$ \\ \hline
+      Selection & Tournament size=12\\ \hline
+      Mutation &  \\ \hline
+
+  \end{tabular}
+\end{table}
+
 
 
 %TO DO: TABLE
@@ -336,7 +352,7 @@ the folders needed by the COCO post-processing scripts.
 
 \begin{figure}[!t]
     \centering
-        \includegraphics[width=2.5in]{img/Sphere.png}
+        \includegraphics[width=3.5in]{img/Sphere.pdf}
     \caption{ TO DO: Caption.}
     \label{fig:sphere}
 \end{figure}
@@ -344,14 +360,14 @@ the folders needed by the COCO post-processing scripts.
 
 \begin{figure}[!t]
     \centering
-        \includegraphics[width=2.5in]{img/Ellipsoid.png}
+        \includegraphics[width=3.5in]{img/Ellipsoid.pdf}
     \caption{ TO DO: Caption.}
     \label{fig:ellipsoid}
 \end{figure}
 
 \begin{figure}[!t]
     \centering
-        \includegraphics[width=2.5in]{img/Rastrigin.png}
+        \includegraphics[width=3.5in]{img/Rastrigin.pdf}
     \caption{ TO DO: Caption.}
     \label{fig:rastrigin}
 \end{figure}
