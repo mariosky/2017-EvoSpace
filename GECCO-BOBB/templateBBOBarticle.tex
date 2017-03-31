@@ -266,6 +266,7 @@ each dimension (see Table~\ref{tab:params}).
     Sample Size  & 100 & 100 & 100 & 200 & 200 & 200 \\ \hline
     Samples per Worker & 20 & 30 & 25 & 25 & 25 & 25  \\ \hline
     PSO Workers & 1 & 1 & 2 & 2 & 4 & 8  \\ \hline
+    GA Workers & 1 & 1 & 2 & 2 & 4 & 8  \\ \hline
   \end{tabular}
 \end{table}
 
@@ -319,7 +320,12 @@ Intel Xeon (TM) E5 CPU @ 3.7GHz with 12 GB 1866 MHz DDR3 ECC RAM, 1 processor an
 EvoWorkers were executed in Docker (v 17.03.0-ce-mac2) container images are available at
 \url{https://hub.docker.com/r/mariosky/evo_worker/} . 
 % TO DO 
-The time per function evaluation for dimensions 2, 3, 5, 10, 20\change{, 40} equals \change{$x.x$}, \change{$x.x$}, \change{$x.x$}, \change{$xx$}, \change{$xxx$}\change{, and $xxx$} seconds respectively. 
+The time per function evaluation for dimensions 2, 3, 5, 10, 20, 40 equals $0.0678$, $0.0676$,
+$0.0372$, $0.03929$, $0.03929$, and $0.05223$  miliseconds respectively. 
+Times were measured with EvoWorkers executing in parallel on the Docker containers
+mentioned above, is important to notice that the number of EvoWorkers increased 
+with dimensions (see Table~\ref{tab:params}). 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
