@@ -140,22 +140,20 @@ on the BBOB Noiseless Testbed}
 
 \begin{abstract}
 In this work, we  evaluate an asynchronous population-based 
-algorithms following a pool-based approach. In Pool-based 
-algorithms a collection of heterogeneous worker processes 
-collaborate through a shared population repository. In particular
+algorithm following a pool-based approach. In Pool-based 
+algorithms a collection of heterogeneous workers 
+collaborate through a shared population repository. In particular,
 we followed the EvoSpace approach in which workers 
 asynchronously interact with a population pool by taking 
-samples of the population to perform a local search on the 
+samples of the population to perform a standard search on the 
 samples, to then return newly evolved solutions back to the 
-pool. We benchmark  against the BBOB noiseless testbed a 
+pool. For this porpuse, we use the BBOB noiseless testbed and a 
 hybrid algorithm mixing two kinds or workers:  PSO  and GA. 
-The results of the asynchronous execution were transformed 
-into files compatible with the Comparing Continuous Optimizer 
-platform. We find that an Pool-based approach outperforms
+We find that an Pool-based approach outperforms
 the canonical GA and PSO algorithms in nearly all cases. 
 The results from these tests suggest that a Pool Based approach 
 can be used to implment hybrid algorithms that can improve 
-the performance of single population-based optimization algorithms.
+the performance of canonical population-based optimization algorithms.
 \end{abstract}
 
 
@@ -210,7 +208,7 @@ ad-hoc and ephemeral collaboration of computing resources.
 The algorithm presented in this paper follows the basic 
 EvoSpace model \cite{GValdez2015} in which EvoWorkers 
 asynchronously interact with the population pool by 
-taking samples of the population to perform a local 
+taking samples of the population to perform a standard 
 evolutionary search on the samples, to then return newly
 evolved solutions back to the pool. This is a
 particular instance of a Pool-based EA, which, as long as there is a
@@ -219,9 +217,11 @@ implementations.
 
 To test this PEA against the Noiseless BBOB testbed, 
 we mixed two canonical versions of the GA and PSO algorithms, 
-by just defining EvoWorkers of each kind. The performance reported 
-although not achieving an outstanding performance when compared 
-against the leading algorithms, the results obtained highlight 
+by just defining EvoWorkers of each kind. The performance 
+%reported 
+%although not achieving an outstanding performance when compared 
+%against the leading algorithms, the results 
+obtained highlight 
 that a Pool Based approach can be used to improve the performance 
 of single population-based optimization algorithms.
 
@@ -240,15 +240,16 @@ then after some iterations, the current population and
 benchmark data is sent back to the server. The source code 
 for the Python EvoWorkers proposed in this work are in 
 the following GitHub repository: \url{https://github.com/mariosky/EvoWorker}.
+For the porppuse of this work we called this algorithm EvoSpace-PSO-GA.  
 
 
 %
 \section{Experimental Procedure}
 A script was responsible for creating the EvoWorker 
 containers and running the testbed. The maximum number of 
-function evaluations was set to $10^5*dim$. For each run 
+function evaluations was set to $10^5*D$. For each run 
 of the algorithms, the initial solution
-$X_0$ is sampled uniformly in $[−5, 5]^D$
+$X_0$ is sampled uniformly in $[−5, 5]^D$.
 In order to maintain the required number of function 
 evaluations the following EvoWorker setup was set for
 each dimension (see Table~\ref{tab:params}).
@@ -333,21 +334,14 @@ with dimensions (see Table~\ref{tab:params}).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 After the  execution, a script processed the logs and 
-generated the files needed by the COCO platform post-processing scripts. 
+generated the files needed by the COCO platform \cite{hansen2016cocoplat}  post-processing scripts. 
 
 A requirement of the COCO platform is that it needs 
 to inspect each function evaluation to keep the log required 
 to analyze the execution. The logging code maintains 
 a sequential record of the number function calls. 
-This exact order is not practical to keep in an asynchronous 
-execution as many workers are calling the function at the 
-same time. For this reason, the granularity of the number of 
-function evaluations and their order is kept at the 
-sample-iteration level. As we mentioned earlier, each worker 
-returns a record with benchmark data, with the number of 
-evaluations performed in each iteration.
 
-Is not practical to track the exact sequential 
+It is not practical to track the exact sequential 
 number of function evaluations in an asynchronous 
 execution, because many workers could be calling 
 the function at the same time. For this reason, the 
@@ -364,17 +358,17 @@ assigned that number,  as if in each iteration the best
 solution was found in the last function evaluation. Instead 
 of incrementing the number by one it is incremented by the 
 number of solutions in the sample. 
-Is important to notice that EvoWorkers run the algorithm 
+It is important to notice that EvoWorkers run the algorithm 
 only for a small number of iterations and with 
 a relatively small sample of the population. For instance,
 for the COCO benchmark presented in the case study the maximum number of 
 function evaluations in a single iteration was 200.
 
-The COCO post-precessing script currently has an assetion stating
+The COCO post-precessing script currently has an assertion stating
 that all the function evaluations start at number 1. In our
 case the first evalauation had a number equal to the total number
 of evalautions in a single iteration. In order to run the script 
-a dummy function evaluation with number one was inserted first. 
+a dummy function evaluation was inserted at the begining. 
 
 Results of \algname\ from experiments according to \cite{hansen2016exp} and \cite{hansen2016perfass} on the benchmark
 functions given in \cite{wp200901_2010,hansen2012fun} are presented in
@@ -703,7 +697,7 @@ meta-heuristic techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014gr
 or Differential Evolution \cite{storn1997differential} for having workers that are 
 heterogeneous in more than one sense. RPSS could be used 
 in those cases where each algorithm has a different set of 
-parameters, but also to randomly select the technique employed 
+parameters, but also to randomly select the technique employed. 
 
 \bibliographystyle{ACM-Reference-Format}
 %\bibliography{bbob}  % bbob.bib is the name of the Bibliography in this case
