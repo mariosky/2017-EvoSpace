@@ -210,4 +210,4 @@ auto/
 comment.cut
 
 *~
-!GECCO-BOBB/ppdata/*
+!/GECCO-BOBB/ppdata/*
