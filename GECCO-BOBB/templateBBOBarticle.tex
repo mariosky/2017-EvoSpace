@@ -311,13 +311,15 @@ and Table\ref{tab:GAparams} for GAs and PSO respectively.
 \section{CPU Timing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % note that the following text is just a proposal and can/should be changed to your needs:
-In order to evaluate the CPU timing of the algorithm, we have run the \change{MY-ALGORITHM-NAME} 
-on the  \change{bbob test suite \cite{hansen2009fun}} with restarts for a maximum budget 
-equal to \change{$400 (D + 2)$} function evaluations according to \cite{hansen2016exp}. 
-The \change{C/Java/Python/Matlab/Octave} code was run on a \change{Mac Intel(R) Core(TM) 
-i5-2400S CPU @ 2.50GHz} with \change{1} processor and \change{4} cores \change{and (compile) options xxx}. 
-% We did not measure this :( -Mario
-%The time per function evaluation for dimensions 2, 3, 5, 10, 20\change{, 40} equals \change{$x.x$}, \change{$x.x$}, \change{$x.x$}, \change{$xx$}, \change{$xxx$}\change{, and $xxx$} seconds respectively. 
+In order to evaluate the CPU timing of the algorithm, we have run the EvoSpace-PSO-GA algorithm 
+on the  bbob test suite \cite{hansen2009fun} with no restarts for a maximum budget 
+equal to  $10^5*dim$ function evaluations according to \cite{hansen2016exp}. 
+The Python (version 2.7.13) code was run on a MacPro (late 2013) Intel(R) Quad Core 
+Intel Xeon (TM) E5 CPU @ 3.7GHz} with 12 GB 1866 MHz DDR3 ECC RAM, 1 processor and 4 cores, 
+EvoWorkers were executed in Docker (v 17.03.0-ce-mac2) container images are available at
+\url{https://hub.docker.com/r/mariosky/evo_worker/} . 
+% TO DO 
+The time per function evaluation for dimensions 2, 3, 5, 10, 20\change{, 40} equals \change{$x.x$}, \change{$x.x$}, \change{$x.x$}, \change{$xx$}, \change{$xxx$}\change{, and $xxx$} seconds respectively. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -371,7 +373,8 @@ a dummy function evaluation with number one was inserted first.
 Results of \algname\ from experiments according to \cite{hansen2016exp} and \cite{hansen2016perfass} on the benchmark
 functions given in \cite{wp200901_2010,hansen2012fun} are presented in
 Figures~\ref{fig:aRTgraphs}, \ref{fig:RLDs}, \ref{tab:aRTloss}, and \ref{fig:aRTlogloss} and in
-Tables~\ref{tab:aRTs}. The experiments were performed with COCO \cite{hansen2016cocoplat}, version \change{2.0}, the plots were produced with version \change{2.0}.
+Tables~\ref{tab:aRTs}. The experiments were performed with COCO \cite{hansen2016cocoplat}, version bbob.v15.03 in
+python, the plots were produced with version 2.0.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
