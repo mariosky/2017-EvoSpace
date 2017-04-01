@@ -138,23 +138,18 @@ on the BBOB Noiseless Testbed}
 \renewcommand{\shortauthors}{Firstname Lastname et. al.}
 
 
-\begin{abstract}
-In this work, we  evaluate an asynchronous population-based 
-algorithm following a pool-based approach. In Pool-based 
-algorithms a collection of heterogeneous workers 
-collaborate through a shared population repository. In particular,
-we followed the EvoSpace approach in which workers 
-asynchronously interact with a population pool by taking 
-samples of the population to perform a standard search on the 
-samples, to then return newly evolved solutions back to the 
-pool. For this porpuse, we use the BBOB noiseless testbed and a 
-hybrid algorithm mixing two kinds or workers:  PSO  and GA. 
-We find that an Pool-based approach outperforms
-the canonical GA and PSO algorithms in nearly all cases. 
-The results from these tests suggest that a Pool Based approach 
-can be used to implment hybrid algorithms that can improve 
-the performance of canonical population-based optimization algorithms.
-\end{abstract}
+\begin{abstract} In this work, we evaluate an asynchronous population-based
+algorithm following a pool-based approach. In Pool-based algorithms, a
+collection of workers collaborates through a shared population repository. In
+particular, we followed the EvoSpace approach in which workers asynchronously
+interact with a population pool by taking samples of the population to perform a
+standard search on the samples, to then return newly evolved solutions back to
+the pool. For this purpose, we use the BBOB Noiseless Testbed and a hybrid
+algorithm combining two kinds or workers:  PSO  and GA. We find that a Pool-
+based approach outperforms the canonical GA and PSO algorithms in nearly all
+cases. The results of these tests suggest that a Pool Based approach can be used
+to implement hybrid algorithms that can improve the performance of canonical
+population-based optimization algorithms. \end{abstract}
 
 
 %
@@ -196,24 +191,30 @@ approach, we will refer to such algorithms as {\em Pool-based EAs}
 or PEAs, and highlight the fact that such systems are 
 intrinsically parallel, distributed and asynchronous.
 
-Pool-EAs differ from the closely related Island Model, 
-mainly with regards to the responsibilities assigned to 
-the server. When there is a server in the island model, it is 
-responsible for the interaction and synchronization of 
-all the populations.  In Pool-EAs, on the other hand, the population repository only 
-receives stateless requests from isolated workers 
-or clients. In this way, Pool-EAs are capable of using and leveraging an 
-ad-hoc and ephemeral collaboration of computing resources. 
+Asynchronous EAs \cite{Jini:FEA2000,alba2001analyzing,Jini:FEA2000,
+jj:2008:PPSN} have started to become common only relatively recently, in an
+effort to exploit computing resources available through different Internet
+technologies, including interested in benchmarking asynchronous EAs following a
+pool-based approach, we will refer to such algorithms as {\em Pool-based EAs} or PEAs,
+and highlight the fact that such systems are intrinsically parallel, distributed
+and asynchronous.
 
-The algorithm presented in this paper follows the basic 
-EvoSpace model \cite{GValdez2015} in which EvoWorkers 
-asynchronously interact with the population pool by 
-taking samples of the population to perform a standard 
-evolutionary search on the samples, to then return newly
-evolved solutions back to the pool. This is a
-particular instance of a Pool-based EA, which, as long as there is a
-common population pool, leaves every other detail to particular
-implementations. 
+Pool-EAs differ from the closely related Island Model, mainly with regards to
+the responsibilities assigned to the server. When there is a server in the
+island model, it is responsible for the interaction and synchronization of all
+the populations. In Pool-EAs, on the other hand, the population repository only
+receives stateless requests from isolated workers or clients. In this way,
+Pool-EAs are capable of using and leveraging an ad-hoc and ephemeral
+collaboration of computing resources.
+
+The algorithm presented in this paper follows the basic  EvoSpace model
+\cite{GValdez2015} in which EvoWorkers  asynchronously interact with the
+population pool by taking samples of the population to perform a standard
+evolutionary search on the samples, to then return newly evolved solutions back
+to the pool. This design is a particular instance of a Pool-based EA, which, as
+long as there is a shared population pool leaves every other detail to their
+specific implementations.
+
 
 To test this PEA against the Noiseless BBOB testbed, 
 we mixed two canonical versions of the GA and PSO algorithms, 
