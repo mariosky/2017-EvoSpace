@@ -313,7 +313,7 @@ and Table\ref{tab:GAparams} for GAs and PSO respectively.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % note that the following text is just a proposal and can/should be changed to your needs:
 In order to evaluate the CPU timing of the algorithm, we have run the EvoSpace-PSO-GA algorithm 
-on the  bbob test suite \cite{hansen2009fun} with no restarts for a maximum budget 
+on the  BBOB test suite \cite{hansen2009fun} with no restarts for a maximum budget 
 equal to  $10^5*dim$ function evaluations according to \cite{hansen2016exp}. 
 The Python (version 2.7.13) code was run on a MacPro (late 2013) Intel(R) Quad Core 
 Intel Xeon (TM) E5 CPU @ 3.7GHz with 12 GB 1866 MHz DDR3 ECC RAM, 1 processor and 4 cores, 
@@ -321,7 +321,7 @@ EvoWorkers were executed in Docker (v 17.03.0-ce-mac2) container images are avai
 \url{https://hub.docker.com/r/mariosky/evo_worker/} . 
 % TO DO 
 The time per function evaluation for dimensions 2, 3, 5, 10, 20, 40 equals $0.0678$, $0.0676$,
-$0.0372$, $0.03929$, $0.03929$, and $0.05223$  miliseconds respectively. 
+$0.0372$, $0.03929$, $0.03929$, and $0.05223$  milliseconds respectively. 
 Times were measured with EvoWorkers executing in parallel on the Docker containers
 mentioned above, is important to notice that the number of EvoWorkers increased 
 with dimensions (see Table~\ref{tab:params}). 
@@ -355,7 +355,7 @@ function evaluations is incremented in each iteration
 by the sample size and the best function evaluation is 
 assigned that number,  as if in each iteration the best 
 solution was found in the last function evaluation. Instead 
-of incrementing the number by one it is incremented by the 
+of increasing the number by one it is incremented by the 
 number of solutions in the sample. 
 It is important to notice that EvoWorkers run the algorithm 
 only for a small number of iterations and with 
@@ -363,11 +363,11 @@ a relatively small sample of the population. For instance,
 for the COCO benchmark presented in the case study the maximum number of 
 function evaluations in a single iteration was 200.
 
-The COCO post-precessing script currently has an assertion stating
+The COCO post-processing script currently has an assertion stating
 that all the function evaluations start at number 1. In our
-case the first evalauation had a number equal to the total number
-of evalautions in a single iteration. In order to run the script 
-a dummy function evaluation was inserted at the begining. 
+case the first evaluation had a number equal to the total number
+of evaluations in a single iteration. In order to run the script 
+a dummy function evaluation was inserted at the beginning. 
 
 Results of \algname\ from experiments according to \cite{hansen2016exp} and \cite{hansen2016perfass} on the benchmark
 functions given in \cite{wp200901_2010,hansen2012fun} are presented in
