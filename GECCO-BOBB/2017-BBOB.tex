@@ -229,7 +229,7 @@ of single population-based optimization algorithms.
 \section{Algorithm Presentation}
 
 As we mentioned earlier, EvoWorkers are independent of 
-the population repository, and developers can implement them 
+the population repository, and developers can code them 
 in any language that supports HTTP requests. In this work,  
 EvoWorkers were implemented in Python taking advantage of 
 two open source libraries of nature inspired optimization 
@@ -239,21 +239,19 @@ python script was responsible for the initialization using
 the required parameters and setting up the initial population, 
 then after some iterations, the current population and 
 benchmark data is sent back to the server. The source code 
-for the Python EvoWorkers proposed in this work are in 
+for the Python EvoWorkers proposed in this work is in 
 the following GitHub repository: \url{https://github.com/mariosky/EvoWorker}.
-For the porppuse of this work we called this algorithm EvoSpace-PSO-GA.  
+For the purpose of this work, we called this algorithm EvoSpace-PSO-GA.   
 
 
-%
-\section{Experimental Procedure}
-A script was responsible for creating the EvoWorker 
-containers and running the testbed. The maximum number of 
-function evaluations was set to $10^5*D$. For each run 
-of the algorithms, the initial solution
-$X_0$ is sampled uniformly in $[−5, 5]^D$.
-In order to maintain the required number of function 
-evaluations the following EvoWorker setup was set for
-each dimension (see Table~\ref{tab:params}).
+% 
+\section{Experimental Procedure} 
+A script was responsible for creating the
+EvoWorker  containers and running the testbed. The maximum number of  function
+evaluations was set to $10^5*D$. For each run  of the algorithms, the initial
+solution $X_0$ is sampled uniformly in $[−5, 5]^D$. In order to maintain the
+required number of function  evaluations the following EvoWorker setup was set
+for each dimension (see Table~\ref{tab:params}).
 
 \begin{table}
   \small
@@ -274,7 +272,7 @@ each dimension (see Table~\ref{tab:params}).
 
 
 \subsection{Parameter Tuning}
-The parameters for each type of EvoWorker shown in Table\ref{tab:GAparams}
+The parameters for each type of EvoWorker are shown in Table\ref{tab:GAparams}
 and Table\ref{tab:GAparams} for GAs and PSO respectively.
 \begin{table}
   \small
