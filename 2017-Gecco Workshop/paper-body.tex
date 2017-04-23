@@ -5,15 +5,13 @@ A large body of work exists on the parallelization of EAs,
 with techniques leveraging multiple CPU cores, many computing nodes, 
 and GPUs \cite{muhlenbein1989parallel,cantu2000efficient,hofmann2013performance}. 
 However, asynchronous EAs
-\cite{Jini:FEA2000,alba2001analyzing,Jini:FEA2000,jj:2008:PPSN} have
+\cite{Jini:FEA2000,alba2001analyzing,EvoStar2014:jsEO,jj:2008:PPSN} have
 started to become common only relatively
 recently, in an effort to exploit computing resources available
 through different Internet technologies, including cloud. In this work, we are
-interested in those asynchronous EAs following a pool-based approach,
-where a collection of heterogeneous worker processes 
-carry out population search tasks by collaborating through a shared
-individual 
-repository or population pool. We will refer to such algorithms 
+interested in those asynchronous EAs following an approach that uses a
+shared {\em pool} of individuals with a collection of heterogeneous worker processes 
+carry out population search tasks by collaborating through this pool. We will refer to such algorithms 
 as {\em Pool-based EAs} or PEAs, and highlight the fact that 
 such systems are intrinsically parallel, distributed and asynchronous.
 
@@ -21,7 +19,9 @@ Pool-EAs differ from the closely related Island Model,
 mainly with regards to the responsibilities assigned to 
 the server. When there is a server in the island model, it is 
 responsible for the interaction and synchronization of 
-all the populations.  In Pool-EAs, on the other hand, the population repository only 
+all the populations, and this server might have a possibly ephemeral
+{\em pool} of migrants in the process of being moved from one island
+to another.  In Pool-EAs, on the other hand, the population repository only 
 receives stateless requests from isolated workers 
 or clients. In this way, Pool-EAs are capable of using and leveraging an 
 ad-hoc and ephemeral collaboration of computing resources. 
@@ -181,7 +181,7 @@ following endpoints:
     as a JSON object, the structure been specific to each application, 
     and finally a ``chromosome'' property again defined as
     a JavaScript object giving the internal representation of 
-    the solution, by default a it defined as list of objects. 
+    the solution, by default defined as a list of objects. 
     There is also an optional integer property called 
     ``score'' used when objects are going to be retrieved in a certain order.
     \item {\bf population\_name/sample/n}
@@ -209,7 +209,7 @@ objects currently on the population.
 
 The above methods were implemented first as JavaScript library 
 with two classes: {\tt Individual} and {\tt Population} depicted 
-in Figure~\ref{fig:classes} with calls to the Redis memory store \cite{}
+in Figure~\ref{fig:classes} with calls to the Redis memory store %\cite{}
 through the {\bf ioredis} asynchronous library. 
 % I can describe with more detail the data structures used in Redis
 % Set, Lists, Key-Value, etc. - M 
@@ -229,7 +229,7 @@ data is again stored in Redis as an ordered list,
 keeping a log for each experiment. Currently the JSON 
 benchmark data structure contains the following details 
 to later be used by the COCO platform: the algorithm identifier, 
-parameters used, name , dimension, instance and optimal value 
+parameters used, name, dimension, instance and optimal value 
 of the function that is been optimized, worker and experiment 
 identifiers and finally a list of details of each iteration 
 or generation of the local execution. The details include:
@@ -290,12 +290,6 @@ sample-iteration level. As we mentioned earlier, each worker
 returns a record with benchmark data, with the number of 
 evaluations performed in each iteration.
 
-Is not practical to track the exact sequential 
-number of function evaluations in an asynchronous 
-execution, because many workers could be calling 
-the function at the same time. For this reason, the 
-granularity of the number of function evaluations and 
-their order was kept at the sample and iteration level. 
 As we mentioned earlier, each worker returns the number 
 of evaluations performed in each iteration. The order 
 of function calls was given by the order in which the 
