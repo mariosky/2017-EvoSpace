@@ -254,7 +254,7 @@ current population back to the server.
 In this work, EvoWorkers were implemented in Python 
 taking advantage of two open source libraries of nature inspired optimization 
 metaheuristics:  DEAP \cite{fortin2012deap} and EvoloPy 
-\cite{faris2016evolopy}. For each algorithm a 
+\cite{DBLP:conf/ijcci/FarisAMCM16}. For each algorithm a 
 python script was responsible for the initialization using 
 the required parameters and setting up the initial population, 
 then after some iterations, the current population and 
@@ -309,7 +309,7 @@ function evaluations in a single iteration was 200.
   
 
 \subsection{Set-up}
-\label{sec:evoworkers}
+\label{sec:setup}
 
 A script was responsible for creating the EvoWorker 
 containers and running the benchmark. The first three functions 
@@ -341,7 +341,7 @@ each dimension.
 \begin{table}
   \small
   \caption{ DEAP GA EvoWorker Parameters }
-  \label{tab:GAparams} 
+  \label{tab:DEAP:GAparams} 
   \centering
   \small
   \begin{tabular}{|l|c|}
@@ -358,7 +358,7 @@ each dimension.
 \begin{table}
   \small
   \caption{ EvoloPy PSO EvoWorker Parameters }
-  \label{tab:GAparams} 
+  \label{tab:PSOparams} 
   \centering
   \small
   \begin{tabular}{|l|c|}
