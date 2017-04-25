@@ -266,6 +266,13 @@ The source code for the Python EvoWorkers
 proposed in this work are in the following GitHub repository: 
 \url{https://github.com/mariosky/EvoWorker}.
 
+% Please check that this is correct. Kind of what the reviewer said. - JJ
+Please note that this kind of synchronous implementation might
+introduce some inconsistencies in the data reporting in the beginning
+stages of the data. The reported evaluations are the ones that have
+returned from EvoWorkers, which might have the effect we observe on
+the generated charts.  
+
 \section{Experiments}
  \label{sec:experiments}
 As a case study, a simple hybrid algorithm consisting 
@@ -458,7 +465,7 @@ only implementation details.
 Our results have been entirely published in GitHub, along with
 sources. We think it is important to help reproductibility as much as
 possible by opening our science. Publishing results and software with
-an open source license will help achieve this reproducibility, and you
+an open source license will help achieve this reproductibility, and you
 can find all results, code as well as the source for this paper in
 (URL HIDDEN FOR DOUBLE-BLIND REASONS).
 
