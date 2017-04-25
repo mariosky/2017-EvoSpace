@@ -197,8 +197,8 @@ A script was responsible for creating the
 EvoWorker  containers and running the testbed. The maximum number of  function
 evaluations was set to $10^5*D$. For each run  of the algorithms, the initial
 solution $X_0$ is sampled uniformly in [-5, 5]$^D$. In order to maintain the
-required number of function  evaluations the following EvoWorker setup was set
-for each dimension (see Table~\ref{tab:params}).
+required number of function  evaluations the EvoWorkers were set up as
+shown in Table~\ref{tab:params}.
 
 \begin{table}
   \small
@@ -219,8 +219,11 @@ for each dimension (see Table~\ref{tab:params}).
 
 
 \subsection{Parameter Tuning}
+
 The parameters for each type of EvoWorker are shown in Table \ref{tab:GAparams}
-and Table \ref{tab:PSOparams} for GAs and PSO respectively.
+and Table \ref{tab:PSOparams} for GAs and PSO respectively. These were
+reasonable parameters and no great effort was made to make them as
+optimal as possible. 
 
 \begin{table}
   \small
