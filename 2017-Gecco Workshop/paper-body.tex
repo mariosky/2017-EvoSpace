@@ -29,9 +29,19 @@ ad-hoc and ephemeral collaboration of computing resources.
 The platform presented in this paper is a new implementation 
 of the EvoSpace model \cite{GValdez2015} in which 
 workers asynchronously interact with the population 
-pool by taking samples of the population 
-to perform a local evolutionary search on the samples, 
-to then return newly evolved solutions back to the pool. This is a
+pool in the following way. Following their own schedule, EvoWorkers
+request samples of the population from the pool and perform a local
+evolutionary search using them as initial population, which after a
+number of iterations is returned to the pool. The sample size and the
+number of iterations this cycle lasts depends on the implementation
+and is actually not so important for the overall performance of the
+algorithm. Sample size has got more to do with protocol overhead: the
+bigger the population, the higher proportion of
+payload-to-total-packet-size is achieved. The number of iterations of
+every cycle is also mainly an implementation detail: the shorter the
+cycle, the higher the load on the server. The actual parameters used
+in this paper are listed in Table \ref{tab:params}.
+This is a
 particular instance of a Pool-based EA, which, as long as there is a
 common population pool, leaves every other detail to particular
 implementations. Other PEAs, for instance, might return only one
@@ -40,7 +50,7 @@ returning any member to it; the {\em frequency} with which resources
 are taken or returned to the population are not set by the model
 either, leaving it as a implementation or model-specific parameter. % I am giving here a general overview of PEAs, maybe it should be moved up with a few references? - JJ
 
-The previous version % anonymized reference
+The previous version \cite{DBLP:journals/grid/ValdezTGVO15}
 was implemented using CherryPy, a basic HTTP 
 server written in Python. This new version uses Node.js, an 
 event-driven interpreter with a built-in event loop capable of
@@ -52,7 +62,7 @@ to optimize throughput and scalability of the server. %Actually you
                                 % Ok, I will later when explaining the server 
                                 % in detail - Mario 
 
-Additionally to the  increased performance this version 
+Additionally to the increased performance this version 
 adds new functionality: In the former version workers could only
 ask for random samples of a particular size, now clients 
 can retrieve objects from the server ordered by a score. 
@@ -157,12 +167,9 @@ The main components of the EvoSpace framework are: the {\sf evospace-js}
 population repository, remote clients called EvoWorkers.
 Each of these components are defined in the following subsections.
 
-\subsection{{\sf evospace-js} Population Repository} % Maybe qualify this, it's got the same
-                               % name as above. Population container?
-                               % ~ JJ
-                               % I like "container" but we have been using "repository" in
-                               % the begining and other papers, will stick to that.
+\subsection{{\sf evospace-js} Population Repository} 
 \label{sec:evospace}
+
 The {\sf evospace-js} server provides a collection of REST methods  
 to operate over a set of objects $ES$, which can be seen as the 
 population. Multiple populations can be created and are 
@@ -218,7 +225,7 @@ In order to expose the library as a
 REST Web service endpoints were implemented using the Express HTTP framework.
 An optional dashboard type application, can be used to inspect 
 the populations currently available on the server. This dashboard uses
-the Jade template engine and Express.
+the Jade (which has recently been renamed to Pugs) template engine and Express.
 
 When a worker is putting back a sample, it can send 
 an additional property called {\tt benchmark\_data }
@@ -253,9 +260,11 @@ current population back to the server.
 
 In this work, EvoWorkers were implemented in Python 
 taking advantage of two open source libraries of nature inspired optimization 
-metaheuristics:  DEAP \cite{fortin2012deap} and EvoloPy 
-\cite{DBLP:conf/ijcci/FarisAMCM16}. For each algorithm a 
-python script was responsible for the initialization using 
+metaheuristics:  DEAP \cite{fortin2012deap}, which use the
+configuration parameters included in Table \ref{tab:DEAP:GAparams} and EvoloPy 
+\cite{DBLP:conf/ijcci/FarisAMCM16} using the parameters listed in
+Table \ref{tab:PSOparams}. For each algorithm a 
+Python script was responsible for the initialization using 
 the required parameters and setting up the initial population, 
 then after some iterations, the current population and 
 benchmark data is sent back to the server. EvoWorker 
@@ -264,7 +273,7 @@ the initial parameters as environment variables, and
 the script ends when it reaches a maximum number of samples.
 The source code for the Python EvoWorkers
 proposed in this work are in the following GitHub repository: 
-\url{https://github.com/mariosky/EvoWorker}.
+\url{https://github.com/mariosky/EvoWorker}. 
 
 % Please check that this is correct. Kind of what the reviewer said. - JJ
 Please note that this kind of synchronous implementation might
