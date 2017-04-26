@@ -62,12 +62,12 @@
 \begin{document}
 
 
-\title[Benchmarking a Pool-Based Execution with GA and PSO Workers] 
+\title[Benchmarking an Asynchronous Pool-Based Execution with GA and PSO Workers] 
 {Benchmarking a Pool-Based Execution with GA and PSO Workers on the BBOB Noiseless Testbed}
-\titlenote{Submission deadline: March 31st.}
+%\titlenote{Submission deadline: March 31st.}
 % Camera-ready paper due April 24th.}}
 % Maybe you should shorten the title, it overlaps the header - JJ
-\subtitle{Draft version}
+%\subtitle{Draft version}
 
 
 \author{Mario Garc\'ia-Valdez}
@@ -175,19 +175,32 @@ of single population-based optimization algorithms.
 
 \section{Algorithm Presentation}
 
-As we mentioned earlier, EvoWorkers are independent of 
-the population repository, and developers can code them 
-in any language that supports HTTP requests. In this work,  
-EvoWorkers were implemented in Python taking advantage of 
-two open source libraries of nature inspired optimization 
-metaheuristics:  DEAP \cite{fortin2012deap} and EvoloPy 
-\cite{faris2016evolopy}. For each algorithm a 
-python script was responsible for the initialization using 
-the required parameters and setting up the initial population, 
-then after some iterations, the current population and 
-benchmark data is sent back to the server. The source code 
-for the Python EvoWorkers proposed in this work is in 
-the following GitHub repository: \url{https://github.com/mariosky/EvoWorker}.
+As we mentioned earlier, EvoWorkers are independent of  the population
+repository, and developers can code them  in any language that supports HTTP
+requests. In this work,   EvoWorkers were implemented in Python taking
+advantage of  two open source libraries of nature inspired optimization
+metaheuristics:  DEAP \cite{fortin2012deap} and EvoloPy
+\cite{faris2016evolopy}. The EvoSpace population repository is implemented in
+Node.js and uses the redis memory store as the repository. The code is in the
+following GitHub repository: \url{https://github.com/mariosky/evospace-js}. 
+On the other hand, each EvoWorker runs inside a Docker container. Before each
+experiment, a script initializes the population on the server, creating the
+number of individuals specified in the {\em Population Size} parameter, this size
+depends on the dimension of the problem.  The same script then starts the
+number of containers needed, one for each EvoWorker. When starting each
+container, the following parameters are used: first, the {\em Sample Size}
+indicates the number of individuals the worker would take from the server on each
+interaction, then the {\em Iterations per Sample} parameter specifies the number of
+generations or iterations the local algorithm will run before sending back to
+the server the resulting population. Finally, the number of samples that the
+EvoWorker will take are indicated by the {\em Samples per Worker} parameter. These
+parameters are specified for each of the dimensions, and they give the maximum
+number of function evaluations for each problem. Each time an EvoWorker 
+returns an evolved sample, it also returns benchmark data, indicating the type
+of algorithm and parameters used, the number of function evaluations, 
+best individual, and fitness of each iteration. The source code for the Python 
+EvoWorkers proposed in this work is in the following GitHub repository:
+\url{https://github.com/mariosky/EvoWorker}. 
 For the purpose of this work, we called this algorithm EvoSpace-PSO-GA.   
 
 
@@ -198,7 +211,8 @@ EvoWorker  containers and running the testbed. The maximum number of  function
 evaluations was set to $10^5*D$. For each run  of the algorithms, the initial
 solution $X_0$ is sampled uniformly in [-5, 5]$^D$. In order to maintain the
 required number of function  evaluations the EvoWorkers were set up as
-shown in Table~\ref{tab:params}.
+shown in Table~\ref{tab:params}. The current experiment uses instances 1-5 and 41-50
+from the 2016 version of the test bed. 
 
 \begin{table}
   \small
@@ -284,7 +298,8 @@ with dimensions (see Table~\ref{tab:params}).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 After the  execution, a script processed the logs and 
-generated the files needed by the COCO platform \cite{hansen2016cocoplat}  post-processing scripts. 
+generated the files needed by the COCO platform 
+\cite{hansen2016cocoplat}  post-processing scripts. 
 
 A requirement of the COCO platform is that it needs 
 to inspect each function evaluation to keep the log required 
@@ -312,15 +327,17 @@ It is important to notice that EvoWorkers run the algorithm
 only for a small number of iterations and with 
 a relatively small sample of the population. For instance,
 for the COCO benchmark presented in the case study the maximum number of 
-function evaluations in a single iteration was 200.
+function evaluations in a single iteration (generation) was 200.
 
 The COCO post-processing script currently has an assertion stating
 that all the function evaluations start at number 1. In our
 case the first evaluation had a number equal to the total number
 of evaluations in a single iteration. In order to run the script 
-a dummy function evaluation was inserted at the beginning. 
+a function evaluation of a random generated solution was 
+inserted at the beginning. 
 
-Results of \algname\ from experiments according to \cite{hansen2016exp} and \cite{hansen2016perfass} on the benchmark
+Results of \algname\ from experiments according to \cite{hansen2016exp} 
+and \cite{hansen2016perfass} on the benchmark
 functions given in \cite{wp200901_2010,hansen2012fun} are presented in
 Figures~\ref{fig:aRTgraphs} and \ref{fig:RLDs} and in Table~\ref{tab:aRTloss}. The experiments were performed with COCO \cite{hansen2016cocoplat}, version bbob.v15.03 in
 python, the plots were produced with version 2.0.
