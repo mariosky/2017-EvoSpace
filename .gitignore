@@ -211,3 +211,4 @@ comment.cut
 
 *~
 !/GECCO-BOBB/ppdata/**
+!*/img/*
