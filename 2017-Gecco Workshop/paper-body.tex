@@ -276,11 +276,11 @@ proposed in this work are in the following GitHub repository:
 \url{https://github.com/mariosky/EvoWorker}. 
 
 % Please check that this is correct. Kind of what the reviewer said. - JJ
-Please note that this kind of synchronous implementation might
-introduce some inconsistencies in the data reporting in the beginning
-stages of the data. The reported evaluations are the ones that have
-returned from EvoWorkers, which might have the effect we observe on
-the generated charts.  
+%Please note that this kind of synchronous implementation might
+%introduce some inconsistencies in the data reporting in the beginning
+%stages of the data. The reported evaluations are the ones that have
+%returned from EvoWorkers, which might have the effect we observe on
+%the generated charts.  
 
 \section{Experiments}
  \label{sec:experiments}
@@ -330,11 +330,13 @@ function evaluations in a single iteration was 200.
 A script was responsible for creating the EvoWorker 
 containers and running the benchmark. The first three functions 
 F1 to F3 were tested with 15 instances for each of 
-the dimensions: 2, 3, 5, 10, 20, and 40. 
+the dimensions: 2, 3, 5, 10, and 20. 
 The maximum number of function evaluations was set to $10^5*dim$. 
 In order to maintain the required number of function 
 evaluations the following EvoWorker setup was set for
-each dimension.
+each dimension. An instance of a function in COCO is a different
+version of the function, with a different location of the global 
+optimum and a different optimal function value.  
 
 \begin{table}
   \small
@@ -396,9 +398,9 @@ each dimension.
 
 \subsection{Results}
 \label{sec:results}
-\begin{figure*}[h!tbp]
+\begin{figure}[h!tbp]
     \centering
-        \includegraphics[width=5in]{img/Sphere.pdf}
+        \includegraphics[width=3in]{img/f1.pdf}
     \caption{Average numbers of function evaluations to reach the target
       for every dimension for the Sphere function. This figure and the
     following ones have been generated with the BBOB report
@@ -417,7 +419,7 @@ each dimension.
   % functions were more diversity is needed. - M
   % We should say that on the paper
 \label{fig:sphere}
-\end{figure*}
+\end{figure}
 %
 After the experiment was run a script generated 
 the files and folders needed by the COCO post-processing 
@@ -435,21 +437,21 @@ from other nature inspired algorithms \cite{hansen2010bbob}. Results
 obtained with the Rastrigin function are better than the rest, giving
 hope that with adequate tuning much better results could be obtained.
 %
-\begin{figure*}[h!tbp]
+\begin{figure}[h!tbp]
     \centering
-        \includegraphics[width=5in]{img/Ellipsoid.pdf}
+        \includegraphics[width=3in]{img/f2.pdf}
     \caption{Average numbers of function evaluations to reach target
       for every dimension for the Ellipsoid function.}
     \label{fig:ellipsoid}
-\end{figure*}
+\end{figure}
 %
-\begin{figure*}[h!tbp]
+\begin{figure}[h!tbp]
     \centering
-        \includegraphics[width=5in]{img/Rastrigin.pdf}
+        \includegraphics[width=3in]{img/f3.pdf}
     \caption{Average numbers of function evaluations to reach target
       for every dimension for the Rastrigin function.}
     \label{fig:rastrigin}
-\end{figure*}
+\end{figure}
 
 In fact, all runs have ended successfully with a completely new
 asynchronous, heterogeneous, and pool based evolutionary
