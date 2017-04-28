@@ -398,9 +398,9 @@ optimum and a different optimal function value.
 
 \subsection{Results}
 \label{sec:results}
-\begin{figure}[h!tbp]
+\begin{figure*}[h!tbp]
     \centering
-        \includegraphics[width=3in]{img/f1.pdf}
+        \includegraphics[width=4in]{img/f1.pdf}
     \caption{Average numbers of function evaluations to reach the target
       for every dimension for the Sphere function. This figure and the
     following ones have been generated with the BBOB report
@@ -419,7 +419,7 @@ optimum and a different optimal function value.
   % functions were more diversity is needed. - M
   % We should say that on the paper
 \label{fig:sphere}
-\end{figure}
+\end{figure*}
 %
 After the experiment was run a script generated 
 the files and folders needed by the COCO post-processing 
@@ -437,21 +437,23 @@ from other nature inspired algorithms \cite{hansen2010bbob}. Results
 obtained with the Rastrigin function are better than the rest, giving
 hope that with adequate tuning much better results could be obtained.
 %
-\begin{figure}[h!tbp]
+\begin{figure*}[h!tbp]
     \centering
-        \includegraphics[width=3in]{img/f2.pdf}
+        \includegraphics[width=4in]{img/f2.pdf}
     \caption{Average numbers of function evaluations to reach target
-      for every dimension for the Ellipsoid function.}
+      for every dimension for the Ellipsoid function. Interpretation
+      of results as in Figure \ref{fig:sphere}.}
     \label{fig:ellipsoid}
-\end{figure}
+\end{figure*}
 %
-\begin{figure}[h!tbp]
+\begin{figure*}[h!tbp]
     \centering
-        \includegraphics[width=3in]{img/f3.pdf}
+        \includegraphics[width=4in]{img/f3.pdf}
     \caption{Average numbers of function evaluations to reach target
-      for every dimension for the Rastrigin function.}
+      for every dimension for the Rastrigin function. Interpretation
+      of results as in Figure \ref{fig:sphere}.}
     \label{fig:rastrigin}
-\end{figure}
+\end{figure*}
 
 In fact, all runs have ended successfully with a completely new
 asynchronous, heterogeneous, and pool based evolutionary
@@ -480,8 +482,7 @@ Our results have been entirely published in GitHub, along with
 sources. We think it is important to help reproductibility as much as
 possible by opening our science. Publishing results and software with
 an open source license will help achieve this reproductibility, and you
-can find all results, code as well as the source for this paper in
-(URL HIDDEN FOR DOUBLE-BLIND REASONS).
+can find all results, code as well as the source for this paper in \url{https://github.com/mariosky/2017-EvoSpace}.
 
 Future lines of work will focus on using other EA or 
 meta-heuristic population-based techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014grey}
