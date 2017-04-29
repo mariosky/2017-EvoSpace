@@ -656,7 +656,17 @@ python, the plots were produced with version 2.0.
 The results obtained show that an asynchronous execution 
 following a Pool-based approach is  possible and easy to achieve.
 Results, however, are still preliminary and further tuning of the parameters could 
-potentially wield better results.
+potentially yield better results.
+
+The results obtained show that the algorithm reaches the targets on separable
+functions (1-5), and scaling well in higher dimensions. This results are competitive 
+when compared to other nature inspired algorithms \cite{hansen2010bbob}.
+In particular when comparing against the Binay GA algorithm implementation 
+of Nicolau \cite{nicolau2009application}, and the PSO algorithm by 
+El-Abd and Kamel \cite{el2009black}, the EvoSpace-PSO-GA 
+algorithms outperforms both, reaching more targets with a lower expected 
+running time (ERT). When testing with harder problems, for instance functions 
+13 and 24, the algorithm is not capable of reaching the targets. 
 
 Future lines of work will focus on using other EA or 
 meta-heuristic techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014grey}
