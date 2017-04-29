@@ -192,8 +192,9 @@ container, the following parameters are used: first, the {\em Sample Size}
 indicates the number of individuals the worker would take from the server on each
 interaction, then the {\em Iterations per Sample} parameter specifies the number of
 generations or iterations the local algorithm will run before sending back to
-the server the resulting population. Finally, the number of samples that the
-EvoWorker will take are indicated by the {\em Samples per Worker} parameter. These
+the server the resulting population. Finally, the number of times an 
+EvoWorker will take, evolve and return a sample, is 
+indicated by the {\em Samples per Worker} parameter. These
 parameters are specified for each of the dimensions, and they give the maximum
 number of function evaluations for each problem. Each time an EvoWorker 
 returns an evolved sample, it also returns benchmark data, indicating the type
@@ -240,7 +241,6 @@ were obtained by testing first on the Rastrigin separable function with
 five dimensions.  After about fifteen experiments the most challenging 
 targets were achieved. We tested again with functions one to three, and 
 after obtaining favorable results, the PSO and GA algorithm parameters were set.  
-
 \begin{table}
   \small
   \caption{ DEAP GA EvoWorker Parameters }
