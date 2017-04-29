@@ -334,7 +334,11 @@ that all the function evaluations start at number 1. In our
 case the first evaluation had a number equal to the total number
 of evaluations in a single iteration. In order to run the script 
 a function evaluation of a random generated solution was 
-inserted at the beginning. 
+inserted at the beginning. Each component of the solution was generated
+using the basic random function from the Python standard library. The
+random function generates a random float uniformly in the semi-open 
+range [0.0, 1.0) using the Mersenne Twister as the core generator.
+
 
 Results of \algname\ from experiments according to \cite{hansen2016exp} 
 and \cite{hansen2016perfass} on the benchmark
@@ -658,15 +662,16 @@ following a Pool-based approach is  possible and easy to achieve.
 Results, however, are still preliminary and further tuning of the parameters could 
 potentially yield better results.
 
-The results obtained show that the algorithm reaches the targets on separable
-functions (1-5), and scaling well in higher dimensions. This results are competitive 
+The results obtained show that the algorithm reaches the most diffcult 
+targets on separable functions (1-5), and scaling well in 
+higher dimensions. This results are competitive 
 when compared to other nature inspired algorithms \cite{hansen2010bbob}.
 In particular when comparing against the Binay GA algorithm implementation 
 of Nicolau \cite{nicolau2009application}, and the PSO algorithm by 
 El-Abd and Kamel \cite{el2009black}, the EvoSpace-PSO-GA 
 algorithms outperforms both, reaching more targets with a lower expected 
 running time (ERT). When testing with harder problems, for instance functions 
-13 and 24, the algorithm is not capable of reaching the targets. 
+13 and 24, the algorithm is not capable of reaching the most diffcult targets. 
 
 Future lines of work will focus on using other EA or 
 meta-heuristic techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014grey}
