@@ -235,9 +235,11 @@ from the 2016 version of the test bed.
 \subsection{Parameter Tuning}
 
 The parameters for each type of EvoWorker are shown in Table \ref{tab:GAparams}
-and Table \ref{tab:PSOparams} for GAs and PSO respectively. These were
-reasonable parameters and no great effort was made to make them as
-optimal as possible. 
+and Table \ref{tab:PSOparams} for GAs and PSO respectively. These parameters 
+were obtained by testing first on the Rastrigin separable function with 
+five dimensions.  After about fifteen experiments the most challenging 
+targets were achieved. We tested again with functions one to three, and 
+after obtaining favorable results, the PSO and GA algorithm parameters were set.  
 
 \begin{table}
   \small
@@ -657,14 +659,11 @@ python, the plots were produced with version 2.0.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}  % and or conclusion, summary...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The results obtained show that an asynchronous execution 
-following a Pool-based approach is  possible and easy to achieve.
-Results, however, are still preliminary and further tuning of the parameters could 
-potentially yield better results.
+
 
 The results obtained show that the algorithm reaches the most diffcult 
 targets on separable functions (1-5), and scaling well in 
-higher dimensions. This results are competitive 
+higher dimensions. These results are competitive 
 when compared to other nature inspired algorithms \cite{hansen2010bbob}.
 In particular when comparing against the Binay GA algorithm implementation 
 of Nicolau \cite{nicolau2009application}, and the PSO algorithm by 
@@ -678,7 +677,12 @@ meta-heuristic techniques, such as the Grey Wolf Optimizer \cite{mirjalili2014gr
 or Differential Evolution \cite{storn1997differential} for having workers that are 
 heterogeneous in more than one sense. RPSS could be used 
 in those cases where each algorithm has a different set of 
-parameters, but also to randomly select the technique employed. 
+parameters, but also to randomly select the technique employed.
+
+The experiment shows that an asynchronous execution of population-based optimization algorithms 
+following a Pool-based approach is possible and easy to achieve.
+Results, however, are still preliminary and further tuning of the parameters could 
+potentially yield better results. 
 
 \bibliographystyle{ACM-Reference-Format}
 %\bibliography{bbob}  % bbob.bib is the name of the Bibliography in this case
