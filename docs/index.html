@@ -29,11 +29,98 @@
 		
 		<h3>García Valdez & Merelo </h3>
 	      </section>
-	      
-	      <section><img src='img/evospace-js.png' alt='System architecture'></section>
+
+	      <section>
+		<section> <!-- Questions -->
+		  <h1>What is an evolutionary algorithm</h1>
+		  
+		  <aside class='notes'>It's a Nature-inspired algorithm
+		    where a set of data structures representing solutions to a
+		    problem evolve via individual or collective
+		    changes. Please bear in mind that the
+		    words <em>loop</em>, or <em>initialization</em> or
+		    many other things are not part of this barebones
+		    definition. We do need data structures to represent
+		    the solutions and a way to "evolve" them. This is the
+		    skeleton. The rest needs to be fleshed out to make
+		    this become an actual algorithm that can be run. But
+		    this begs the question.</aside>
+		</section>
+		
+		<section><h1>Algorithms + data structures =</h1>
+		  <h1 class='fragment'>Evolution programs</h1>
+		  
+		  <aside class='notes'>That definition does not throw
+		    the algorithm and the data structure in the same
+		    bag. There's data somewhere, there's an algorithm
+		    somewhere else. They might be the self same thing, but
+		    they could be something completely different. If we
+		    use the definition from the famous Michalewicz book,
+		    you can have <em>many</em> algorithms. One could be
+		    an evolutionary algorithm, another could be a
+		    completely different one, like PSO. But the problem
+		    is where you run them?</aside>
+		</section>
+		
+		<section><h1>Where do we run algorithms?</h1>
+		  <aside class='notes'>If you're an straight shooter,
+		    the answer would be "A computer". Maybe you could say
+		    "the cloud", which is where you run your programs in
+		    the XXIst century. But a more precise answer to the
+		    question would be <em>in a technosocial system</em> that
+		    includes computers and people who own them and which
+		    are, at the same time, connected via a social
+		    network. Even if you do not consider the human in the
+		    loop, where you run the algorithm is going to be a
+		    complex system itself, heterogeneous, with different
+		    timelines, different capabilities and budgets. If you
+		    want to leverage it fully, you will need to take into
+		    account this nature. </aside>
+		</section>
+	      </section>
+
+	      <section>
+		<section><h1>Population = persistent + ephemeral</h1>
+		  <aside class='notes'>Not <em>all</em> the population
+		    has to be present <em>all the time</em>. To keep
+		    track of the progress of the algorithm, a few
+		    select members of the population is quite enough. </aside>
+		</section>
+
+		<section><h1>Algorithms = any</h1>
+		  <h2 class='fragment'>If there's change and
+		    recombination</h2>
+		  <aside class='notes'>The zen of genetic algorithms
+		  is very general about the mechanisms of change. If
+		  there is variability introduced in the population
+		  pool, some kind of selection and maybe recombination
+		  that is more than enough as long as there is a
+		    persistent part of the population updated</aside>
+		</section>
+
+		<section><h1>Persistent population
+		    → <em>Pool</em></h1>
+		  <aside class='notes'>This pool will be an evolving
+		  log of the best and the brightest among whatever the
+		    rest of the algorithms have found.</aside>
+		</section>
+
+	      </section>
+
+	      <section>
+		<section><h1>Introducing <code>evospace.js</code></h1>
+		  <aside class='notes'>A JavaScript implementation of
+		    EvoSpace and a server-side implementation of a
+		    pool-based architecture. </aside>
+		</section>
+		
+		<section><img src='img/evospace-js.png' alt='System
+			      architecture'></section>
+
+	      </section>
 	      <section><img src='img/Sphere.png' alt='Results for Sphere'></section>
 	      <section><img src='img/Ellipsoid.png' alt='Results for Ellipsoid'></section>
-	      <section><img src='img/Rastrigin.png' alt='Results for Rastrigin''></section>
+	      <section><img src='img/Rastrigin.png' alt='Results for Rastrigin'></section>
 
 	      <section>
 		<section><h1>Asynchronous + pool based rocks!</h1></section>
